@@ -39,7 +39,7 @@
 						<p><strong>Carte interactive de téléchargement des kits cartographiques « Mon territoire en cartes »</strong></p>
 						<p><i>Cliquez sur le territoire qui vous concerne, ou rechercher un nom d'epci</i></p>
 						<p>« Mon territoire en cartes » réunit dans un petit atlas une série de cartes qui donnent à voir les grandes caractéristiques de chaque territoire français.</p>
-						<p>Les cartes rendent compte des différentes dimensions de la vie quotidienne de nos concitoyens autour de huit thèmes : se déplacer, se soigner, utiliser Internet, s'insérer, se cultiver, travailler, se loger, s'impliquer.</p>
+						<p>Les cartes rendent compte des différentes dimensions de la vie quotidienne de nos concitoyens autour de huit thèmes : se déplacer, se soigner, utiliser Internet, s'insérer, se cultiver, travailler, se loger, s'impliquer, et niveau de vie.</p>
 						<p>Il y a plus de 1 200 dossiers cartographiques, ce qui permet à chacun de voir sa commune, son intercommunalité, son département sa région, mais aussi de se situer par rapport aux autres villes et villages de France...</p>
 						<p>Chaque élu, chaque association, chaque citoyen qui voudra débattre pourra s'appuyer sur ce dossier s'il le souhaite, voire le compléter d’autres éléments qui lui paraîtraient nécessaires pour poser les termes du débat. La neutralité dans l'organisation du débat exige que l'on apporte des données vérifiables, sourcées et que les définitions soient précisées. C’est ici le cas.</p>
 					</div>
@@ -77,9 +77,10 @@
 		
 			
 		// Création de la carte
-		var map = L.map('mapid', {maxZoom:18, minZoom:6 })
+		var map = L.map('mapid', {maxZoom:11, minZoom:6 })
 		.setView([46.5, 2], 6);
 		map.zoomControl.setPosition('topright');
+		map.attributionControl.addAttribution('<a href="https://cartotheque.cget.gouv.fr/cartes" style="text-decoration:none;" target="_blank ">CGET</a>');
 		
 		var GeoportailFrance_parcels = L.tileLayer('https://wxs.ign.fr/{apikey}/geoportail/wmts?REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0&STYLE={style}&TILEMATRIXSET=PM&FORMAT={format}&LAYER=CADASTRALPARCELS.PARCELS&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}', {
 		attribution: '',
@@ -93,10 +94,19 @@
 		//Ajout des couches du fond de carte
 		Cache = L.geoJSON(JS_masque, {color: "#154463", weight: 0, opacity: 1, fillOpacity: 1}).addTo(map);
 		
+		//Com = L.geoJSON(JS_com, {color: "#154463", weight: 0, opacity: 1, fillOpacity: 1}).addTo(map);
+		
 		EPCI = L.geoJSON(JS_todo, {
 			filter: function(feature, layer) {return feature.properties.layer == "epci";},
 			style : {weight: 0.8, color: "#3e62a4", opacity: 1, fillOpacity: 1, fillColor:"#00bdce"},
-			onEachFeature: function(feature, layer) {layer.bindTooltip(feature.properties.libgeo, {className: 'Tooltips'}); layer.on('click', function(e) {popup(feature.properties);epciCible(e.target._latlngs)})}
+			onEachFeature: function(feature, layer) {
+					layer.bindTooltip(feature.properties.libgeo, {className: 'Tooltips'});
+					layer.on('click', function(e) {
+						popup(feature.properties);
+						epciCible(e.target._latlngs);
+						preventDefault(e);
+						})
+					}
 		}).addTo(map);
 		
 		Contour_Regions = L.geoJSON(JS_todo, {
@@ -121,7 +131,7 @@
 		
 		//Action au clic sur un marker
 		function popup(e) {
-			//stopPropagation(e);
+			
 			if (document.getElementById('sidebar').classList.contains('collapsed')){
 				sidebar.open('home');
 				}
@@ -140,7 +150,6 @@
 		function epciCible(e) {
 			if(epciCib) {map.removeLayer(epciCib);}
 			epciCib = new L.polygon(e, {weight:0.4, fillOpacity: 0.9, Color:"#b51917", fillColor:"#b51917"});
-				//markerCib.setZIndexOffset(-50);
 			epciCib.addTo(map);
 		}
 		
@@ -158,7 +167,7 @@
 			}
 			
 		//Events au clic sur la carte
-		//map.on('click', clickMap);
+		map.on('click', clickMap);
 		
 		//Barre de recherche
 		var Recherche = L.layerGroup([EPCI]);
@@ -166,20 +175,22 @@
 		var searchControl = new L.control.search({
 			layer: Recherche,
 			initial: false,
-			//zoom: 10,
 			position:'topright',
 			propertyName: 'libgeo',
 			marker: false,
 			moveToLocation: function(latlng, title, map) {
-			//map.fitBounds( latlng.layer.getBounds() );
-			var zoom = map.getBoundsZoom(latlng.layer.getBounds());
-  			map.setView(latlng, zoom-1); // access the zoom
-		}
+				var zoom = map.getBoundsZoom(latlng.layer.getBounds());
+				map.setView(latlng, zoom-1, {
+				  "animate": true,
+				  "pan": {"duration": 10} // access the zoom
+				});
+			}
 		})
 		
 		searchControl.on('search:locationfound', function(e) {
 			if(epciCib) {map.removeLayer(epciCib);}
 			epciCible(e.layer._latlngs);
+			popup(e.layer.feature.properties);
 		});
 		
 		map.addControl( searchControl );

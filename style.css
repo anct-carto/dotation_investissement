@@ -8,23 +8,11 @@ html, body, #mapid {
     font-family: Montserrat;
 	color: #ffffff;
 	}
-
 	
 a {
 	text-decoration:none;
 	font-weight:black;
 	color: yellow;
-	}
-		
-button {
-	background-color: white;
-	font-weight: bold;
-	font-size:1em;
-	box-shadow: 0px 0px 0px #aaa; 
-	border: none;
-	text-align: left;
-	color:#1d1d1b;
-	cursor: pointer;
 	}
 		
 #legende {
@@ -37,27 +25,6 @@ button {
 	padding-top:20px;
 	}
 		
-.bouton {
-	text-decoration: line-through;
-	}
-		
-.bouton_on:hover {
-	color:#f69788;
-	}
-		
-.bouton_asso:hover {
-	color:#f69788;
-	}
-		
-.gauche {
-	width:50%;
-	float: left;
-	}
-		
-.droite {
-	width:50%;
-	float: right;
-	}
 		
 #popup {
 	display: none;
@@ -91,39 +58,4 @@ h3 {
 	font-size:1em;
 	text-decoration: underline;
 }
-		
-.ol-popup {
-	font-family: Montserrat; 
-	}
-
-.ol-popup h1,.ol-popup .h1 {
-	font-weight:bold;			
-	font-size:1.4 em;			
-	}
-		
-.ol-popup h2 ,.ol-popup .h2{
-	font-weight:bold;
-	font-size:0.8em;
-	text-decoration: underline;
-	}
-
-.ol-popup .email:before {
-	content:"";
-	background: url(img/picto_couriel.png) no-repeat;
-	display:inline-block;
-	width:10px;
-	height:10px;
-	background-size:contain;
-	margin-right:5px
-	}
-	
-.ol-popup .tel:before {
-	content:"";
-	background:url(img/picto_telephone.png) no-repeat;
-	display:inline-block;
-	width:10px;
-	height:10px;
-	background-size:contain;
-	margin-right:5px
-	}
 	
