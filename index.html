@@ -154,6 +154,7 @@
 		}
 		
 		function clickMap () {
+			if(epciCib) {map.removeLayer(epciCib);}
 			//fermer ou ouvrir la sidebar
 			if (document.getElementById('sidebar').classList.contains('collapsed')) {
 				sidebar.open('home');
