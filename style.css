@@ -1,74 +1,17 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 body {
 	padding: 0;
+	margin:0;
 	margin-right: auto;
 	margin-left:auto;
 	}
 
 html, body, #mapid {
     height: 100%;
-    font-family: Trebuchet MS, verdana, sans serif;
-	color: #333333;
+    font-family: Montserrat;
+	color: #ffffff;
 	}
 
+	
 a {
 	text-decoration:none;
 	color:grey;
@@ -83,7 +26,6 @@ button {
 	text-align: left;
 	color:#1d1d1b;
 	cursor: pointer;
-	
 	}
 		
 #legende {
@@ -91,7 +33,7 @@ button {
 	width: 100%;
 	}
 	
-#texte {
+#sources {
 	float:left;
 	width: 100%;
 	}
@@ -123,11 +65,10 @@ button {
 	}
 		
 .Tooltips {
-	font-size:1.2em;
-	font-weight: bold;
-	padding:2px;
+	font-size:0.9em;
+	padding:5px;
 	border:none;
-	color: #333333;
+	color: #061032;
 	background-color: white;
 	}
 
@@ -136,14 +77,11 @@ i {
 	}
 	
 strong {
-	color:#f69788;
-	font-Weight: Bold;
-	font-size:1.2em;
+	font-Weight: 400;
 	}
 		
 h1{
-	font-size:2em;
-	color:#f69788;
+	font-size:1.8em;
 	}
 		
 h2{
@@ -156,7 +94,7 @@ h3 {
 }
 		
 .ol-popup {
-	font-family: Trebuchet MS, verdana, sans serif; 
+	font-family: Montserrat; 
 	}
 
 .ol-popup h1,.ol-popup .h1 {
