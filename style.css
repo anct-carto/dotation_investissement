@@ -35,7 +35,9 @@ a {
 	font-weight:black;
 	color: yellow;
 	}
-		
+
+
+	
 #legende {
 	position:auto;
 	width: 100%;
@@ -80,4 +82,7 @@ h3 {
 	font-size:1em;
 	text-decoration: underline;
 }
-	
+
+.leaflet-left {
+	left: 0;
+	}	
