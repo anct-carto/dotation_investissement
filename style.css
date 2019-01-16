@@ -1,3 +1,24 @@
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('font/Montserrat-Light.ttf');
+}
+
+@font-face {
+  font-family: 'MontserratBlack';
+  src: url('font/Montserrat-Black.ttf');
+}
+
+@font-face {
+  font-family: 'MontserratBold';
+  src: url('font/Montserrat-Bold.ttf');
+}
+
+@font-face {
+  font-family: 'MontserratItalic';
+  src: url('font/Montserrat-Italic.ttf');
+}
+
 body {
 	padding: 0;
 	margin:0;
@@ -5,7 +26,7 @@ body {
 
 html, body, #mapid {
     height: 100%;
-    font-family: Montserrat;
+    font-family: 'Montserrat';
 	color: #ffffff;
 	}
 	
@@ -39,11 +60,12 @@ a {
 	}
 
 i {
-	font-size:0.9em;		
+	font-size:0.9em;
+	font-family: 'MontserratItalic';	
 	}
 	
 strong {
-	font-Weight: bold;
+	font-family: 'MontserratBold';
 	}
 		
 h1{

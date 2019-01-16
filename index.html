@@ -9,7 +9,7 @@
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="src/leaflet-search.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css" />
-	<link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+	<!--<link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>-->
     <!--[if lte IE 8]><link rel="stylesheet" href="//cdn.leafletjs.com/leaflet-0.7.2/leaflet.ie.css" /><![endif]-->
 
     <link rel="stylesheet" href="src/leaflet-sidebar.css" />
@@ -20,7 +20,7 @@
 <body>
 
     <div id="sidebar" class="sidebar collapsed">
-        <div class="sidebar-tabs">
+        <div class="sidebar-tabs" id="barre-verticale">
             <ul role="tablist">
                 <li><a href="#home" role="tab" id="logo"><i class="fa fa-home"></i></a></li>
             </ul>
@@ -39,7 +39,7 @@
 						<p><strong>Carte interactive de téléchargement des kits cartographiques « Mon territoire en cartes »</strong></p>
 						<p><i>Cliquez sur le territoire qui vous concerne, ou rechercher un nom d'epci</i></p>
 						<p>« Mon territoire en cartes » réunit dans un petit atlas une série de cartes qui donnent à voir les grandes caractéristiques de chaque territoire français.</p>
-						<p>Les cartes rendent compte des différentes dimensions de la vie quotidienne de nos concitoyens autour de huit thèmes : se déplacer, se soigner, utiliser Internet, s'insérer, se cultiver, travailler, se loger, s'impliquer, et niveau de vie.</p>
+						<p>Les cartes rendent compte des différentes dimensions de la vie quotidienne de nos concitoyens autour de neuf thèmes : se déplacer, se soigner, utiliser Internet, s'insérer, se cultiver, travailler, se loger, s'impliquer, et niveau de vie.</p>
 						<p>Il y a plus de 1 200 dossiers cartographiques, ce qui permet à chacun de voir sa commune, son intercommunalité, son département sa région, mais aussi de se situer par rapport aux autres villes et villages de France...</p>
 						<p>Chaque élu, chaque association, chaque citoyen qui voudra débattre pourra s'appuyer sur ce dossier s'il le souhaite, voire le compléter d’autres éléments qui lui paraîtraient nécessaires pour poser les termes du débat. La neutralité dans l'organisation du débat exige que l'on apporte des données vérifiables, sourcées et que les définitions soient précisées. C’est ici le cas.</p>
 					</div>
@@ -94,7 +94,13 @@
 		//Ajout des couches du fond de carte
 		Cache = L.geoJSON(JS_masque, {color: "#154463", weight: 0, opacity: 1, fillOpacity: 1}).addTo(map);
 		
-		//Com = L.geoJSON(JS_com, {color: "#154463", weight: 0, opacity: 1, fillOpacity: 1}).addTo(map);
+		
+		/*var	picto = new L.Icon({iconUrl: 'img/pictos_national_off.png', iconSize: [14,14], iconAnchor:[7,7]})
+		Commune = L.geoJSON(JS_com, {
+				pointToLayer: function(feature, latlng) {
+					return L.marker(latlng,{icon:picto}).on('click', function(e) { alert('coucou');})
+				}
+		})*/
 		
 		EPCI = L.geoJSON(JS_todo, {
 			filter: function(feature, layer) {return feature.properties.layer == "epci";},
@@ -170,6 +176,27 @@
 		//Events au clic sur la carte
 		map.on('click', clickMap);
 		
+		//Event au clic sur "home"
+		document.getElementById("logo").addEventListener("click", function(event){
+			
+			sidebar.open('home');
+			//remettre le texte d'intro
+			document.getElementById('popup').style.display = "none";
+			document.getElementById('defaut').style.display = "block";
+			event.stopPropagation();
+		});
+		
+		//Event au clic sur la barre verticale
+		document.getElementById("barre-verticale").addEventListener("click", function(event){
+			
+			if (document.getElementById('sidebar').classList.contains('collapsed')) {
+				sidebar.open('home');
+			}
+			else {
+				sidebar.close();
+			}
+		});
+		
 		//Barre de recherche
 		var Recherche = L.layerGroup([EPCI]);
 		
@@ -194,9 +221,46 @@
 			popup(e.layer.feature.properties);
 		});
 		
-		map.addControl( searchControl );
+		//map.addControl( searchControl );
 		
 		sidebar.open('home');
+		
+		
+		
+		
+		//TEST
+		//sample data values for populate map
+		var data = [
+			{"loc":[41.575330,13.102411], "title":"aquamarine", "commune":"Saint-Ouen"},
+			{"loc":[41.575730,13.002411], "title":"black", "commune":"Paris"},
+			{"loc":[41.807149,13.162994], "title":"blue", "commune":"Versailles"},
+			{"loc":[41.507149,13.172994], "title":"chocolate", "commune":"Lyon"}
+		];
+
+		function localData(text, callResponse)
+		{
+			//here can use custom criteria or merge data from multiple layers
+
+			callResponse(data);
+
+			return {	//called to stop previous requests on map move
+				abort: function() {
+					console.log('aborted request:'+ text);
+				}
+			};
+		}
+
+		var searchControl2 = new L.Control.Search({sourceData: localData, markerLocation:false, position:'topright'});
+		
+		searchControl2.on('search:locationfound', function(e) {
+			console.log(e);
+			//if(epciCib) {map.removeLayer(epciCib);}
+			//epciCible(e.layer._latlngs);
+			//popup(e.layer.feature.properties);
+		});
+		
+		map.addControl(searchControl2);
+		
 
    </script>
 	
