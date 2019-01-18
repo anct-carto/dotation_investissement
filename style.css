@@ -31,7 +31,7 @@ html, body, #mapid {
 	}
 	
 a {
-	text-decoration:none;
+	text-decoration:underline;
 	font-weight:black;
 	color: yellow;
 	}
@@ -74,14 +74,7 @@ h1{
 	font-size:1.8em;
 	}
 		
-h2{
-	align: left;
-	}
-	
-h3 {
-	font-size:1em;
-	text-decoration: underline;
-}
+
 
 .leaflet-left {
 	left: 0;
