@@ -9,7 +9,7 @@
     <title>Le grand débat national</title>
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
     <link rel="shortcut icon" type="image/png" href="img/logo.png"/>
-	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 	<link rel="stylesheet" href="src/leaflet-search.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css" />
     <link rel="stylesheet" href="src/leaflet-sidebar.css" />
@@ -22,7 +22,8 @@
     <div id="sidebar" class="sidebar collapsed">
         <div class="sidebar-tabs" id="barre-verticale">
             <ul role="tablist">
-                <li><a href="#home" role="tab" id="logo"><i class="fa fa-home"></i></a></li>
+                <li><a href="#home" role="tab" class="tabs" id="logo"><i class="fas fa-home"></i></a></li>
+				 <li><a href="https://cartotheque.cget.gouv.fr/cartes?filters%5Bquery%5D=&filters%5Bserie%5D%5BSerie%5D%5B0%5D=field.Serie%3Ar%22Grand+D%C3%A9bat+National%22&current_page=1&category=&page_size=20&query=" role="tab"  class="tabs" target="_blank" title="Cartothèque du CGET"><i class="fas fa-map"></i></a></li>
             </ul>
         </div>
 
@@ -37,27 +38,23 @@
 					
 					<div>
 						<p><strong>Carte interactive de téléchargement des kits cartographiques « Mon territoire en cartes »</strong></p>
-						<p><i>Cliquez sur le territoire qui vous concerne, ou rechercher un nom d'epci</i></p>
+						<p><i>Cliquez sur un territoire, ou recherchez un epci</i></p>
 						<p>« Mon territoire en cartes » réunit dans un petit atlas une série de cartes qui donnent à voir les grandes caractéristiques de chaque territoire français.</p>
 						<p>Les cartes rendent compte des différentes dimensions de la vie quotidienne de nos concitoyens autour de neuf thèmes : se déplacer, se soigner, utiliser Internet, s'insérer, se cultiver, travailler, se loger, s'impliquer, et niveau de vie.</p>
 						<p>Il y a plus de 1 200 dossiers cartographiques, ce qui permet à chacun de voir sa commune, son intercommunalité, son département sa région, mais aussi de se situer par rapport aux autres villes et villages de France...</p>
 						<p>Chaque élu, chaque association, chaque citoyen qui voudra débattre pourra s'appuyer sur ce dossier s'il le souhaite, voire le compléter d’autres éléments qui lui paraîtraient nécessaires pour poser les termes du débat. La neutralité dans l'organisation du débat exige que l'on apporte des données vérifiables, sourcées et que les définitions soient précisées. C’est ici le cas.</p>
+						<h2>Retrouvez tous les kits sur la <a href="https://cartotheque.cget.gouv.fr/cartes?filters%5Bquery%5D=&filters%5Bserie%5D%5BSerie%5D%5B0%5D=field.Serie%3Ar%22Grand+D%C3%A9bat+National%22&current_page=1&category=&page_size=20&query=" style="text-decoration:none;" target="_blank ">cartothèque du CGET</a></h2>
 					</div>
-					<div id="legende">
-			
-					</div>
-					<br/>
+					
 					<div id="sources">
 					<img src="img/cget.png" alt="" width="20%"/>
 					<img src="img/ot.png" alt="" width="40%"/>
-					<p><i>Retrouver les kits également sur la <a href="https://cartotheque.cget.gouv.fr/cartes?filters%5Bquery%5D=&filters%5Bserie%5D%5BSerie%5D%5B0%5D=field.Serie%3Ar%22Grand+D%C3%A9bat+National%22&current_page=1&category=&page_size=20&query=" style="text-decoration:none;" target="_blank ">cartothèque du CGET</a></i></p>
 					</div>
 				</div>
 
 				<div class="ol-popup" id="popup">
 					<div id="titre"></div>
 					<div id="internet"></div>
-					<div id="cartotek"></div>
 				</div>
 					
             </div>
@@ -93,14 +90,6 @@
 		
 		//Ajout des couches du fond de carte
 		Cache = L.geoJSON(JS_masque, {color: "#154463", weight: 0, opacity: 1, fillOpacity: 1}).addTo(map);
-		
-		
-		/*var	picto = new L.Icon({iconUrl: 'img/pictos_national_off.png', iconSize: [4,4], iconAnchor:[2,2]})
-		Commune = L.geoJSON(JS_com, {
-				pointToLayer: function(feature, latlng) {
-					return L.marker(latlng,{icon:picto}).on('click', function(e) { console.log('coucou');})
-				}
-		})*/
 		
 		EPCI = L.geoJSON(JS_todo, {
 			filter: function(feature, layer) {return feature.properties.layer == "epci";},
@@ -147,9 +136,7 @@
 			document.getElementById('defaut').style.display = "none";
 			
 			document.getElementById('titre').innerHTML = "<h1 style='#ffffff'>"+e.libgeo+"</h1>";
-			document.getElementById('internet').innerHTML = "<p><a href="+e.nomfic+" style='font-size:1.2em' target='_blank '>Télécharger le kit cartographique</a></p>";
-			document.getElementById('cartotek').innerHTML = "<p><i>Retrouver tous les kits sur la <a href='https://cartotheque.cget.gouv.fr/cartes?filters%5Bquery%5D=&filters%5Bserie%5D%5BSerie%5D%5B0%5D=field.Serie%3Ar%22Grand+D%C3%A9bat+National%22&current_page=1&category=&page_size=20&query=' style='padding-top:50px; font-size:1em' target='_blank '>cartothèque du CGET</a></i></p>";			
-			
+			document.getElementById('internet').innerHTML = "<p><a href="+e.nomfic+" style='font-size:1.2em; target='_blank' >Télécharger le kit cartographique</a></p>";
 		}
 		
 		//Indiquer epci sélectionné

@@ -32,9 +32,14 @@ html, body, #mapid {
 	
 a {
 	text-decoration:none;
-	font-weight:black;
+	font-family: 'MontserratBold';
 	color: yellow;
 	}
+
+a:hover {
+  color : #b51917;
+  font-family: 'MontserratBold';
+}
 	
 #legende {
 	position:auto;
@@ -43,7 +48,8 @@ a {
 	
 #sources {
 	float:left;
-	padding-top:20px;
+	padding:20px 0px;
+	text-align: center;
 	}
 		
 		
@@ -71,7 +77,21 @@ strong {
 h1{
 	font-size:1.8em;
 	}
+	
+h2{
+	text-transform:uppercase;
+	font-size:0.9em;
+	text-align: center;
+}
 		
 .leaflet-left {
 	left: 0;
 	}	
+	
+.fas {
+  color : white;
+}
+
+.tabs:hover {
+  background-color : #b51917;
+}
