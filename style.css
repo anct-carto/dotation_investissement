@@ -31,12 +31,10 @@ html, body, #mapid {
 	}
 	
 a {
-	text-decoration:underline;
+	text-decoration:none;
 	font-weight:black;
 	color: yellow;
 	}
-
-
 	
 #legende {
 	position:auto;
@@ -74,8 +72,6 @@ h1{
 	font-size:1.8em;
 	}
 		
-
-
 .leaflet-left {
 	left: 0;
 	}	
