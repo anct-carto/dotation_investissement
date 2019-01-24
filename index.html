@@ -69,6 +69,7 @@
     <script src="https://turbo87.github.io/sidebar-v2/js/leaflet-sidebar.js"></script>
 	<script type="text/javascript" src="data/masque.js"></script>
 	<script type="text/javascript" src="data/toutes_couches.js"></script>
+	<script type="text/javascript" src="data/cercles_drom.js"></script>
 	
     <script>
 		
@@ -90,6 +91,7 @@
 		
 		//Ajout des couches du fond de carte
 		Cache = L.geoJSON(JS_masque, {color: "#154463", weight: 0, opacity: 1, fillOpacity: 1}).addTo(map);
+		Cercles_drom = L.geoJSON(JS_drom, {color: "#ffffff", weight: 0.5, opacity: 0.7, fillOpacity: 0}).addTo(map);
 		
 		EPCI = L.geoJSON(JS_todo, {
 			filter: function(feature, layer) {return feature.properties.layer == "epci";},
@@ -101,13 +103,15 @@
 						epciCible(e.target._latlngs);
 						preventDefault(e);
 						})
+					//layer.on('mouseover', function(e){
+					//	epciCible(e.target._latlngs);
+					//	})
 					}
 		}).addTo(map);
 		
 		Contour_Regions = L.geoJSON(JS_todo, {
-			filter: function(feature, layer) {return feature.properties.layer == "regions";},
-			interactive: false,
-			style: { color: "#003b5e", weight: 1, opacity: 1, fillOpacity: 0}
+			filter: function(feature, layer) {return feature.properties.layer == "region";},
+			style: {interactive: false, color: "#003b5e", weight: 1, opacity: 1, fillOpacity: 0}
 		}).addTo(map);
 		
 		Departements = L.geoJSON(JS_todo, {
