@@ -95,3 +95,25 @@ h2{
 .tabs:hover {
   background-color : #b51917;
 }
+
+
+.boutons {
+		margin-top: 25px;
+		}
+		
+.bouton {
+		color:#ffffff;
+		font-weight: bold;
+		cursor: pointer;
+		height: 21px;
+		}
+		
+.bouton:hover {
+		color: #004494;
+		}
+		
+.bouton_on {
+		color: red;
+		font-weight: bold;
+		height: 21px;
+		}

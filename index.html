@@ -6,7 +6,7 @@
 	<!-- Développement : service cartographie du CGET -->
 
     <meta charset="utf-8" />
-    <title>Le grand débat national</title>
+    <title>Dotations</title>
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no" />
     <link rel="shortcut icon" type="image/png" href="img/logo.png"/>
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
@@ -23,38 +23,42 @@
         <div class="sidebar-tabs" id="barre-verticale">
             <ul role="tablist">
                 <li><a href="#home" role="tab" class="tabs" id="logo"><i class="fas fa-home"></i></a></li>
-				 <li><a href="https://cartotheque.cget.gouv.fr/cartes?filters%5Bquery%5D=&filters%5Bserie%5D%5BSerie%5D%5B0%5D=field.Serie%3Ar%22Grand+D%C3%A9bat+National%22&current_page=1&category=&page_size=20&query=" role="tab"  class="tabs" target="_blank" title="Cartothèque du CGET"><i class="fas fa-map"></i></a></li>
+				<!--<li><a href="https://cartotheque.cget.gouv.fr/cartes?filters%5Bquery%5D=&filters%5Bserie%5D%5BSerie%5D%5B0%5D=field.Serie%3Ar%22Grand+D%C3%A9bat+National%22&current_page=1&category=&page_size=20&query=" role="tab"  class="tabs" target="_blank" title="Cartothèque du CGET"><i class="fas fa-map"></i></a></li>-->
             </ul>
         </div>
 
         <!-- Tab panes -->
         <div class="sidebar-content">
             <div class="sidebar-pane" id="home">
-                <h1><img src="img/Logo_Grand_Debat_National.png" alt="" width="80%"/>
+                <h1>Dotations de fonctionnement
 				<span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
                 </h1>
 				
 				<div class="presentation" id="defaut">
 					
 					<div>
-						<p><strong>Carte interactive de téléchargement des kits cartographiques « Mon territoire en cartes »</strong></p>
-						<p><i>Cliquez sur un territoire, ou recherchez un epci</i></p>
-						<p>« Mon territoire en cartes » réunit dans un petit atlas une série de cartes qui donnent à voir les grandes caractéristiques de chaque territoire français.</p>
-						<p>Les cartes rendent compte des différentes dimensions de la vie quotidienne de nos concitoyens autour de neuf thèmes : se déplacer, se soigner, utiliser Internet, s'insérer, se cultiver, travailler, se loger, s'impliquer, et niveau de vie.</p>
-						<p>Il y a plus de 1 200 dossiers cartographiques, ce qui permet à chacun de voir sa commune, son intercommunalité, son département sa région, mais aussi de se situer par rapport aux autres villes et villages de France...</p>
-						<p>Chaque élu, chaque association, chaque citoyen qui voudra débattre pourra s'appuyer sur ce dossier s'il le souhaite, voire le compléter d’autres éléments qui lui paraîtraient nécessaires pour poser les termes du débat. La neutralité dans l'organisation du débat exige que l'on apporte des données vérifiables, sourcées et que les définitions soient précisées. C’est ici le cas.</p>
-						<h2>Retrouvez tous les kits sur la <a href="https://cartotheque.cget.gouv.fr/cartes?filters%5Bquery%5D=&filters%5Bserie%5D%5BSerie%5D%5B0%5D=field.Serie%3Ar%22Grand+D%C3%A9bat+National%22&current_page=1&category=&page_size=20&query=" style="text-decoration:none;" target="_blank ">cartothèque du CGET</a></h2>
+						<p><strong>Carte interactive des dotations de fonctionnement</strong></p>
+						<p><i>Cliquez dans la légende pour filtrer les informations, ou recherchez directement votre département ou votre commune.</i></p>
+						<p>Informations sur les dotations de fonctionnement attribuée par l'État aux communes, aux EPCI et aux départements</p>
+						</div>
+						
+					<div class="boutons">
+					<div class="bouton" id="bouton1"><img src="img/picto_1b.png" style="vertical-align:middle; width:20px;padding:0px 10px;"  />Voir les départements</div>
+					<div class="bouton" id="bouton2"><img src="img/picto_2b.png" style="vertical-align:middle; width:20px;padding:0px 10px;"  />Voir les communes</div>
+					<div class="bouton" id="bouton3"><img src="img/picto_3b.png" style="vertical-align:middle; width:20px;padding:0px 10px;"  />Voir les EPCI</div>
 					</div>
-					
-					<div id="sources">
-					<img src="img/cget.png" alt="" width="20%"/>
-					<img src="img/ot.png" alt="" width="40%"/>
+						
+				<div id="sources">
+					<img src="img/cget.png" alt="" width="60%"/>
 					</div>
 				</div>
 
 				<div class="ol-popup" id="popup">
 					<div id="titre"></div>
-					<div id="internet"></div>
+					<div id="N1EVO"></div>
+					<div id="N2MONTANT"></div>
+					<div id="N3PART_PER"></div>
+					<div id="N4PART_DGF"></div>
 				</div>
 					
             </div>
@@ -68,7 +72,8 @@
 	<script src="src/leaflet-search.js"></script>
     <script src="https://turbo87.github.io/sidebar-v2/js/leaflet-sidebar.js"></script>
 	<script type="text/javascript" src="data/masque.js"></script>
-	<script type="text/javascript" src="data/toutes_couches.js"></script>
+	<!--<script type="text/javascript" src="data/toutes_couches.js"></script>-->
+	<script type="text/javascript" src="data/geoData.js"></script>
 	<script type="text/javascript" src="data/cercles_drom.js"></script>
 	
     <script>
@@ -93,8 +98,8 @@
 		Cache = L.geoJSON(JS_masque, {color: "#154463", weight: 0, opacity: 1, fillOpacity: 1}).addTo(map);
 		Cercles_drom = L.geoJSON(JS_drom, {color: "#ffffff", weight: 0.5, opacity: 0.7, fillOpacity: 0}).addTo(map);
 		
-		EPCI = L.geoJSON(JS_todo, {
-			filter: function(feature, layer) {return feature.properties.layer == "epci";},
+		commune = L.geoJSON(JS_todo, {
+			filter: function(feature, layer) {return feature.properties.Type == "com";},
 			style : {weight: 0.8, color: "#3e62a4", opacity: 1, fillOpacity: 1, fillColor:"#00bdce"},
 			onEachFeature: function(feature, layer) {
 					layer.bindTooltip(feature.properties.libgeo, {className: 'Tooltips'});
@@ -103,26 +108,26 @@
 						epciCible(e.target._latlngs);
 						preventDefault(e);
 						})
-					//layer.on('mouseover', function(e){
-					//	epciCible(e.target._latlngs);
-					//	})
 					}
-		}).addTo(map);
+		});
 		
-		Contour_Regions = L.geoJSON(JS_todo, {
+		/*Contour_Regions = L.geoJSON(JS_todo, {
 			filter: function(feature, layer) {return feature.properties.layer == "region";},
 			style: {interactive: false, color: "#003b5e", weight: 1, opacity: 1, fillOpacity: 0}
-		}).addTo(map);
+		}).addTo(map);*/
 		
-		Departements = L.geoJSON(JS_todo, {
-			filter: function(feature, layer) {return feature.properties.layer == "departement";},
-			style: {interactive: false, color: "#003b5e", weight: 0.5, opacity: 1, fillOpacity: 0}
+		departement = L.geoJSON(JS_todo, {
+			filter: function(feature, layer) {return feature.properties.Type == "dep";},
+			style: {weight: 0.8, color: "#3e62a4", opacity: 1, fillOpacity: 1, fillColor:"#00bdce"},
+			onEachFeature: function(feature, layer) {
+					layer.bindTooltip(feature.properties.libgeo, {className: 'Tooltips'});
+					layer.on('click', function(e) {
+						popup(feature.properties);
+						epciCible(e.target._latlngs);
+						preventDefault(e);
+						})
+					}
 		}).addTo(map);
-		
-		//Ajout du logo sur la carte
-		var imageUrl = 'img/Logo_Grand_Debat_National.png',
-		imageBounds = [[51, -4.7],[50, 0]];
-		L.imageOverlay(imageUrl, imageBounds, {zIndex : '1000'} ).addTo(map);
 		
 		//Ajout de la sidebar
 		var sidebar = L.control.sidebar('sidebar').addTo(map);
@@ -140,7 +145,10 @@
 			document.getElementById('defaut').style.display = "none";
 			
 			document.getElementById('titre').innerHTML = "<h1 style='#ffffff'>"+e.libgeo+"</h1>";
-			document.getElementById('internet').innerHTML = "<p><a href="+e.nomfic+" style='font-size:1.2em; target='_blank' >Télécharger le kit cartographique</a></p>";
+			document.getElementById('N1EVO').innerHTML = "<p>Évolution de la dotation forfaitaire 2017/2018 : "+e.N1EVO+"</p>";
+			document.getElementById('N2MONTANT').innerHTML = "<p>Montant dotation globale de fonctionnement (part forfaitaire + part péréquation) : "+e.N2MONTANT+"</p>";
+			document.getElementById('N3PART_PER').innerHTML = "<p>Part péréquation/DGF : "+e.N3PART_PER+"</p>";
+			document.getElementById('N4PART_DGF').innerHTML = "<p>Part DGF/Recettes réelles de fonctionnement : "+e.N4PART_DGF+"</p>";
 		}
 		
 		//Indiquer epci sélectionné
@@ -189,8 +197,41 @@
 			}
 		});
 		
+		//Boutons en légende
+		document.getElementById("bouton1").addEventListener("click", function(event){
+			event.stopPropagation();
+			document.getElementById('bouton1').setAttribute("class", "bouton_on");
+			document.getElementById('bouton2').setAttribute("class", "bouton");
+			document.getElementById('bouton3').setAttribute("class", "bouton");
+			if (map.hasLayer(commune)) {map.removeLayer(commune);};
+			//if (map.hasLayer(pointTop)) {map.removeLayer(pointTop);};
+			if (map.hasLayer(departement)==false) {map.addLayer(departement); }
+		});	
+
+		document.getElementById("bouton2").addEventListener("click", function(event){
+			event.stopPropagation();
+			document.getElementById('bouton1').setAttribute("class", "bouton");
+			document.getElementById('bouton2').setAttribute("class", "bouton_on");
+			document.getElementById('bouton3').setAttribute("class", "bouton");
+			if (map.hasLayer(departement)) {map.removeLayer(departement);};
+			//if (map.hasLayer(pointTop)) {map.removeLayer(pointTop);};
+			if (map.hasLayer(commune)==false) {map.addLayer(commune); }
+		});	
+		
+		/*document.getElementById("bouton3").addEventListener("click", function(event){
+			event.stopPropagation();
+			document.getElementById('bouton1').setAttribute("class", "bouton");
+			document.getElementById('bouton2').setAttribute("class", "bouton");
+			document.getElementById('bouton3').setAttribute("class", "bouton_on");
+			if (map.hasLayer(pointMedium)) {map.removeLayer(pointMedium);};
+			if (map.hasLayer(pointBottom)) {map.removeLayer(pointBottom);};
+			if (map.hasLayer(pointTop)==false) {map.addLayer(pointTop); }
+		});	*/
+		
+		
+		
 		//Barre de recherche
-		var Recherche = L.layerGroup([EPCI]);
+		var Recherche = L.layerGroup([commune]);
 		
 		var searchControl = new L.control.search({
 			layer: Recherche,
@@ -217,24 +258,7 @@
 		
 		sidebar.open('home');
 		
-		
-		/*TEST
-		var searchControl2 = new L.control.search({
-			layer: Commune,
-			initial: false,
-			position:'topright',
-			propertyName: 'libgeo',
-			marker: false
-		})
-		
-		searchControl.on('search:locationfound', function(e) {
-			//if(epciCib) {map.removeLayer(epciCib);}
-			//epciCible(e.layer._latlngs);
-			//popup(e.layer.feature.properties);
-		});
-		
-		//map.addControl(searchControl2);*/
-		
+		map.removeLayer(commune);
 
    </script>
 	

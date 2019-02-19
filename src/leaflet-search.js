@@ -83,7 +83,7 @@ L.Control.Search = L.Control.extend({
 		autoCollapseTime: 1200,			//delay for autoclosing alert and collapse after blur
 		textErr: 'Lieu non trouvé',	//error message
 		textCancel: 'Effacer',		    //title in cancel button		
-		textPlaceholder: 'Rechercher un epci',   //placeholder value			
+		textPlaceholder: 'Rechercher un territoire',   //placeholder value			
 		hideMarkerOnCollapse: false,    //remove circle and marker on search control collapsed		
 		position: 'topleft',		
 		marker: {						//custom L.Marker or false for hide
