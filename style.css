@@ -27,7 +27,7 @@ body {
 html, body, #mapid {
     height: 100%;
     font-family: 'Montserrat';
-	color: #ffffff;
+	color: #c8c8d2;
 	}
 	
 a {
@@ -41,15 +41,16 @@ a:hover {
   font-family: 'MontserratBold';
 }
 	
+	
 #legende {
+	margin-top: 30px;
 	position:auto;
 	width: 100%;
 	}
 	
 #sources {
-	float:left;
-	padding:20px 0px;
-	text-align: center;
+	margin-top:100px;
+	font-size:0.7em;
 	}
 		
 		
@@ -75,13 +76,29 @@ strong {
 	}
 		
 h1{
-	font-size:1.8em;
+	font-size:2 em;
+	text-transform:uppercase;
+	font-family: 'MontserratBold';
+	color: white;
 	}
 	
 h2{
-	text-transform:uppercase;
-	font-size:0.9em;
-	text-align: center;
+	font-size:1.2em;
+	font-weight: bold;
+	color: white;
+}
+
+h3{
+	font-size:1em;
+	font-weight: bold;
+	color: white;
+	margin-top:30px;
+}
+
+.chiffre{
+	font-size:1.5em;
+	font-weight: bold;
+	color:#00bdce;
 }
 		
 .leaflet-left {
@@ -93,27 +110,27 @@ h2{
 }
 
 .tabs:hover {
-  background-color : #b51917;
+  background-color : #ffee00;
 }
 
 
 .boutons {
-		margin-top: 25px;
+		margin-top: 40px;
 		}
 		
 .bouton {
-		color:#ffffff;
+		color:#00bdce;
 		font-weight: bold;
 		cursor: pointer;
 		height: 21px;
 		}
 		
 .bouton:hover {
-		color: #004494;
+		color: red;
 		}
 		
 .bouton_on {
-		color: red;
+		color: #ffee00;
 		font-weight: bold;
 		height: 21px;
 		}
