@@ -32,12 +32,12 @@ html, body, #mapid {
 	
 a {
 	text-decoration:none;
+	color: white;
 	font-family: 'MontserratBold';
-	color: yellow;
 	}
 
 a:hover {
-  color : #b51917;
+  color : red;
   font-family: 'MontserratBold';
 }
 	
