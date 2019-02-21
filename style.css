@@ -85,20 +85,24 @@ h1{
 h2{
 	font-size:1.2em;
 	font-weight: bold;
-	color: white;
+	color: #ffffff;
 }
 
 h3{
-	font-size:1em;
+	font-size:0.9em;
 	font-weight: bold;
 	color: white;
-	margin-top:30px;
 }
 
 .chiffre{
 	font-size:1.5em;
 	font-weight: bold;
 	color:#00bdce;
+}
+
+.indicateur {
+	color:white;
+	font-size:0.9em;
 }
 		
 .leaflet-left {
@@ -113,13 +117,12 @@ h3{
   background-color : #ffee00;
 }
 
-
 .boutons {
-		margin-top: 40px;
+		margin-top: 20px;
 		}
 		
 .bouton {
-		color:#00bdce;
+		color:#ffffff;
 		font-weight: bold;
 		cursor: pointer;
 		height: 21px;
@@ -130,7 +133,26 @@ h3{
 		}
 		
 .bouton_on {
-		color: #ffee00;
+		color: #8a0000;
 		font-weight: bold;
 		height: 21px;
 		}
+			
+.divTable{
+	display: table;
+	
+}
+.divTableRow {
+	display: table-row;
+	margin-top:30px;	
+}
+
+.divTableCell, .divTableHead {
+	border: 0.1px solid #88a0b7;
+	vertical-align:middle;
+	padding: 3px 10px;
+}
+
+.divTableBody {
+	display: table-row-group;
+}

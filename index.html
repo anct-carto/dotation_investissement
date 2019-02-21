@@ -38,24 +38,22 @@
 					
 					<div>
 						<h2><span style="color:#ffee00;">29,96 milliards</span> pour le fonctionnement des communes, intercommunalités et départements</h2>
-						<p>En 2019, le montant de la dotation globale de fonctionnement (DGF) est <span style="color:white;">stabilisée</span> pour la 2ème année consécutive, et après 4 années de baisse continue.</p>
+						<p>En 2019, le montant de la dotation globale de fonctionnement (DGF) est <span style="color:white;">stabilisé</span> pour la 2ème année consécutive, et après 4 années de baisse continue.</p>
 						<p>L’État consacre <span style="color:white;">7,7 milliards d’euros</span> à la péréquation entre les collectivités.</p>
-					</div>
-						
-					<div id="legende">
-						<h2>Part de la dotation globale de fonctionnement dans les recettes réelles de fonctionnement du territoire : </h2>
-						<div><img src="img/leg1.png" style="vertical-align:middle; width:20px;padding:0px 10px;"  />Plus de 20%</div>
-						<div><img src="img/leg2.png" style="vertical-align:middle; width:20px;padding:0px 10px;"  />15% - 20%</div>
-						<div><img src="img/leg3.png" style="vertical-align:middle; width:20px;padding:0px 10px;"  />10% - 15%</div>
-						<div><img src="img/leg4.png" style="vertical-align:middle; width:20px;padding:0px 10px;"  />Moins de 10%</div>
+						<p>La DGF a augmenté en 2019 pour <span style="color:white;">xx%</span> des communes.</p>
 					</div>
 					
 					<div class="boutons">
-						<h2>Rechercher votre territoire : </h2>
+						<h2>Accéder aux informations relatives aux <span style="color:#ffee00;">dotations de l'État</span> pour votre territoire&nbsp;:</h2>
+						<div class="indicateur"><img src="img/bullet.png" style="vertical-align:middle; width:15px;padding:0px 0px;"  />Évolution de la dotation forfaitaire</div>
+						<div class="indicateur"><img src="img/bullet.png" style="vertical-align:middle; width:15px;padding:0px 00px;"  />Montant de la DGF</div>
+						<div class="indicateur"><img src="img/bullet.png" style="vertical-align:middle; width:15px;padding:0px 00px;"  />Part de la péréquation dans la DGF</div>
+						<div class="indicateur"><img src="img/bullet.png" style="vertical-align:middle; width:15px;padding:0px 00px;"  />Part de la DGF dans les recettes</div>
+						</br>
 						<div class="bouton_on" id="bouton1"><img src="img/fleche.png" style="vertical-align:middle; width:20px;padding:0px 10px;"  />Voir les départements</div>
 						<div class="bouton" id="bouton3"><img src="img/fleche.png" style="vertical-align:middle; width:20px;padding:0px 10px;"  />Voir les EPCI</div>
 						</br>
-						<div style="color:#00bdce;font-weight:bold;height:21px">Rechercher une commune<div id="boiteRecherche"></div></div>
+						<div style="font-weight:bold;height:21px;color:white;">Rechercher une commune<div id="boiteRecherche"></div></div>
 						
 					</div>
 						
@@ -65,13 +63,27 @@
 					
 				</div>
 
-				<div class="ol-popup" id="popup">
+				<div class="divTable" id="popup">
 					<div id="titre"></div>
-					<div id="N1EVO"></div>
-					<div id="N2MONTANT"></div>
-					<div id="N3PART_PER"></div>
-					<div id="N4PART_DGF"></div>
-					<div id="retour"></div>
+					<div class="divTableBody">
+						<div class="divTableCell">
+								<div class="divTableRow"><h3>Évolution de la dotation forfaitaire 2017/2018&nbsp;:</h3></div>
+								<div class="divTableRow chiffre" id="N1EVO"></div>
+						</div>
+						<div class="divTableCell">
+								<div class="divTableRow"><h3>Montant de la dotation globale de fonctionnement</br>(dotation forfaitaire et dotation de péréquation)&nbsp;:</h3></div>
+								<div class="divTableRow chiffre" id="N2MONTANT"></div>
+						</div>
+						<div class="divTableCell">
+								<div class="divTableRow"><h3>Part de la péréquation dans la dotation globale de fonctionnement&nbsp;:</h3></div>
+								<div class="divTableRow chiffre" id="N3PART_PER"></div>
+						</div>
+						<div class="divTableCell">
+								<div class="divTableRow"><h3>Part de la dotation globale de fonctionnement dans les recettes réelles de fonctionnement&nbsp;:</h3></div>
+								<div class="divTableRow chiffre" id="N4PART_DGF"></div>
+						</div>
+					</div>
+					<div id="retour" style="margin-top:50px;"></div>
 				</div>
 					
             </div>
@@ -130,6 +142,11 @@
 					}
 		});
 		
+		//Ajout de la légende sur la carte
+		var imageUrl = 'img/legende.png',
+		imageBounds = [[51.1, -5.4],[49.2, 0.15]];
+		L.imageOverlay(imageUrl, imageBounds, {zIndex : '1000'} ).addTo(map);
+		
 		function style(feature) {
 			return {
 			fillColor: getColor(feature.properties.N4PART_DGF),
@@ -162,7 +179,7 @@
 		//Ajout de la sidebar
 		var sidebar = L.control.sidebar('sidebar').addTo(map);
 		
-		
+		//Fonctions de formatage de nombres
 		function format1(nombre){
 		  nombre=parseFloat(nombre).toFixed(2);
 		  return nombre;
@@ -170,7 +187,7 @@
 		
 		function format2(nombre){
 		  nombre += '';
-		  var sep = ' ';
+		  var sep = '&nbsp;';
 		  var reg = /(\d+)(\d{3})/;
 		  while( reg.test( nombre)) {
 			nombre = nombre.replace( reg, '$1' +sep +'$2');
@@ -190,10 +207,10 @@
 			document.getElementById('defaut').style.display = "none";
 			
 			document.getElementById('titre').innerHTML = "<h1 style='color:yellow'>"+e.libgeo+"</h1><p>Les données concernant votre "+e.Type+"</p>";
-			document.getElementById('N1EVO').innerHTML = "<h3>Évolution de la dotation forfaitaire 2017/2018 : <span class='chiffre'>"+format1(e.N1EVO*100)+"&nbsp;%</span></h3>";
-			document.getElementById('N2MONTANT').innerHTML = "<h3>Montant de la dotation globale de fonctionnement (dotation forfaitaire et dotation de péréquation) : <span class='chiffre'></br>"+format2(e.N2MONTANT)+"&nbsp;€</span></h3>";
-			document.getElementById('N3PART_PER').innerHTML = "<h3>Part de la péréquation dans la dotation globale de fonctionnement : <span class='chiffre'>"+format1(e.N3PART_PER*100)+"&nbsp;%</span></h3>";
-			document.getElementById('N4PART_DGF').innerHTML = "<h3>Part de la dotation globale de fonctionnement dans les recettes réelles de fonctionnement : <span class='chiffre'>"+format1(e.N4PART_DGF*100)+"&nbsp;%</span></h3>";
+			document.getElementById('N1EVO').innerHTML = "<span>"+format1(e.N1EVO*100)+"&nbsp;%</span>";
+			document.getElementById('N2MONTANT').innerHTML = "<span>"+format2(e.N2MONTANT)+"&nbsp;€</span>";
+			document.getElementById('N3PART_PER').innerHTML = "<span>"+format1(e.N3PART_PER*100)+"&nbsp;%</span>";
+			document.getElementById('N4PART_DGF').innerHTML = "<span>"+format1(e.N4PART_DGF*100)+"&nbsp;%</span>";
 			document.getElementById('retour').innerHTML = "<div class='bouton' style='color:white'><img src='img/fleche.png' style='vertical-align:middle; width:20px;padding:0px 10px;'  />Retour</div>";
 		}
 		
