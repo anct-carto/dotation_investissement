@@ -38,7 +38,7 @@
   top: 0;
   bottom: 0;
   height: 100%;
-  background-color: #032d50; }
+  background-color: #3c5daa; }
   .sidebar-left .sidebar-tabs {
     left: 0; }
   .sidebar-right .sidebar-tabs {
@@ -51,7 +51,6 @@
     list-style-type: none; }
     .sidebar-tabs > li, .sidebar-tabs > ul > li {
       width: 100%;
-      height: 40px;
       color: #333;
       font-size: 12pt;
       overflow: hidden;
@@ -83,7 +82,7 @@
   position: absolute;
   top: 0;
   bottom: 0;
-  background-color: #061032;
+  background-color: #032d50;
   overflow-x: hidden;
   overflow-y: auto; }
   .sidebar-left .sidebar-content {

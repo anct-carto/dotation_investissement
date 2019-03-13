@@ -13,6 +13,7 @@
 	<link rel="stylesheet" href="src/leaflet-search.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css" />
     <link rel="stylesheet" href="src/leaflet-sidebar.css" />
+	<link href="https://fonts.googleapis.com/css?family=Asap:400,400i,500,500i,600,600i,700,700i|Crimson+Text:400,400i,600,600i,700,700i" rel="stylesheet">
 	<link rel="stylesheet" href="style.css" />
 	
 </head>
@@ -22,9 +23,11 @@
     <div id="sidebar" class="sidebar collapsed">
         <div class="sidebar-tabs" id="barre-verticale">
             <ul role="tablist">
-                <li><a href="#home" role="tab" class="tabs" id="logo"><i class="fas fa-home"></i></a></li>
-				<!--<li><a href="https://cartotheque.cget.gouv.fr/cartes?filters%5Bquery%5D=&filters%5Bserie%5D%5BSerie%5D%5B0%5D=field.Serie%3Ar%22Grand+D%C3%A9bat+National%22&current_page=1&category=&page_size=20&query=" role="tab"  class="tabs" target="_blank" title="Cartothèque du CGET"><i class="fas fa-map"></i></a></li>-->
-            </ul>
+                <li><a href="#home" role="tab" id="logo"><i class="fas fa-home"></i></a></li>
+				<li><a href="#home" role="tab" class="onglets" id="logo_dep">Départements</i></a></li>
+				<li><a href="#home" role="tab" class="onglets" id="logo_epci">EPCI</i></a></li>
+				<li><a href="#home" role="tab" class="onglets" id="logo_com">Communes</i></a></li>
+			</ul>
         </div>
 
         <!-- Tab panes -->
@@ -37,21 +40,22 @@
 				<div class="presentation" id="defaut">
 					
 					<div>
-						<h2><span style="color:#ffee00;">29,96 milliards</span> pour le fonctionnement des communes, intercommunalités et départements</h2>
-						<p>En 2019, le montant de la dotation globale de fonctionnement (DGF) est <span style="color:white;">stabilisé</span> pour la 2ème année consécutive, et après 4 années de baisse continue.</p>
-						<p>L’État consacre <span style="color:white;">7,7 milliards d’euros</span> à la péréquation entre les collectivités.</p>
-						<p>La DGF a augmenté en 2019 pour <span style="color:white;">xx%</span> des communes.</p>
+						<h2><span style="color:#ffee00;">29,94 milliards d'euros</span> de dotation globale de fonctionnement pour les communes, les intercommunalités et les départements</h2>
+						<p>En 2019, le montant de la dotation globale de fonctionnement (DGF) est <span style="color:white;">stabilisé</span> pour la 2ème année consécutive, et après 4 années de baisse continue entre 2014 et 2017.</p>
+						<p>L’État consacre <span style="color:white;">7,7 milliards d’euros</span> à la péréquation entre les collectivités au sein de la DGF.</p>
+						<p>La DGF a augmenté en 2019 pour <span style="color:white;">xx%</span> des communes, <span style="color:white;">yy%</span> des EPCI et <span style="color:white;">zz%</span> des départements.</p>
 					</div>
 					
 					<div class="boutons">
-						<h2>Accéder aux informations relatives aux <span style="color:#ffee00;">dotations de l'État</span> pour votre territoire&nbsp;:</h2>
-						<div class="indicateur"><img src="img/bullet.png" style="vertical-align:middle; width:15px;padding:0px 0px;"  />Évolution de la dotation forfaitaire</div>
-						<div class="indicateur"><img src="img/bullet.png" style="vertical-align:middle; width:15px;padding:0px 00px;"  />Montant de la DGF</div>
-						<div class="indicateur"><img src="img/bullet.png" style="vertical-align:middle; width:15px;padding:0px 00px;"  />Part de la péréquation dans la DGF</div>
-						<div class="indicateur"><img src="img/bullet.png" style="vertical-align:middle; width:15px;padding:0px 00px;"  />Part de la DGF dans les recettes</div>
+						<h2>Accédez aux informations relatives à la DGF 2019 pour votre commune, intercommunalité ou département&nbsp;:</h2>
+						<div class="indicateur"><img src="img/bullet.png" style="vertical-align:middle; width:15px;padding:0px 0px;"  />Variation de la DGF entre 2018 et 2019 (en %)</div>
+						<div class="indicateur"><img src="img/bullet.png" style="vertical-align:middle; width:15px;padding:0px 00px;"  />Variation de la DGF entre 2018 et 2019 (en % des recettes réelles de fonctionnement)</div>
+						<div class="indicateur"><img src="img/bullet.png" style="vertical-align:middle; width:15px;padding:0px 00px;"  />Montant de la DGF (en €)</div>
+						<div class="indicateur"><img src="img/bullet.png" style="vertical-align:middle; width:15px;padding:0px 00px;"  />Montant de la DGF par habitant (en €)</div>
+						<div class="indicateur"><img src="img/bullet.png" style="vertical-align:middle; width:15px;padding:0px 00px;"  />Part de la péréquation dans la DGF (en %)</div>
 						</br>
-						<div class="bouton_on" id="bouton1"><img src="img/fleche.png" style="vertical-align:middle; width:20px;padding:0px 10px;"  />Voir les départements</div>
-						<div class="bouton" id="bouton3"><img src="img/fleche.png" style="vertical-align:middle; width:20px;padding:0px 10px;"  />Voir les EPCI</div>
+						<div class="bouton_on" id="bouton_dep"><img src="img/fleche.png" style="vertical-align:middle; width:20px;padding:0px 10px;" />Voir les départements</div>
+						<div class="bouton" id="bouton_epci"><img src="img/fleche.png" style="vertical-align:middle; width:20px;padding:0px 10px;" />Voir les EPCI</div>
 						</br>
 						<div style="font-weight:bold;height:21px;color:white;">Rechercher une commune<div id="boiteRecherche"></div></div>
 						
@@ -63,25 +67,54 @@
 					</div>
 					
 				</div>
+				
+				
+				<div class="presentation" id="onglet_departement">
+					<h2>Les départements</h2>
+					<p>La DGF (dotation forfaitaire + dotation de compensation + dotation de péréquation) <span style="color:white;">augmente entre 2019 et 2018 pour 48 départements</span>.</p>
+					<p><span style="color:white;">99</span> départements bénéficient d’une dotation de péréquation de la part de l’Etat (dotation de fonctionnement minimale et/ou dotation de péréquation urbaine).</p>
+					<p>La péréquation représente en moyenne <span style="color:white;">17,35%</span> de la DGF des départements. La part de la péréquation est <span style="color:white;">supérieure à la moyenne pour 64 départements</span>.</p>
+					<p>La DGF représente en moyenne <span style="color:white;">11,81%</span> des recettes réelles de fonctionnement des départements. La part de la DGF est <span style="color:white;">supérieure à la moyenne pour 71 départements</span>.</p>
+				</div>
+				
+				<div class="presentation" id="onglet_commune">
+					<h2>Les communes</h2>
+					<p>La DGF (dotation forfaitaire + dotation de péréquation) <span style="color:white;">augmente entre 2019 et 2018 pour 18 302 communes</span></p>
+					<p><span style="color:white;">97,46%</span> des communes bénéficient d’une dotation de péréquation de la part de l’Etat.</p>
+					<p>La péréquation représente en moyenne <span style="color:white;">38,29%</span> de la DGF des communes. La part de la péréquation est <span style="color:white;">supérieure à la moyenne pour 13 373 communes.</span></p>
+					<p>La DGF représente en moyenne <span style="color:white;">14,56%</span> des recettes réelles de fonctionnement des communes. La part de la DGF est <span style="color:white;">supérieure à la moyenne pour 26 120 communes.</span></p>
+				</div>
+				
+				<div class="presentation" id="onglet_epci">
+					<h2>Les intercommunalités</h2>
+					<p>La DGF (dotation de compensation + d’intercommunalité) <span style="color:white;">augmente entre 2019 et 2018 pour 226 EPCI</span>.</p>
+					<p><span style="color:white;">89,56%</span> des EPCI bénéficient d’une dotation de péréquation de la part de l’Etat (dotation d’intercommunalité).</p>
+					<p>La péréquation représente en moyenne <span style="color:white;">22,91%</span> de la DGF des EPCI. La part de la péréquation est <span style="color:white;">supérieure à la moyenne pour 852 EPCI</span>.</p>
+					<p>La DGF représente en moyenne <span style="color:white;">15,20%</span> des recettes réelles de fonctionnement des EPCI. La part de la DGF est <span style="color:white;">supérieure à la moyenne pour 273 EPCI</span>.</p>
+				</div>
 
 				<div class="divTable" id="popup">
 					<div id="titre"></div>
 					<div class="divTableBody">
 						<div class="divTableCell">
-								<div class="divTableRow"><h3>Évolution de la dotation forfaitaire 2017/2018&nbsp;:</h3></div>
+								<div class="divTableRow"><h3>Variation de la DGF entre 2018 et 2019&nbsp;:</h3></div>
 								<div class="divTableRow chiffre" id="N1EVO"></div>
 						</div>
 						<div class="divTableCell">
-								<div class="divTableRow"><h3>Montant de la dotation globale de fonctionnement</br>(dotation forfaitaire et dotation de péréquation)&nbsp;:</h3></div>
+								<div class="divTableRow"><h3>Montant de la DGF en 2019&nbsp;:</h3></div>
 								<div class="divTableRow chiffre" id="N2MONTANT"></div>
 						</div>
 						<div class="divTableCell">
-								<div class="divTableRow"><h3>Part de la péréquation dans la dotation globale de fonctionnement&nbsp;:</h3></div>
-								<div class="divTableRow chiffre" id="N3PART_PER"></div>
+								<div class="divTableRow"><h3>Montant de la dotation globale de fonctionnement par habitant en 2019&nbsp;:</h3></div>
+								<div class="divTableRow chiffre" id="N3DGFHAB"></div>
 						</div>
 						<div class="divTableCell">
-								<div class="divTableRow"><h3>Part de la dotation globale de fonctionnement dans les recettes réelles de fonctionnement&nbsp;:</h3></div>
-								<div class="divTableRow chiffre" id="N4PART_DGF"></div>
+								<div class="divTableRow"><h3>Variation de la DGF entre 2018 et 2019 par rapport aux recettes réelles de fonctionnement (en %)&nbsp;:</h3></div>
+								<div class="divTableRow chiffre" id="N4VARRFF"></div>
+						</div>
+						<div class="divTableCell">
+								<div class="divTableRow"><h3>Part de la péréquation (dotation d’intercommunalité) dans la DGF 2019 (en %)&nbsp;:</h3></div>
+								<div class="divTableRow chiffre" id="N5PEREK"></div>
 						</div>
 					</div>
 					<div id="retour" style="margin-top:50px;"></div>
@@ -98,7 +131,7 @@
 	<script src="src/leaflet-search.js"></script>
     <script src="https://turbo87.github.io/sidebar-v2/js/leaflet-sidebar.js"></script>
 	<script type="text/javascript" src="data/masque.js"></script>
-	<script type="text/javascript" src="data/geoData4.js"></script>
+	<script type="text/javascript" src="data/geoData.js"></script>
 	<script type="text/javascript" src="data/cercles_drom.js"></script>
 	
     <script>
@@ -120,18 +153,21 @@
 		//GeoportailFrance_parcels.addTo(map);
 		
 		//Ajout des couches du fond de carte
-		Cache = L.geoJSON(JS_masque, {color: "#b9c3c8", weight: 0, opacity: 1, fillOpacity: 1}).addTo(map);
+		Cache = L.geoJSON(JS_masque, {color: "#d4d4d4", weight: 0, opacity: 1, fillOpacity: 1}).addTo(map);
 		Cercles_drom = L.geoJSON(JS_drom, {color: "#ffffff", weight: 0.5, opacity: 0.7, fillOpacity: 0}).addTo(map);
 		
 		function getColor(d) {
-		return 	d > 0.20 ? 	'#002442' :
-				d > 0.15  ? '#154463' :
-				d > 0.10  ? '#50738a' :
-							'#88a0b7' ;
+		return 	d > 1 ? '#f35300' : //très forte augmentation
+		d > 0 ? '#f67f32' : //augmentation
+		d == 0  ? '#ffdfb1' : //stable
+		d < -0.01  ? '#d6d5fc' : // diminution
+		d < -0 ? '#b5b3fa' :// très légère diminution
+		
+		'#ffee00' ;
 		}
 		
 		commune = L.geoJSON(JS_todo, {
-			filter: function(feature, layer) {return feature.properties.Type == "commune";},
+			filter: function(feature, layer) {return feature.properties.type == "commune";},
 			style : {weight: 0.8, color: "#3e62a4", opacity: 1, fillOpacity: 1, fillColor:"#00bdce"},
 			onEachFeature: function(feature, layer) {
 					layer.bindTooltip(feature.properties.libgeo, {className: 'Tooltips'});
@@ -145,12 +181,12 @@
 		
 		//Ajout de la légende sur la carte
 		var imageUrl = 'img/legende.png',
-		imageBounds = [[51.1, -5.4],[49.2, 0.15]];
+		imageBounds = [[51.4, -5.4],[49.6, 0.16]];
 		L.imageOverlay(imageUrl, imageBounds, {zIndex : '1000'} ).addTo(map);
 		
 		function style(feature) {
 			return {
-			fillColor: getColor(feature.properties.N4PART_DGF),
+			fillColor: getColor(feature.properties.N1_EVO1718),
 			weight: 0.8,
 			opacity: 1,
 			color: 'white',
@@ -160,7 +196,20 @@
 		}
 		
 		departement = L.geoJSON(JS_todo, {
-			filter: function(feature, layer) {return feature.properties.Type == "département";},
+			filter: function(feature, layer) {return feature.properties.type == "département";},
+			style: style,
+			onEachFeature: function(feature, layer) {
+					layer.bindTooltip(feature.properties.libgeo, {className: 'Tooltips'});
+					layer.on('click', function(e) {
+						popup(feature.properties);
+						territoireCible(e.target._latlngs);
+						preventDefault(e);
+						})
+					}
+		}).addTo(map);
+		
+		epci = L.geoJSON(JS_todo, {
+			filter: function(feature, layer) {return feature.properties.type == "epci";},
 			style: style,
 			onEachFeature: function(feature, layer) {
 					layer.bindTooltip(feature.properties.libgeo, {className: 'Tooltips'});
@@ -173,7 +222,7 @@
 		}).addTo(map);
 		
 		Contour_Regions = L.geoJSON(JS_todo, {
-			filter: function(feature, layer) {return feature.properties.Type == "région";},
+			filter: function(feature, layer) {return feature.properties.type == "région";},
 			style: {interactive: false, color: "#ffffff", weight: 1.5, opacity: 1, fillOpacity: 0}
 		}).addTo(map);
 		
@@ -206,12 +255,16 @@
 			//Remplissage de la popup
 			document.getElementById('popup').style.display = "block";
 			document.getElementById('defaut').style.display = "none";
+			document.getElementById('onglet_departement').style.display = "none";
+			document.getElementById('onglet_commune').style.display = "none";
+			document.getElementById('onglet_epci').style.display = "none";
 			
-			document.getElementById('titre').innerHTML = "<h1 style='color:yellow'>"+e.libgeo+"</h1><p>Les données concernant votre "+e.Type+"</p>";
-			document.getElementById('N1EVO').innerHTML = "<span>"+format1(e.N1EVO*100)+"&nbsp;%</span>";
-			document.getElementById('N2MONTANT').innerHTML = "<span>"+format2(e.N2MONTANT)+"&nbsp;€</span>";
-			document.getElementById('N3PART_PER').innerHTML = "<span>"+format1(e.N3PART_PER*100)+"&nbsp;%</span>";
-			document.getElementById('N4PART_DGF').innerHTML = "<span>"+format1(e.N4PART_DGF*100)+"&nbsp;%</span>";
+			document.getElementById('titre').innerHTML = "<h1 style='color:yellow'>"+e.libgeo+"</h1><p>Les données concernant votre "+e.type+"</p>";
+			document.getElementById('N1EVO').innerHTML = "<span>"+format1(e.N1_EVO1718*100)+"&nbsp;%</span>";
+			document.getElementById('N2MONTANT').innerHTML = "<span>"+format2(e.N2_MONTANT)+"&nbsp;€</span>";
+			document.getElementById('N3DGFHAB').innerHTML = "<span>"+e.N3_DGFHAB+"&nbsp;€</span>";
+			document.getElementById('N4VARRFF').innerHTML = "<span>"+e.N4_VAR_RRF*100+"&nbsp;%</span>";
+			document.getElementById('N5PEREK').innerHTML = "<span>"+format1(e.N5_PEREK*100)+"&nbsp;%</span>";
 			document.getElementById('retour').innerHTML = "<div class='bouton' style='color:white'><img src='img/fleche.png' style='vertical-align:middle; width:20px;padding:0px 10px;'  />Retour</div>";
 		}
 		
@@ -247,8 +300,16 @@
 			//remettre le texte d'intro
 			document.getElementById('popup').style.display = "none";
 			document.getElementById('defaut').style.display = "block";
+			document.getElementById('onglet_departement').style.display = "none";
+			document.getElementById('onglet_commune').style.display = "none";
+			document.getElementById('onglet_epci').style.display = "none";
 			event.stopPropagation();
 		});
+		
+		//Event au clic sur les onglets
+		document.getElementById("logo_com").addEventListener("click", function(event){event.stopPropagation();resetView();showCom();;});
+		document.getElementById("logo_epci").addEventListener("click", function(event){event.stopPropagation();resetView();showEpci();});
+		document.getElementById("logo_dep").addEventListener("click", function(event){event.stopPropagation();resetView();showDep();});
 		
 		//Event au clic sur "retour"
 		document.getElementById("retour").addEventListener("click", function(event){
@@ -271,25 +332,12 @@
 			}
 		});
 		
-		//Boutons en légende
-		document.getElementById("bouton1").addEventListener("click", function(event){
-			event.stopPropagation();
-			document.getElementById('bouton1').setAttribute("class", "bouton_on");
-			document.getElementById('bouton2').setAttribute("class", "bouton");
-			document.getElementById('bouton3').setAttribute("class", "bouton");
-			//if (map.hasLayer(commune)) {map.removeLayer(commune);};
-			//if (map.hasLayer(pointTop)) {map.removeLayer(pointTop);};
-			if (map.hasLayer(departement)==false) {map.addLayer(departement); }
-		});	
-
-		/*document.getElementById("bouton2").addEventListener("click", function(event){
-			event.stopPropagation();
-			document.getElementById('bouton1').setAttribute("class", "bouton");
-			document.getElementById('bouton2').setAttribute("class", "bouton_on");
-			document.getElementById('bouton3').setAttribute("class", "bouton");
-			if (map.hasLayer(departement)) {map.removeLayer(departement);};
-			//if (map.hasLayer(pointTop)) {map.removeLayer(pointTop);};
-			if (map.hasLayer(commune)==false) {map.addLayer(commune); }
+		/*Boutons en légende
+		document.getElementById("bouton_dep").addEventListener("click", function(event){
+			//event.stopPropagation();
+			document.getElementById('bouton_dep').setAttribute("class", "bouton_on");
+			showDep();
+			//document.getElementById('bouton_com').setAttribute("class", "bouton");
 		});	*/
 		
 		//Barre de recherche
@@ -349,6 +397,51 @@
 		sidebar.open('home');
 		
 		map.removeLayer(commune);
+		map.removeLayer(epci);
+		
+		//Fonctions 
+		
+		function resetView() {
+			map.setView([46.5, 0.5], 6);
+				
+		}
+
+		function showDep() {
+			sidebar.open('home');
+			if(territoireCib) {map.removeLayer(territoireCib);}
+			document.getElementById('popup').style.display = "none";
+			document.getElementById('defaut').style.display = "none";
+			document.getElementById('onglet_departement').style.display = "block";
+			document.getElementById('onglet_commune').style.display = "none";
+			document.getElementById('onglet_epci').style.display = "none";
+			map.removeLayer(epci);
+			map.addLayer(departement);
+			//event.stopPropagation();
+		}
+		
+		function showEpci() {
+			sidebar.open('home');
+			if(territoireCib) {map.removeLayer(territoireCib);}
+			document.getElementById('popup').style.display = "none";
+			document.getElementById('defaut').style.display = "none";
+			document.getElementById('onglet_departement').style.display = "none";
+			document.getElementById('onglet_commune').style.display = "none";
+			document.getElementById('onglet_epci').style.display = "block";
+			map.removeLayer(departement);
+			map.addLayer(epci);
+			//event.stopPropagation();
+		}
+		
+		function showCom() {
+			sidebar.open('home');
+			if(territoireCib) {map.removeLayer(territoireCib);}
+			document.getElementById('popup').style.display = "none";
+			document.getElementById('defaut').style.display = "none";
+			document.getElementById('onglet_departement').style.display = "none";
+			document.getElementById('onglet_commune').style.display = "block";
+			document.getElementById('onglet_epci').style.display = "none";
+			//event.stopPropagation();
+		}
 
    </script>
 	
