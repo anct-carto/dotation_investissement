@@ -16,7 +16,7 @@ a {
 	}
 
 a:hover {
-  color : red;
+  color : #ffee00;
 }
 	
 	
@@ -101,7 +101,7 @@ h3{
 .chiffre{
 	font-size:1.5em;
 	font-weight: bold;
-	color:#00bdce;
+	color:#f26664;
 }
 
 .indicateur {
@@ -130,15 +130,13 @@ h3{
 		}
 		
 .bouton:hover {
-		color: red;
+		color: #ffee00;
 		}
-		
-.bouton_on {
-		color: #8a0000;
-		font-weight: bold;
-		height: 21px;
-		}
-			
+
+.retour {
+	margin-top:50px;
+}
+	
 .divTable{
 	display: table;
 	
