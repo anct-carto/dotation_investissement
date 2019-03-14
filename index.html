@@ -40,9 +40,9 @@
 				<div class="presentation" id="defaut">
 					
 					<div>
-						<h2><span style="color:#f26664;">29,94 milliards d'euros</span> de dotation globale de fonctionnement pour les communes, les intercommunalités et les départements</h2>
+						<h2><span style="color:#f26664;">26,94 milliards d'euros</span> de dotation globale de fonctionnement pour les communes, les intercommunalités et les départements</h2>
 						<p>En 2019, le montant de la dotation globale de fonctionnement (DGF) est <span style="color:white;">stabilisé</span> pour la 2ème année consécutive, et après 4 années de baisse continue entre 2014 et 2017.</p>
-						<p>L’État consacre <span style="color:white;">7,7 milliards d’euros</span> à la péréquation entre les collectivités au sein de la DGF.</p>
+						<p>L’État consacre <span style="color:white;">7,7 milliards d’euros</span> à la solidarité entre les collectivités au sein de la DGF.</p>
 						<p>La DGF a augmenté en 2019 pour <span style="color:white;">xx%</span> des communes, <span style="color:white;">yy%</span> des EPCI et <span style="color:white;">zz%</span> des départements.</p>
 					</div>
 					
@@ -54,49 +54,55 @@
 						<div class="indicateur"><img src="img/bullet.png" style="vertical-align:middle; width:15px;padding:0px 00px;"  />Montant de la DGF par habitant</div>
 						<div class="indicateur"><img src="img/bullet.png" style="vertical-align:middle; width:15px;padding:0px 00px;"  />Part de la péréquation dans la DGF</div>
 						</br>
-						<div class="bouton" id="bouton_dep"><img src="img/fleche.png" style="vertical-align:middle; width:20px;padding:0px 10px;" />Voir les départements</div>
-						<div class="bouton" id="bouton_epci"><img src="img/fleche.png" style="vertical-align:middle; width:20px;padding:0px 10px;" />Voir les EPCI</div>
+						<div class="bouton bouton_dep" ><img src="img/fleche.png" style="vertical-align:middle; width:20px;padding:0px 10px;" />Voir les départements</div>
+						<div class="bouton bouton_epci" ><img src="img/fleche.png" style="vertical-align:middle; width:20px;padding:0px 10px;" />Voir les EPCI</div>
 						<div class="bouton" id="bouton_com"><img src="img/fleche.png" style="vertical-align:middle; width:20px;padding:0px 10px;" />Voir les communes</div>
 						</br>
 						
 						
 					</div>
 						
-					<div id="sources">
+					<div id="sources" style="width:70%;">
 						<p><i>Sources&nbsp;: <a href="http://www.dotations-dgcl.interieur.gouv.fr/consultation/accueil.php" target="_blank">Direction générale des collectivités locales (DGCL) </a>• Réalisation&nbsp;: <a href="https://cartotheque.cget.gouv.fr/cartes?filters%5Bquery%5D=interactif&current_page=1&category=&page_size=20" target="_blank">CGET service cartographie</a></i><p>
-						<p><img src="img/dgcl.png" style="vertical-align:middle; width:70%;"  /></p>
-						<p><img src="img/cgetMCT.png" style="vertical-align:middle; width:70%;"  /></p>
+						<p><img src="img/cget.png" style="vertical-align:middle; width:100%;"/></p>
+						<p><img src="img/dgcl.png" style="vertical-align:middle; width:100%;"/></p>
 					</div>
 					
 				</div>
 				
 				
 				<div class="presentation" id="onglet_departement">
-					<h2>Les départements</h2>
+					<h2 style='color:#f26664'>Les départements</h2>
 					<p>La DGF (dotation forfaitaire + dotation de compensation + dotation de péréquation) <span style="color:white;">augmente entre 2019 et 2018 pour xxx départements</span>.</p>
 					<p><span style="color:white;">99</span> départements bénéficient d’une dotation de péréquation de la part de l’Etat (dotation de fonctionnement minimale et/ou dotation de péréquation urbaine).</p>
 					<p>La péréquation représente en moyenne <span style="color:white;">17,35%</span> de la DGF des départements. La part de la péréquation est <span style="color:white;">supérieure à la moyenne pour 64 départements</span>.</p>
 					<p>La DGF représente en moyenne <span style="color:white;">11,81%</span> des recettes réelles de fonctionnement des départements. La part de la DGF est <span style="color:white;">supérieure à la moyenne pour 71 départements</span>.</p>
-					<div class="retour bouton"><img src='img/fleche.png' style='vertical-align:middle; width:20px;padding:0px 10px;'  />Retour</div>
+					<div class="bas">
+						<div class="bouton bouton_epci"><img src="img/fleche.png" style="vertical-align:middle; width:20px;padding:0px 10px;" />Voir les EPCI</div>
+						<div class="bouton retour"><img src='img/fleche.png' style='vertical-align:middle; width:20px;padding:0px 10px;'  />Retour</div>
+					</div>
 				</div>
 				
 				<div class="presentation" id="onglet_commune">
-					<h2>Les communes</h2>
+					<h2 style='color:#f26664'>Les communes</h2>
 					<p>La DGF (dotation forfaitaire + dotation de péréquation) <span style="color:white;">augmente entre 2019 et 2018 pour zzzz communes</span></p>
 					<p><span style="color:white;">97,46%</span> des communes bénéficient d’une dotation de péréquation de la part de l’Etat.</p>
 					<p>La péréquation représente en moyenne <span style="color:white;">38,29%</span> de la DGF des communes. La part de la péréquation est <span style="color:white;">supérieure à la moyenne pour 13 373 communes.</span></p>
 					<p>La DGF représente en moyenne <span style="color:white;">14,56%</span> des recettes réelles de fonctionnement des communes. La part de la DGF est <span style="color:white;">supérieure à la moyenne pour 26 120 communes.</span></p>
 					<div style="font-weight:bold;height:21px;color:white;">Rechercher une commune<div id="boiteRecherche"></div></div>
-					<div class="retour bouton"><img src='img/fleche.png' style='vertical-align:middle; width:20px;padding:0px 10px;'  />Retour</div>
+					<div class="bas retour bouton"><img src='img/fleche.png' style='vertical-align:middle; width:20px;padding:0px 10px;'  />Retour</div>
 				</div>
 				
 				<div class="presentation" id="onglet_epci">
-					<h2>Les intercommunalités</h2>
+					<h2 style='color:#f26664'>Les intercommunalités</h2>
 					<p>La DGF (dotation de compensation + d’intercommunalité) <span style="color:white;">augmente entre 2019 et 2018 pour yyy EPCI</span>.</p>
 					<p><span style="color:white;">89,56%</span> des EPCI bénéficient d’une dotation de péréquation de la part de l’Etat (dotation d’intercommunalité).</p>
 					<p>La péréquation représente en moyenne <span style="color:white;">22,91%</span> de la DGF des EPCI. La part de la péréquation est <span style="color:white;">supérieure à la moyenne pour 852 EPCI</span>.</p>
 					<p>La DGF représente en moyenne <span style="color:white;">15,20%</span> des recettes réelles de fonctionnement des EPCI. La part de la DGF est <span style="color:white;">supérieure à la moyenne pour 273 EPCI</span>.</p>
-					<div class="retour bouton"><img src='img/fleche.png' style='vertical-align:middle; width:20px;padding:0px 10px;'  />Retour</div>
+					<div class="bas">
+						<div class="bouton bouton_dep"><img src="img/fleche.png" style="vertical-align:middle; width:20px;padding:0px 10px;" />Voir les départements</div>
+						<div class="bouton retour"><img src='img/fleche.png' style='vertical-align:middle; width:20px;padding:0px 10px;'  />Retour</div>
+					</div>
 				</div>
 
 				<div class="divTable" id="popup">
@@ -109,6 +115,12 @@
 						<div class="divTableCell">
 								<div class="divTableRow"><h3>Montant de la DGF en 2019&nbsp;:</h3></div>
 								<div class="divTableRow chiffre" id="N2MONTANT"></div>
+								<div class="divTableRow ptichiffre" id="N2A"></div>
+								<div class="divTableRow ptichiffre" id="N2B"></div>
+								<div class="divTableRow ptichiffre" id="N2C"></div>
+								<div class="divTableRow ptichiffre" id="N2D"></div>
+								<div class="divTableRow ptichiffre" id="N2E"></div>
+								<div class="divTableRow ptichiffre" id="N2F"></div>
 						</div>
 						<div class="divTableCell">
 								<div class="divTableRow"><h3>Montant de la dotation globale de fonctionnement par habitant en 2019&nbsp;:</h3></div>
@@ -119,7 +131,7 @@
 								<div class="divTableRow chiffre" id="N4VARRFF"></div>
 						</div>
 						<div class="divTableCell">
-								<div class="divTableRow"><h3>Part de la péréquation (dotation d’intercommunalité) dans la DGF 2019 (en %)&nbsp;:</h3></div>
+								<div class="divTableRow"><h3>Part de la péréquation dans la DGF 2019 (en %)&nbsp;:</h3></div>
 								<div class="divTableRow chiffre" id="N5PEREK"></div>
 						</div>
 					</div>
@@ -237,7 +249,7 @@
 		
 		//Fonctions de formatage de nombres
 		function format1(nombre){
-		  nombre=parseFloat(nombre).toFixed(3);
+		  nombre=parseFloat(nombre).toFixed(2);
 		  return nombre;
 		}
 		
@@ -248,6 +260,11 @@
 		  while( reg.test( nombre)) {
 			nombre = nombre.replace( reg, '$1' +sep +'$2');
 		  }
+		  return nombre;
+		}
+		
+		function format3(nombre){
+		  nombre=parseFloat(nombre).toFixed(0);
 		  return nombre;
 		}
 		
@@ -268,8 +285,22 @@
 			document.getElementById('titre').innerHTML = "<h1 style='color:#f26664'>"+e.libgeo+"</h1><p>Les données concernant votre "+e.type+"</p>";
 			document.getElementById('N1EVO').innerHTML = "<span>"+format1(e.N1_EVO1718*100)+"&nbsp;%</span>";
 			document.getElementById('N2MONTANT').innerHTML = "<span>"+format2(e.N2_MONTANT)+"&nbsp;€</span>";
-			document.getElementById('N3DGFHAB').innerHTML = "<span>"+format2(e.N3_DGFHAB)+"&nbsp;€</span>";
-			document.getElementById('N4VARRFF').innerHTML = "<span>"+e.N4_VAR_RRF*100+"&nbsp;%</span>";
+			
+			document.getElementById('N2A').innerHTML = "";
+			if(e.N2A_DFM > 0) {document.getElementById('N2A').innerHTML = "<span>dont DFM&nbsp;"+format2(e.N2A_DFM)+"&nbsp;€</span></br>";}
+			document.getElementById('N2B').innerHTML = "";
+			if(e.N2B_DPU > 0) {document.getElementById('N2B').innerHTML = "<span>dont DPU&nbsp;"+format2(e.N2B_DPU)+"&nbsp;€</span></br>";}
+			document.getElementById('N2C').innerHTML = "";
+			if(e.N2C_DI > 0) {document.getElementById('N2C').innerHTML = "<span>dont DI&nbsp;"+format2(e.N2C_DI)+"&nbsp;€</span></br>";}
+			document.getElementById('N2D').innerHTML = "";
+			if(e.N2D_DSU > 0) {document.getElementById('N2D').innerHTML = "<span>dont DSU&nbsp;"+format2(e.N2D_DSU)+"&nbsp;€</span></br>";}
+			document.getElementById('N2E').innerHTML = "";
+			if(e.N2E_DSR > 0) {document.getElementById('N2E').innerHTML = "<span>dont DSR&nbsp;"+format2(e.N2E_DSR)+"&nbsp;€</span></br>";}
+			document.getElementById('N2F').innerHTML = "";
+			if(e.N2F_DACOM > 0) {document.getElementById('N2F').innerHTML = "<span>dont DACOM&nbsp;"+format2(e.N2F_DACOM)+"&nbsp;€</span></br>";}
+			
+			document.getElementById('N3DGFHAB').innerHTML = "<span>"+format3(e.N3_DGFHAB)+"&nbsp;€</span>";
+			document.getElementById('N4VARRFF').innerHTML = "<span>"+format1(e.N4_VAR_RRF*100)+"&nbsp;%</span>";
 			document.getElementById('N5PEREK').innerHTML = "<span>"+format1(e.N5_PEREK*100)+"&nbsp;%</span>";
 			document.getElementById('lien').innerHTML = "<span><a href='http://www.dotations-dgcl.interieur.gouv.fr/consultation/dotation_commune_html.php?code=46045' target='blank'>En savoir plus</a></span>";
 		}
@@ -306,12 +337,20 @@
 		});
 		
 		//Event au clic sur les onglets
-		document.getElementById("logo_com").addEventListener("click", function(event){event.stopPropagation();resetView();showCom();;});
-		document.getElementById("logo_epci").addEventListener("click", function(event){event.stopPropagation();resetView();showEpci();});
-		document.getElementById("logo_dep").addEventListener("click", function(event){event.stopPropagation();resetView();showDep();});
-		document.getElementById("bouton_com").addEventListener("click", function(event){event.stopPropagation();resetView();showCom();;});
-		document.getElementById("bouton_epci").addEventListener("click", function(event){event.stopPropagation();resetView();showEpci();});
-		document.getElementById("bouton_dep").addEventListener("click", function(event){event.stopPropagation();resetView();showDep();});
+		document.getElementById("logo_com").addEventListener("click", function(event){event.stopPropagation();showCom();;});
+		document.getElementById("logo_epci").addEventListener("click", function(event){event.stopPropagation();showEpci();});
+		document.getElementById("logo_dep").addEventListener("click", function(event){event.stopPropagation();showDep();});
+		document.getElementById("bouton_com").addEventListener("click", function(event){event.stopPropagation();showCom();;});
+		
+		var boutons_epci = document.getElementsByClassName("bouton_epci");
+		for (var i = 0; i < boutons_epci.length; i++) {
+			boutons_epci[i].addEventListener('click', showEpci, false);
+		}
+		
+		var boutons_dep = document.getElementsByClassName("bouton_dep");
+		for (var i = 0; i < boutons_dep.length; i++) {
+			boutons_dep[i].addEventListener('click', showDep, false);
+		}
 		
 		//Event au clic sur "retour"
 		var boutons_retour = document.getElementsByClassName("retour");
@@ -331,7 +370,7 @@
 		});
 		
 		//Barre de recherche
-		var Recherche = L.layerGroup([commune, departement]);
+		var Recherche = L.layerGroup([commune]);
 		
 		var searchControl = new L.control.search({
 			layer: Recherche,
@@ -408,6 +447,8 @@
 		}
 
 		function showDep() {
+			//event.stopPropagation();
+			resetView();
 			sidebar.open('home');
 			if(territoireCib) {map.removeLayer(territoireCib);}
 			document.getElementById('popup').style.display = "none";
@@ -415,12 +456,16 @@
 			document.getElementById('onglet_departement').style.display = "block";
 			document.getElementById('onglet_commune').style.display = "none";
 			document.getElementById('onglet_epci').style.display = "none";
+			document.getElementById('logo_dep').setAttribute("class", "onglets_on");
+			document.getElementById('logo_epci').setAttribute("class", "onglets");
+			document.getElementById('logo_com').setAttribute("class", "onglets");
 			map.removeLayer(epci);
 			map.addLayer(departement);
-			//event.stopPropagation();
 		}
 		
 		function showEpci() {
+			//event.stopPropagation();
+			resetView();
 			sidebar.open('home');
 			if(territoireCib) {map.removeLayer(territoireCib);}
 			document.getElementById('popup').style.display = "none";
@@ -428,12 +473,16 @@
 			document.getElementById('onglet_departement').style.display = "none";
 			document.getElementById('onglet_commune').style.display = "none";
 			document.getElementById('onglet_epci').style.display = "block";
+			document.getElementById('logo_epci').setAttribute("class", "onglets_on");
+			document.getElementById('logo_dep').setAttribute("class", "onglets");
+			document.getElementById('logo_com').setAttribute("class", "onglets");
 			map.removeLayer(departement);
 			map.addLayer(epci);
-			//event.stopPropagation();
 		}
 		
 		function showCom() {
+			//event.stopPropagation();
+			resetView();
 			sidebar.open('home');
 			if(territoireCib) {map.removeLayer(territoireCib);}
 			document.getElementById('popup').style.display = "none";
@@ -441,7 +490,9 @@
 			document.getElementById('onglet_departement').style.display = "none";
 			document.getElementById('onglet_commune').style.display = "block";
 			document.getElementById('onglet_epci').style.display = "none";
-			//event.stopPropagation();
+			document.getElementById('logo_com').setAttribute("class", "onglets_on");
+			document.getElementById('logo_dep').setAttribute("class", "onglets");
+			document.getElementById('logo_epci').setAttribute("class", "onglets");	
 		}
 
    </script>

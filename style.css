@@ -61,6 +61,26 @@ a:hover {
 	-ms-transform: rotate(-90deg);
 	/* Opera */
 	-o-transform: rotate(-90deg);
+	background-color: #3c5daa;
+	border: 0.1px solid #5a77b7;
+}
+
+.onglets:hover {
+	color: #004494;
+	background-color: #ffee00;
+}
+
+.onglets_on {
+	/* Safari */
+	-webkit-transform: rotate(-90deg);
+	/* Firefox */
+	-moz-transform: rotate(-90deg);
+	/* IE */
+	-ms-transform: rotate(-90deg);
+	/* Opera */
+	-o-transform: rotate(-90deg);
+	background-color: #f26664;
+	border : 0.1px solid #5a77b7;
 }
 		
 .Tooltips {
@@ -104,6 +124,12 @@ h3{
 	color:#f26664;
 }
 
+.ptichiffre{
+	font-size:0.8em;
+	font-weight: bold;
+	color:#f26664;
+}
+
 .indicateur {
 	color:white;
 	font-size:0.9em;
@@ -133,7 +159,7 @@ h3{
 		color: #ffee00;
 		}
 
-.retour {
+.bas {
 	margin-top:50px;
 }
 	
