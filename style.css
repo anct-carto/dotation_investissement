@@ -132,7 +132,7 @@ h3{
 
 .indicateur {
 	color:white;
-	font-size:0.9em;
+	
 }
 		
 .leaflet-left {
@@ -152,11 +152,15 @@ h3{
 		color:#ffffff;
 		font-weight: bold;
 		cursor: pointer;
-		height: 21px;
 		}
 		
 .bouton:hover {
 		color: #ffee00;
+		}
+		
+.bouton_on {
+		color: #f26664;
+		font-weight: bold;
 		}
 
 .bas {
