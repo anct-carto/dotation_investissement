@@ -82,6 +82,7 @@
 					<p>Elle diminue pour <span style="color:white;">51 (2018)</span> départements. Cette diminution représente en moyenne <span style="color:white;">0,06% (2018)</span> des recettes réelles de fonctionnement des départements concernés. Elle varie de <span style="color:white;">0,0009%</span> des recettes réelles de fonctionnement <span style="color:white;">(Sarthe) à 0,19% (Côtes d’Armor)</span>.</p>
 					<p>La péréquation représente en moyenne <span style="color:white;">17,35% (2018)</span> de la DGF des départements. La part de la péréquation est supérieure à la moyenne pour <span style="color:white;">64 (2018)</span> départements. <span style="color:white;">99 (2018)</span> départements bénéficient d’une dotation de péréquation de la part de l’Etat.</p>
 					<div class="bas">
+						<div class="bouton switch_indicateur" title="indicateur1"><img src='img/fleche.png' style='vertical-align:middle; width:20px;padding:0px 10px;' />Voir la variation de la DGF entre 2018 et 2019 en pourcentage des recettes réelles de fonctionnement</div>
 						<div class="bouton bouton_epci"><img src="img/fleche.png" style="vertical-align:middle; width:20px;padding:0px 10px;" />Voir les EPCI</div>
 						<div class="bouton bouton_com" ><img src="img/fleche.png" style="vertical-align:middle; width:20px;padding:0px 10px;" />Rechercher une commune</div>
 						<div class="bouton retour"><img src='img/fleche.png' style='vertical-align:middle; width:20px;padding:0px 10px;'  />Retour</div>
@@ -107,6 +108,7 @@
 					<p>Elle diminue pour <span style="color:white;">1 026 (2018)</span> EPCI. Cette diminution représente en moyenne <span style="color:white;">0,32% (2018)</span> des recettes réelles de fonctionnement des EPCI concernés.</p>
 					<p>La péréquation représente en moyenne <span style="color:white;">22,91% (2018)</span> de la DGF des EPCI. La part de la péréquation est supérieure à la moyenne pour <span style="color:white;">852 (2018) EPCI. 1139 (2018) EPCI (89,56%)</span> bénéficient d’une dotation de péréquation de la part de l’Etat (dotation d’intercommunalité).</p>
 					<div class="bas">
+						<div class="bouton switch_indicateur" title="indicateur1"><img src='img/fleche.png' style='vertical-align:middle; width:20px;padding:0px 10px;' />Voir la variation de la DGF entre 2018 et 2019 en pourcentage des recettes réelles de fonctionnement</div>
 						<div class="bouton bouton_dep"><img src="img/fleche.png" style="vertical-align:middle; width:20px;padding:0px 10px;" />Voir les départements</div>
 						<div class="bouton bouton_com" ><img src="img/fleche.png" style="vertical-align:middle; width:20px;padding:0px 10px;" />Rechercher une commune</div>
 						<div class="bouton retour"><img src='img/fleche.png' style='vertical-align:middle; width:20px;padding:0px 10px;'  />Retour</div>
@@ -183,22 +185,21 @@
 		Cache = L.geoJSON(JS_masque, {color: "#7183ab", weight: 0, opacity: 1, fillOpacity: 1}).addTo(map);
 		Cercles_drom = L.geoJSON(JS_drom, {color: "#ffffff", weight: 0.5, opacity: 0.7, fillOpacity: 0}).addTo(map);
 		
-		function getColor1(d) {
+		function getColor1(d) { //N1_EVO1718
 		if(legende1){map.addLayer(legende1)};
 		if(legende2){map.removeLayer(legende2)};
-		return 	d > 0.003 ? '#f4661d' : //augmentation
-		d <= -0.004  ? '#fbd9c7' : //diminution
-		d <= 0.003 ? '#f69564' : //stabilité
+		return 	d > 0.02 ? '#f4661d' : //augmentation
+		d <= -0.02  ? '#fbd9c7' : //diminution
+		d <= 0.02 ? '#f69564' : //stabilité
 		'grey' ;
 		}
 		
-		function getColor2(d) {
+		function getColor2(d) { //N4_VAR_RRF
 		if(legende1){map.removeLayer(legende1)};
 		if(legende2){map.addLayer(legende2)};
-		
-		return 	d > 0.003 ? '#ff4c4c' : //augmentation
-		d <= -0.003  ? '#ffcccc' : //diminution
-		d <= 0.003 ? '#ff7878' : //stabilité
+		return 	d > 0.005 ? '#ff4c4c' : //augmentation
+		d <= -0.005  ? '#ffcccc' : //diminution
+		d <= 0.005 ? '#ff7878' : //stabilité
 		'grey' ;
 		}
 		
@@ -393,6 +394,28 @@
 		document.getElementById("indicateur1").addEventListener("click", function(event){event.stopPropagation();departement.setStyle(style1);commune.setStyle(style1);epci.setStyle(style1);document.getElementById('indicateur1').className = "bouton_on";document.getElementById('indicateur2').className = "bouton";});
 		document.getElementById("indicateur2").addEventListener("click", function(event){event.stopPropagation();departement.setStyle(style2);commune.setStyle(style2);epci.setStyle(style2);document.getElementById('indicateur2').className = "bouton_on";document.getElementById('indicateur1').className = "bouton";});
 		
+		//Changement d'indicateur dans une page de maillage
+		var boutons_switch = document.getElementsByClassName("switch_indicateur");
+		
+		for (var i = 0; i < boutons_switch.length; i++) {
+			boutons_switch[i].addEventListener('click', function(i){
+				if (i.target.title == "indicateur1"){
+					epci.setStyle(style2);
+					commune.setStyle(style2);
+					departement.setStyle(style2);
+					i.target.innerHTML = "<img src='img/fleche.png' style='vertical-align:middle; width:20px;padding:0px 10px;'>Voir la variation de la DGF entre 2018 et 2019";
+					i.target.title = "indicateur2";
+				}
+			else if (i.target.title == "indicateur2"){
+					epci.setStyle(style1);
+					commune.setStyle(style1);
+					departement.setStyle(style1);
+					i.target.innerHTML = "<img src='img/fleche.png' style='vertical-align:middle; width:20px;padding:0px 10px;' />Voir la variation de la DGF entre 2018 et 2019 en pourcentage des recettes réelles de fonctionnement";
+					i.target.title = "indicateur1";
+				};
+			});
+		}
+		
 		var boutons_com = document.getElementsByClassName("bouton_com");
 		for (var i = 0; i < boutons_com.length; i++) {
 			boutons_com[i].addEventListener('click', showCom, false);
@@ -476,9 +499,6 @@
 		function setParent(el, newParent)
 		{newParent.appendChild(el);}
 		setParent(htmlObject, a);
-		
-		console.log(searchControl.getContainer());
-		
 		
 		
 		sidebar.open('home');
