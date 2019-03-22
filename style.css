@@ -38,6 +38,7 @@ a:hover {
 	
 #onglet_departement {
 	display: none;
+	
 	}
 	
 #onglet_commune {
@@ -51,34 +52,23 @@ a:hover {
 #defaut {
 	display: block;
 	}
+
+
+.onglets{
 	
-.onglets {
-	/* Safari */
-	-webkit-transform: rotate(-90deg);
-	/* Firefox */
-	-moz-transform: rotate(-90deg);
-	/* IE */
-	-ms-transform: rotate(-90deg);
-	/* Opera */
-	-o-transform: rotate(-90deg);
 	background-color: #3c5daa;
 	border: 0.1px solid #5a77b7;
 }
 
+
 .onglets:hover {
+	
 	color: #004494;
 	background-color: #ffee00;
 }
 
-.onglets_on {
-	/* Safari */
-	-webkit-transform: rotate(-90deg);
-	/* Firefox */
-	-moz-transform: rotate(-90deg);
-	/* IE */
-	-ms-transform: rotate(-90deg);
-	/* Opera */
-	-o-transform: rotate(-90deg);
+.onglets_on a{
+	
 	background-color: #f26664;
 	border : 0.1px solid #5a77b7;
 }

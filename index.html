@@ -22,11 +22,12 @@
 
     <div id="sidebar" class="sidebar collapsed">
         <div class="sidebar-tabs" id="barre-verticale">
-            <ul role="tablist">
-                <li><a href="#home" role="tab" id="logo"><i class="fas fa-home"></i></a></li>
-				<li><a href="#home" role="tab" class="onglets" id="logo_dep">Départements</i></a></li>
-				<li><a href="#home" role="tab" class="onglets" id="logo_epci">EPCI</i></a></li>
-				<li><a href="#home" role="tab" class="onglets" id="logo_com">Communes</i></a></li>
+            <ul role="tablist" >
+                <li><a href="#home" role="tab" id="logo" title="Retour à l'accueil"><i style="vertical-align:middle;" class="fas fa-home"></i></a></li>
+				<li><a href="#home" role="tab" class="onglets" id="logo_dep" title="Départements"><img src="img/tabdep.png" style="vertical-align:middle;padding:7px"  /></a></li>
+				<li><a href="#home" role="tab" class="onglets" id="logo_epci" title="EPCI"><img src="img/tabepci.png" style="vertical-align:middle;padding:7px"  /></a></li>
+				<li><a href="#home" role="tab" class="onglets" id="logo_com" title="Communes"><img src="img/tabcom.png" style="vertical-align:middle;padding:7px"  /></a></li>
+				<li><a href="img/cartes_dgf.pdf" role="tab" target="_blank" title="Télécharger les cartes" class="onglets"><i style="vertical-align:middle;" class="fa fa-download"></i></a></li>
 			</ul>
         </div>
 
@@ -165,6 +166,9 @@
 	
     <script>
 		
+		//Définition des variables globales
+		var maillage = "departement";
+		var indicateur = "indicateur1";
 			
 		// Création de la carte
 		var map = L.map('mapid', {maxZoom:11, minZoom:5 })
@@ -185,22 +189,50 @@
 		Cache = L.geoJSON(JS_masque, {color: "#7183ab", weight: 0, opacity: 1, fillOpacity: 1}).addTo(map);
 		Cercles_drom = L.geoJSON(JS_drom, {color: "#ffffff", weight: 0.5, opacity: 0.7, fillOpacity: 0}).addTo(map);
 		
-		function getColor1(d) { //N1_EVO1718
-		if(legende1){map.addLayer(legende1)};
-		if(legende2){map.removeLayer(legende2)};
-		return 	d > 0.02 ? '#f4661d' : //augmentation
-		d <= -0.02  ? '#fbd9c7' : //diminution
-		d <= 0.02 ? '#f69564' : //stabilité
-		'grey' ;
+		function getColor1(a,d) { //N1_EVO1718
+			if(a=="département") {
+				map.addLayer(legende1dep);
+				if(legende2){map.removeLayer(legende2)};
+				if(legende1){map.removeLayer(legende1)};
+				if(legende2dep){map.removeLayer(legende2dep)};
+				return 	d > 0.005 ? '#f4661d' : //augmentation
+				d <= -0.005  ? '#fbd9c7' : //diminution
+				d <= 0.005 ? '#f69564' : //stabilité
+				'grey' ;
+			}
+			else {
+				map.addLayer(legende1);
+				if(legende2){map.removeLayer(legende2)};
+				if(legende1dep){map.removeLayer(legende1dep)};
+				if(legende2dep){map.removeLayer(legende2dep)};
+				return 	d > 0.02 ? '#f4661d' : //augmentation
+				d <= -0.02  ? '#fbd9c7' : //diminution
+				d <= 0.02 ? '#f69564' : //stabilité
+				'grey' ;
+			}
 		}
 		
-		function getColor2(d) { //N4_VAR_RRF
-		if(legende1){map.removeLayer(legende1)};
-		if(legende2){map.addLayer(legende2)};
-		return 	d > 0.005 ? '#ff4c4c' : //augmentation
-		d <= -0.005  ? '#ffcccc' : //diminution
-		d <= 0.005 ? '#ff7878' : //stabilité
-		'grey' ;
+		function getColor2(a,d) { //N4_VAR_RRF
+			if(a=="département") {
+				map.addLayer(legende2dep);
+				if(legende1){map.removeLayer(legende1)};
+				if(legende2){map.removeLayer(legende2)};
+				if(legende1dep){map.removeLayer(legende1dep)};
+				return 	d > 0.0005 ? '#ff4c4c' : //augmentation
+				d <= -0.0005  ? '#ffcccc' : //diminution
+				d <= 0.0005 ? '#ff7878' : //stabilité
+				'grey' ;
+			}
+			else {
+				map.addLayer(legende2);
+				if(legende1){map.removeLayer(legende1)};
+				if(legende2dep){map.removeLayer(legende2dep)};
+				if(legende1dep){map.removeLayer(legende1dep)};
+				return 	d > 0.005 ? '#ff4c4c' : //augmentation
+				d <= -0.005  ? '#ffcccc' : //diminution
+				d <= 0.005 ? '#ff7878' : //stabilité
+				'grey' ;
+			}
 		}
 		
 		commune = L.geoJSON(JS_todo, {
@@ -219,14 +251,16 @@
 		//Ajout de la légende sur la carte
 		var legende1 = L.imageOverlay('img/legende_indicateur1.png', [[51.4, -5.4],[49.6, 0.16]], {zIndex : '1000'} );
 		var legende2 = L.imageOverlay('img/legende_indicateur2.png', [[51.4, -5.4],[49.6, 0.16]], {zIndex : '1000'} );
-		map.addLayer(legende1);
+		var legende1dep = L.imageOverlay('img/legende_indicateur1dep.png', [[51.4, -5.4],[49.6, 0.16]], {zIndex : '1000'} );
+		var legende2dep = L.imageOverlay('img/legende_indicateur2dep.png', [[51.4, -5.4],[49.6, 0.16]], {zIndex : '1000'} );
+		map.addLayer(legende1dep);
 		
 		map.createPane('territoireCible');
 		map.getPane('territoireCible').style.zIndex = 1000;
 		
 		function style1(feature) {
 			return {
-			fillColor: getColor1(feature.properties.N1_EVO1718),
+			fillColor: getColor1(feature.properties.type, feature.properties.N1_EVO1718),
 			weight: 0.8,
 			opacity: 1,
 			color: 'white',
@@ -237,7 +271,7 @@
 		
 		function style2(feature) {
 			return {
-			fillColor: getColor2(feature.properties.N4_VAR_RRF),
+			fillColor: getColor2(feature.properties.type, feature.properties.N4_VAR_RRF),
 			weight: 0.8,
 			opacity: 1,
 			color: 'white',
@@ -391,10 +425,12 @@
 		document.getElementById("logo_com").addEventListener("click", function(event){event.stopPropagation();showCom();;});
 		document.getElementById("logo_epci").addEventListener("click", function(event){event.stopPropagation();showEpci();});
 		document.getElementById("logo_dep").addEventListener("click", function(event){event.stopPropagation();showDep();});
-		document.getElementById("indicateur1").addEventListener("click", function(event){event.stopPropagation();departement.setStyle(style1);commune.setStyle(style1);epci.setStyle(style1);document.getElementById('indicateur1').className = "bouton_on";document.getElementById('indicateur2').className = "bouton";});
-		document.getElementById("indicateur2").addEventListener("click", function(event){event.stopPropagation();departement.setStyle(style2);commune.setStyle(style2);epci.setStyle(style2);document.getElementById('indicateur2').className = "bouton_on";document.getElementById('indicateur1').className = "bouton";});
+		document.getElementById("indicateur1").addEventListener("click", function(event){event.stopPropagation(); departement.setStyle(style1);commune.setStyle(style1);epci.setStyle(style1);document.getElementById('indicateur1').className = "bouton_on";document.getElementById('indicateur2').className = "bouton"; switchind("to2"); });
+		document.getElementById("indicateur2").addEventListener("click", function(event){event.stopPropagation(); departement.setStyle(style2);commune.setStyle(style2);epci.setStyle(style2);document.getElementById('indicateur2').className = "bouton_on";document.getElementById('indicateur1').className = "bouton"; switchind("to1"); });
 		
 		//Changement d'indicateur dans une page de maillage
+		
+		
 		var boutons_switch = document.getElementsByClassName("switch_indicateur");
 		
 		for (var i = 0; i < boutons_switch.length; i++) {
@@ -405,15 +441,34 @@
 					departement.setStyle(style2);
 					i.target.innerHTML = "<img src='img/fleche.png' style='vertical-align:middle; width:20px;padding:0px 10px;'>Voir la variation de la DGF entre 2018 et 2019";
 					i.target.title = "indicateur2";
+					indicateur = "indicateur2";
 				}
-			else if (i.target.title == "indicateur2"){
+				else if (i.target.title == "indicateur2"){
 					epci.setStyle(style1);
 					commune.setStyle(style1);
 					departement.setStyle(style1);
 					i.target.innerHTML = "<img src='img/fleche.png' style='vertical-align:middle; width:20px;padding:0px 10px;' />Voir la variation de la DGF entre 2018 et 2019 en pourcentage des recettes réelles de fonctionnement";
 					i.target.title = "indicateur1";
+					indicateur = "indicateur1";
 				};
 			});
+		}
+		
+		function switchind(ind) {
+			if (ind=="to1"){
+				for (var i = 0; i < boutons_switch.length; i++) {
+					boutons_switch[i].innerHTML = "<img src='img/fleche.png' style='vertical-align:middle; width:20px;padding:0px 10px;'>Voir la variation de la DGF entre 2018 et 2019";
+					boutons_switch[i].title = "indicateur2";
+					indicateur = "indicateur2";
+				}
+			}
+			else if (ind=="to2"){
+				for (var i = 0; i < boutons_switch.length; i++) {
+					boutons_switch[i].innerHTML = "<img src='img/fleche.png' style='vertical-align:middle; width:20px;padding:0px 10px;' />Voir la variation de la DGF entre 2018 et 2019 en pourcentage des recettes réelles de fonctionnement";
+					boutons_switch[i].title = "indicateur1";
+					indicateur = "indicateur1";
+				}
+			}
 		}
 		
 		var boutons_com = document.getElementsByClassName("bouton_com");
@@ -531,6 +586,7 @@
 			sidebar.open('home');
 			if(territoireCib) {map.removeLayer(territoireCib);}
 			if(com_select) {map.removeLayer(com_select);}
+			maillage = "département";
 			document.getElementById('popup').style.display = "none";
 			document.getElementById('defaut').style.display = "none";
 			document.getElementById('onglet_departement').style.display = "block";
@@ -549,6 +605,7 @@
 			sidebar.open('home');
 			if(territoireCib) {map.removeLayer(territoireCib);}
 			if(com_select) {map.removeLayer(com_select);}
+			maillage = "epci";
 			document.getElementById('popup').style.display = "none";
 			document.getElementById('defaut').style.display = "none";
 			document.getElementById('onglet_departement').style.display = "none";
@@ -567,6 +624,7 @@
 			sidebar.open('home');
 			if(territoireCib) {map.removeLayer(territoireCib);}
 			if(com_select) {map.removeLayer(com_select);}
+			maillage = "commune";
 			document.getElementById('popup').style.display = "none";
 			document.getElementById('defaut').style.display = "none";
 			document.getElementById('onglet_departement').style.display = "none";
