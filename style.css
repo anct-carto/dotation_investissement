@@ -53,13 +53,52 @@ a:hover {
 	display: block;
 	}
 
+#logo_dep {
+	background-image: url("img/tabdep.png");
+	background-repeat:no-repeat;
+	background-position:center center;
+}
 
-.onglets{
+#logo_dep:hover {
+	background-image: url("img/tabondep.png");
+	background-repeat:no-repeat;
+	background-position:center center;
+}
+
+#logo_epci {
+	background-image: url("img/tabepci.png");
+	background-repeat:no-repeat;
+	background-position:center center;
+}
+
+#logo_epci:hover {
+	background-image: url("img/tabonepci.png");
+	background-repeat:no-repeat;
+	background-position:center center;
+}
+
+#logo_com {
+	background-image: url("img/tabcom.png");
+	background-repeat:no-repeat;
+	background-position:center center;
+}
+
+#logo_com:hover {
+	background-image: url("img/taboncom.png");
+	background-repeat:no-repeat;
+	background-position:center center;
+}
 	
+.onglets{
 	background-color: #3c5daa;
 	border: 0.1px solid #5a77b7;
 }
 
+
+.onglets img{
+	vertical-align:middle;
+	padding:7px;
+}
 
 .onglets:hover {
 	
