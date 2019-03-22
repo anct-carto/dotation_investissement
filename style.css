@@ -159,8 +159,14 @@ h3{
 	color:#f26664;
 }
 
+.description {
+	font-size:0.8em;
+	font-weight: bold;
+	color:#ffffff;
+}
+
 .indicateur {
-	color:white;
+	
 	
 }
 		

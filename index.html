@@ -92,12 +92,14 @@
 				
 				<div class="presentation" id="onglet_commune">
 					<h2 style='color:#f26664'>Les communes</h2>
+					<p style="font-weight:bold;height:21px;color:white;">Rechercher une commune ou double-cliquer sur l'EPCI correspondant<div id="boiteRecherche"></div></p>
+					<br/><br/>
 					<p>La DGF des communes s’élève à <span style="color:white;">XX milliards d’euros en 2019.</p>
 					<p>La DGF représente en moyenne <span style="color:white;">14,56% (2018)</span> des recettes réelles de fonctionnement des communes. La part de la DGF est supérieure à la moyenne pour <span style="color:white;">26 120 (2018)</span> communes.</p>
 					<p>La DGF augmente pour <span style="color:white;">18 312 (2018)</span> communes. Les crédits supplémentaires représentent en moyenne <span style="color:white;">0,63%</span> des recettes réelles de fonctionnement des communes concernées. Elle est stable pour <span style="color:white;">17 (chiffre 2018) communes</span>.</p>
 					<p>Elle diminue pour <span style="color:white;">16 743 (2018)</span> communes. Cette diminution représente en moyenne <span style="color:white;">0,52% (2018)</span> des recettes réelles de fonctionnement des communes concernées.</p>
 					<p>La péréquation représente en moyenne <span style="color:white;">38,29% (2018)</span> de la DGF des communes. La part de la péréquation est supérieure à la moyenne pour <span style="color:white;">13 355 (2018) communes. 34 462 (2018) communes (97,46%)</span> bénéficient d’une dotation de péréquation de la part de l’Etat.</p>
-					<div style="font-weight:bold;height:21px;color:white;">Rechercher une commune<div id="boiteRecherche"></div></div>
+					
 					<div class="bas retour bouton"><img src='img/fleche.png' style='vertical-align:middle; width:20px;padding:0px 10px;'  />Retour</div>
 				</div>
 				
@@ -140,6 +142,7 @@
 						<div class="divTableCell">
 								<div class="divTableRow"><h3>Variation de la DGF entre 2018 et 2019 par rapport aux recettes réelles de fonctionnement (en %)&nbsp;:</h3></div>
 								<div class="divTableRow chiffre" id="N4VARRFF"></div>
+								<div class="divTableRow description" id="N4info"></div>
 						</div>
 						<div class="divTableCell">
 								<div class="divTableRow"><h3>Part de la péréquation dans la DGF 2019 (en %)&nbsp;:</h3></div>
@@ -257,8 +260,10 @@
 		
 		map.createPane('territoireCible');
 		map.getPane('territoireCible').style.zIndex = 1000;
+		map.createPane('regions');
+		map.getPane('regions').style.zIndex = 900;
 		
-		function style1(feature) {
+		function indicateur1(feature) {
 			return {
 			fillColor: getColor1(feature.properties.type, feature.properties.N1_EVO1718),
 			weight: 0.8,
@@ -269,7 +274,7 @@
 		};
 		}
 		
-		function style2(feature) {
+		function indicateur2(feature) {
 			return {
 			fillColor: getColor2(feature.properties.type, feature.properties.N4_VAR_RRF),
 			weight: 0.8,
@@ -287,7 +292,7 @@
 		
 		departement = L.geoJSON(JS_todo, {
 			filter: function(feature, layer) {return feature.properties.type == "département";},
-			style: style1,
+			style: indicateur1,
 			onEachFeature: function(feature, layer) {
 					layer.bindTooltip(feature.properties.libgeo, {className: 'Tooltips'});
 					layer.on('click', function(e) {
@@ -305,7 +310,7 @@
 						//preventDefault(e);
 						//territoireCible(e.target._latlngs);
 						map.fitBounds(e.target._latlngs, { paddingTopLeft: [300, 0] });
-						selectCom(e.target.feature.properties.codgeo);
+						selectCom(e.target.feature.properties.codgeo, indicateur);
 						e.preventDefault();
 						});
 					}
@@ -313,7 +318,7 @@
 		
 		epci = L.geoJSON(JS_todo, {
 			filter: function(feature, layer) {return feature.properties.type == "epci";},
-			style: style1,
+			style: indicateur1,
 			onEachFeature: function(feature, layer) {
 					layer.bindTooltip(feature.properties.libgeo, {className: 'Tooltips'});
 					layer.on('click', function(e) {
@@ -326,7 +331,7 @@
 		
 		Contour_Regions = L.geoJSON(JS_todo, {
 			filter: function(feature, layer) {return feature.properties.type == "région";},
-			style: {interactive: false, color: "#ffffff", weight: 1.5, opacity: 1, fillOpacity: 0}
+			style: {interactive: false, color: "#ffffff", weight: 1.5, opacity: 1, pane:'territoireCible', fillOpacity: 0}
 		}).addTo(map);
 		
 		//Ajout de la sidebar
@@ -372,20 +377,22 @@
 			document.getElementById('N2MONTANT').innerHTML = "<span>"+format2(e.N2_MONTANT)+"&nbsp;€</span>";
 			
 			document.getElementById('N2A').innerHTML = "";
-			if(e.N2A_DFM > 0) {document.getElementById('N2A').innerHTML = "<span>dont DFM&nbsp;"+format2(e.N2A_DFM)+"&nbsp;€</span></br>";}
+			if(e.N2A_DFM > 0) {document.getElementById('N2A').innerHTML = "<span>dont dotation de péréquation&nbsp;:&nbsp;"+format2(e.N2A_DFM)+"&nbsp;€</span></br>";}
 			document.getElementById('N2B').innerHTML = "";
-			if(e.N2B_DPU > 0) {document.getElementById('N2B').innerHTML = "<span>dont DPU&nbsp;"+format2(e.N2B_DPU)+"&nbsp;€</span></br>";}
+			if(e.N2B_DPU > 0) {document.getElementById('N2B').innerHTML = "<span>dont dotation de péréquation&nbsp;:&nbsp;"+format2(e.N2B_DPU)+"&nbsp;€</span></br>";}
 			document.getElementById('N2C').innerHTML = "";
-			if(e.N2C_DI > 0) {document.getElementById('N2C').innerHTML = "<span>dont DI&nbsp;"+format2(e.N2C_DI)+"&nbsp;€</span></br>";}
+			if(e.N2C_DI > 0) {document.getElementById('N2C').innerHTML = "<span>dont dotation d’intercommunalité&nbsp;:&nbsp;"+format2(e.N2C_DI)+"&nbsp;€</span></br>";}
 			document.getElementById('N2D').innerHTML = "";
-			if(e.N2D_DSU > 0) {document.getElementById('N2D').innerHTML = "<span>dont DSU&nbsp;"+format2(e.N2D_DSU)+"&nbsp;€</span></br>";}
+			if(e.N2D_DSU > 0) {document.getElementById('N2D').innerHTML = "<span>dont dont dotation de péréquation&nbsp;:&nbsp;"+format2(e.N2D_DSU)+"&nbsp;€</span></br>";}
 			document.getElementById('N2E').innerHTML = "";
-			if(e.N2E_DSR > 0) {document.getElementById('N2E').innerHTML = "<span>dont DSR&nbsp;"+format2(e.N2E_DSR)+"&nbsp;€</span></br>";}
+			if(e.N2E_DSR > 0) {document.getElementById('N2E').innerHTML = "<span>dont dont dotation de péréquation&nbsp;:&nbsp;"+format2(e.N2E_DSR)+"&nbsp;€</span></br>";}
 			document.getElementById('N2F').innerHTML = "";
-			if(e.N2F_DACOM > 0) {document.getElementById('N2F').innerHTML = "<span>dont DACOM&nbsp;"+format2(e.N2F_DACOM)+"&nbsp;€</span></br>";}
-			
+			if(e.N2F_DACOM > 0) {document.getElementById('N2F').innerHTML = "<span>dont dont dotation de péréquation&nbsp;:&nbsp;"+format2(e.N2F_DACOM)+"&nbsp;€</span></br>";}
+			console.log('coucou');
 			document.getElementById('N3DGFHAB').innerHTML = "<span>"+format3(e.N3_DGFHAB)+"&nbsp;€</span>";
 			document.getElementById('N4VARRFF').innerHTML = "<span>"+format1(e.N4_VAR_RRF*100)+"&nbsp;%</span>";
+			if(e.N4_VAR_RRF > 0) {document.getElementById('N4info').innerHTML = "<span>L'augmentation de DGF représente "+format1(e.N4_VAR_RRF*100)+"% des RRF</span>";}
+			if(e.N4_VAR_RRF <= 0) {document.getElementById('N4info').innerHTML = "<span>La diminution de DGF représente "+format1(e.N4_VAR_RRF*100)+"% des RRF</span>";}
 			document.getElementById('N5PEREK').innerHTML = "<span>"+format1(e.N5_PEREK*100)+"&nbsp;%</span>";
 			document.getElementById('lien').innerHTML = "<span><a href='http://www.dotations-dgcl.interieur.gouv.fr/consultation/dotation_commune_html.php?code=46045' target='blank'>En savoir plus</a></span>";
 		}
@@ -400,6 +407,7 @@
 		
 		function clickMap () {
 			if(territoireCib) {map.removeLayer(territoireCib);}
+			if(com_select) {map.removeLayer(com_select);}
 			//fermer ou ouvrir la sidebar
 			if (document.getElementById('sidebar').classList.contains('collapsed')) {
 				sidebar.open('home');
@@ -425,8 +433,8 @@
 		document.getElementById("logo_com").addEventListener("click", function(event){event.stopPropagation();showCom();;});
 		document.getElementById("logo_epci").addEventListener("click", function(event){event.stopPropagation();showEpci();});
 		document.getElementById("logo_dep").addEventListener("click", function(event){event.stopPropagation();showDep();});
-		document.getElementById("indicateur1").addEventListener("click", function(event){event.stopPropagation(); departement.setStyle(style1);commune.setStyle(style1);epci.setStyle(style1);document.getElementById('indicateur1').className = "bouton_on";document.getElementById('indicateur2').className = "bouton"; switchind("to2"); });
-		document.getElementById("indicateur2").addEventListener("click", function(event){event.stopPropagation(); departement.setStyle(style2);commune.setStyle(style2);epci.setStyle(style2);document.getElementById('indicateur2').className = "bouton_on";document.getElementById('indicateur1').className = "bouton"; switchind("to1"); });
+		document.getElementById("indicateur1").addEventListener("click", function(event){event.stopPropagation(); departement.setStyle(indicateur1);commune.setStyle(indicateur1);epci.setStyle(indicateur1);document.getElementById('indicateur1').className = "bouton_on";document.getElementById('indicateur2').className = "bouton"; switchind("to2"); });
+		document.getElementById("indicateur2").addEventListener("click", function(event){event.stopPropagation(); departement.setStyle(indicateur2);commune.setStyle(indicateur2);epci.setStyle(indicateur2);document.getElementById('indicateur2').className = "bouton_on";document.getElementById('indicateur1').className = "bouton"; switchind("to1"); });
 		
 		//Changement d'indicateur dans une page de maillage
 		
@@ -435,18 +443,19 @@
 		
 		for (var i = 0; i < boutons_switch.length; i++) {
 			boutons_switch[i].addEventListener('click', function(i){
+				if(com_select) {map.removeLayer(com_select);}
 				if (i.target.title == "indicateur1"){
-					epci.setStyle(style2);
-					commune.setStyle(style2);
-					departement.setStyle(style2);
+					epci.setStyle(indicateur2);
+					commune.setStyle(indicateur2);
+					departement.setStyle(indicateur2);
 					i.target.innerHTML = "<img src='img/fleche.png' style='vertical-align:middle; width:20px;padding:0px 10px;'>Voir la variation de la DGF entre 2018 et 2019";
 					i.target.title = "indicateur2";
 					indicateur = "indicateur2";
 				}
 				else if (i.target.title == "indicateur2"){
-					epci.setStyle(style1);
-					commune.setStyle(style1);
-					departement.setStyle(style1);
+					epci.setStyle(indicateur1);
+					commune.setStyle(indicateur1);
+					departement.setStyle(indicateur1);
 					i.target.innerHTML = "<img src='img/fleche.png' style='vertical-align:middle; width:20px;padding:0px 10px;' />Voir la variation de la DGF entre 2018 et 2019 en pourcentage des recettes réelles de fonctionnement";
 					i.target.title = "indicateur1";
 					indicateur = "indicateur1";
@@ -455,6 +464,7 @@
 		}
 		
 		function switchind(ind) {
+			if(com_select) {map.removeLayer(com_select);}
 			if (ind=="to1"){
 				for (var i = 0; i < boutons_switch.length; i++) {
 					boutons_switch[i].innerHTML = "<img src='img/fleche.png' style='vertical-align:middle; width:20px;padding:0px 10px;'>Voir la variation de la DGF entre 2018 et 2019";
@@ -522,7 +532,7 @@
 			if(territoireCib) {map.removeLayer(territoireCib);}
 			territoireCible(e.layer._latlngs);
 			popup(e.layer.feature.properties);
-			selectCom(e.layer.feature.properties.codgeo.substring(0,2));
+			selectCom(e.layer.feature.properties.codgeo.substring(0,2), indicateur);
 		});
 		
 		var searchControl2 = new L.control.search({
@@ -541,7 +551,7 @@
 		searchControl2.on('search:locationfound', function(e) {
 			if(territoireCib) {map.removeLayer(territoireCib);}
 			popup(e.layer.feature.properties);
-			selectCom(e.layer.feature.properties.codgeo.substring(0,2));
+			selectCom(e.layer.feature.properties.codgeo.substring(0,2),indicateur);
 			territoireCible(e.layer._latlngs);
 		});
 		
@@ -640,12 +650,15 @@
 		
 		var com_select;
 		
-		function selectCom(dep) {
-		console.log(dep);
+		function selectCom(dep,indicateur) {
+		if(territoireCib) {map.removeLayer(territoireCib);}
 		if(com_select) {map.removeLayer(com_select);}
+		if(departement) map.removeLayer(departement);
+		map.addLayer(epci);
+		if (indicateur == "indicateur1"){
 		com_select = L.geoJSON(JS_todo, {
 			filter: function(feature, layer) {return feature.properties.codgeo.substring(0,2) == dep && feature.properties.type == "commune";},
-			style : style1,
+			style : indicateur1,
 			onEachFeature: function(feature, layer) {
 				layer.bindTooltip(feature.properties.libgeo, {className: 'Tooltips'});
 				layer.on('click', function(e) {
@@ -655,6 +668,21 @@
 				})
 				}
 		});
+		}
+		else if (indicateur == "indicateur2"){
+		com_select = L.geoJSON(JS_todo, {
+			filter: function(feature, layer) {return feature.properties.codgeo.substring(0,2) == dep && feature.properties.type == "commune";},
+			style : indicateur2,
+			onEachFeature: function(feature, layer) {
+				layer.bindTooltip(feature.properties.libgeo, {className: 'Tooltips'});
+				layer.on('click', function(e) {
+					popup(feature.properties);
+					territoireCible(e.target._latlngs);
+					preventDefault(e);
+				})
+				}
+		});
+		}
 		map.addLayer(com_select);
 		}
 		
