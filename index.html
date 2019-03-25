@@ -163,7 +163,7 @@
 	<script src="src/leaflet-search.js"></script>
     <script src="https://turbo87.github.io/sidebar-v2/js/leaflet-sidebar.js"></script>
 	<script type="text/javascript" src="data/masque.js"></script>
-	<script type="text/javascript" src="data/geoData2.js"></script>
+	<script type="text/javascript" src="data/geoData.js"></script>
 	<script type="text/javascript" src="data/cercles_drom.js"></script>
 	
     <script>
@@ -295,13 +295,14 @@
 			onEachFeature: function(feature, layer) {
 					layer.bindTooltip(feature.properties.libgeo, {className: 'Tooltips'});
 					layer.on('click', function(e) {
-						 timer = setTimeout(function() {
-							if (!prevent) {
+						 //timer = setTimeout(function() {
+							//if (!prevent) {
 								popup(feature.properties);
 								territoireCible(e.target._latlngs);
-							}
-							prevent = false;
-							}, delay);			
+								e.preventDefault();
+							//}
+							//prevent = false;
+							//}, delay);			
 						});
 					/*layer.on('dblclick', function(e) {
 						clearTimeout(timer);
