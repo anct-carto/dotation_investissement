@@ -25,7 +25,7 @@
             <ul role="tablist" >
                 <li><a href="#home" role="tab" id="logo" title="Retour à l'accueil" class="onglets"><i style="vertical-align:middle;" class="fas fa-home"></i></a></li>
 				<li><a href="#home" role="tab" class="onglets" id="logo_dep" title="Départements"><img src="img/blanktabdep.png"/></a></li>
-				<li><a href="#home" role="tab" class="onglets" id="logo_epci" title="EPCI"><img src="img/blanktabepci.png"/></a></li>
+				<li><a href="#home" role="tab" class="onglets" id="logo_epci" title="Intercommunalités"><img src="img/blanktabepci.png"/></a></li>
 				<li><a href="#home" role="tab" class="onglets" id="logo_com" title="Communes"><img src="img/blanktabcom.png"/></a></li>
 				<li><a href="img/cartes_dgf.pdf" role="tab" target="_blank" title="Télécharger les cartes" class="onglets"><i style="vertical-align:middle;" class="fa fa-download"></i></a></li>
 			</ul>
@@ -169,7 +169,7 @@
     <script>
 		
 		//Définition des variables globales
-		var maillage = "departement";
+		var maillage = "département";
 		var indicateur = "indicateur1";
 			
 		// Création de la carte
@@ -193,20 +193,12 @@
 		
 		function getColor1(a,d) { //N1_EVO1718
 			if(a=="département") {
-				map.addLayer(legende1dep);
-				if(legende2){map.removeLayer(legende2)};
-				if(legende1){map.removeLayer(legende1)};
-				if(legende2dep){map.removeLayer(legende2dep)};
 				return 	d > 0.005 ? '#f4661d' : //augmentation
 				d <= -0.005  ? '#fbd9c7' : //diminution
 				d <= 0.005 ? '#f69564' : //stabilité
 				'grey' ;
 			}
 			else {
-				map.addLayer(legende1);
-				if(legende2){map.removeLayer(legende2)};
-				if(legende1dep){map.removeLayer(legende1dep)};
-				if(legende2dep){map.removeLayer(legende2dep)};
 				return 	d > 0.02 ? '#f4661d' : //augmentation
 				d <= -0.02  ? '#fbd9c7' : //diminution
 				d <= 0.02 ? '#f69564' : //stabilité
@@ -216,20 +208,12 @@
 		
 		function getColor2(a,d) { //N4_VAR_RRF
 			if(a=="département") {
-				map.addLayer(legende2dep);
-				if(legende1){map.removeLayer(legende1)};
-				if(legende2){map.removeLayer(legende2)};
-				if(legende1dep){map.removeLayer(legende1dep)};
 				return 	d > 0.0005 ? '#ff4c4c' : //augmentation
 				d <= -0.0005  ? '#ffcccc' : //diminution
 				d <= 0.0005 ? '#ff7878' : //stabilité
 				'grey' ;
 			}
 			else {
-				map.addLayer(legende2);
-				if(legende1){map.removeLayer(legende1)};
-				if(legende2dep){map.removeLayer(legende2dep)};
-				if(legende1dep){map.removeLayer(legende1dep)};
 				return 	d > 0.005 ? '#ff4c4c' : //augmentation
 				d <= -0.005  ? '#ffcccc' : //diminution
 				d <= 0.005 ? '#ff7878' : //stabilité
@@ -257,12 +241,13 @@
 		var legende2dep = L.imageOverlay('img/legende_indicateur2dep.png', [[51.4, -5.4],[49.6, 0.16]], {zIndex : '1000'} );
 		map.addLayer(legende1dep);
 		
+		//Niveau d'affichage des couches
 		map.createPane('territoireCible');
 		map.getPane('territoireCible').style.zIndex = 600;
 		map.createPane('regions');
 		map.getPane('regions').style.zIndex = 500;
 		
-		function indicateur1(feature) {
+		function style_indicateur1(feature) {
 			return {
 			fillColor: getColor1(feature.properties.type, feature.properties.N1_EVO1718),
 			weight: 0.8,
@@ -273,7 +258,7 @@
 		};
 		}
 		
-		function indicateur2(feature) {
+		function style_indicateur2(feature) {
 			return {
 			fillColor: getColor2(feature.properties.type, feature.properties.N4_VAR_RRF),
 			weight: 0.8,
@@ -291,7 +276,7 @@
 		
 		departement = L.geoJSON(JS_todo, {
 			filter: function(feature, layer) {return feature.properties.type == "département";},
-			style: indicateur1,
+			style: style_indicateur1,
 			onEachFeature: function(feature, layer) {
 					layer.bindTooltip(feature.properties.libgeo, {className: 'Tooltips'});
 					layer.on('click', function(e) {
@@ -318,7 +303,7 @@
 		
 		epci = L.geoJSON(JS_todo, {
 			filter: function(feature, layer) {return feature.properties.type == "epci";},
-			style: indicateur1,
+			style: style_indicateur1,
 			onEachFeature: function(feature, layer) {
 					layer.bindTooltip(feature.properties.libgeo, {className: 'Tooltips'});
 					layer.on('click', function(e) {
@@ -335,7 +320,7 @@
 						prevent = true;
 						map.fitBounds(e.target._latlngs, { paddingTopLeft: [300, 0] , maxZoom :10});
 						selectCom(e.target.feature.properties.codgeo, indicateur);
-						//territoireCible(e.target._latlngs);
+						epciCible(e.target._latlngs);
 						e.preventDefault();
 						});
 					}
@@ -403,11 +388,20 @@
 		}
 		
 		//Indiquer territoire sélectionné
-		var territoireCib;
+		var territoireCib; //lors d'un simple clic
 		function territoireCible(e) {
+			if(epciCib) {map.removeLayer(epciCib);}
 			if(territoireCib) {map.removeLayer(territoireCib);}
 			territoireCib = new L.polygon(e, {weight:3, color:"#ffee00",pane:'territoireCible', fillOpacity: 0});
 			territoireCib.addTo(map);
+		}
+		
+		var epciCib; //lorsqu'on affiche un ensemble de communes appartenant au même epci
+		function epciCible(e) {
+			if(territoireCib) {map.removeLayer(territoireCib);}
+			if(epciCib) {map.removeLayer(epciCib);}
+			epciCib = new L.polygon(e, {weight:3, color:"red",pane:'territoireCible', fillOpacity: 0, interactive:false});
+			epciCib.addTo(map);
 		}
 		
 		function clickMap () {
@@ -438,8 +432,26 @@
 		document.getElementById("logo_com").addEventListener("click", function(event){event.stopPropagation();showCom();;});
 		document.getElementById("logo_epci").addEventListener("click", function(event){event.stopPropagation();showEpci();});
 		document.getElementById("logo_dep").addEventListener("click", function(event){event.stopPropagation();showDep();});
-		document.getElementById("indicateur1").addEventListener("click", function(event){event.stopPropagation(); departement.setStyle(indicateur1);commune.setStyle(indicateur1);epci.setStyle(indicateur1);document.getElementById('indicateur1').className = "bouton_on";document.getElementById('indicateur2').className = "bouton"; switchind("to2"); });
-		document.getElementById("indicateur2").addEventListener("click", function(event){event.stopPropagation(); departement.setStyle(indicateur2);commune.setStyle(indicateur2);epci.setStyle(indicateur2);document.getElementById('indicateur2').className = "bouton_on";document.getElementById('indicateur1').className = "bouton"; switchind("to1"); });
+		document.getElementById("indicateur1").addEventListener("click", function(event){
+			event.stopPropagation();
+			departement.setStyle(style_indicateur1);
+			commune.setStyle(style_indicateur1);
+			epci.setStyle(style_indicateur1);
+			document.getElementById('indicateur1').className = "bouton_on";
+			document.getElementById('indicateur2').className = "bouton"; 
+			switchind("to2");
+			switch_legende ("indicateur1", maillage)			
+			});
+		document.getElementById("indicateur2").addEventListener("click", function(event){
+			event.stopPropagation(); 
+			departement.setStyle(style_indicateur2);
+			commune.setStyle(style_indicateur2);
+			epci.setStyle(style_indicateur2);
+			document.getElementById('indicateur2').className = "bouton_on";
+			document.getElementById('indicateur1').className = "bouton"; 
+			switchind("to1");
+			switch_legende ("indicateur2", maillage)
+			});
 		
 		//Changement d'indicateur dans une page de maillage
 		
@@ -450,20 +462,22 @@
 			boutons_switch[i].addEventListener('click', function(i){
 				if(com_select) {map.removeLayer(com_select);}
 				if (i.target.title == "indicateur1"){
-					epci.setStyle(indicateur2);
-					commune.setStyle(indicateur2);
-					departement.setStyle(indicateur2);
+					epci.setStyle(style_indicateur2);
+					commune.setStyle(style_indicateur2);
+					departement.setStyle(style_indicateur2);
 					i.target.innerHTML = "<img src='img/fleche.png' style='vertical-align:middle; width:20px;padding:0px 10px;'>Voir la variation de la DGF entre 2018 et 2019";
 					i.target.title = "indicateur2";
 					indicateur = "indicateur2";
+					switch_legende ("indicateur2", maillage)
 				}
 				else if (i.target.title == "indicateur2"){
-					epci.setStyle(indicateur1);
-					commune.setStyle(indicateur1);
-					departement.setStyle(indicateur1);
+					epci.setStyle(style_indicateur1);
+					commune.setStyle(style_indicateur1);
+					departement.setStyle(style_indicateur1);
 					i.target.innerHTML = "<img src='img/fleche.png' style='vertical-align:middle; width:20px;padding:0px 10px;' />Voir la variation de la DGF entre 2018 et 2019 en pourcentage des recettes réelles de fonctionnement";
 					i.target.title = "indicateur1";
 					indicateur = "indicateur1";
+					switch_legende ("indicateur1", maillage)
 				};
 			});
 		}
@@ -605,6 +619,7 @@
 			if(territoireCib) {map.removeLayer(territoireCib);}
 			if(com_select) {map.removeLayer(com_select);}
 			maillage = "département";
+			switch_legende (indicateur, maillage);
 			document.getElementById('popup').style.display = "none";
 			document.getElementById('defaut').style.display = "none";
 			document.getElementById('onglet_departement').style.display = "block";
@@ -624,6 +639,7 @@
 			if(territoireCib) {map.removeLayer(territoireCib);}
 			if(com_select) {map.removeLayer(com_select);}
 			maillage = "epci";
+			switch_legende (indicateur, maillage);
 			document.getElementById('popup').style.display = "none";
 			document.getElementById('defaut').style.display = "none";
 			document.getElementById('onglet_departement').style.display = "none";
@@ -643,6 +659,7 @@
 			if(territoireCib) {map.removeLayer(territoireCib);}
 			if(com_select) {map.removeLayer(com_select);}
 			maillage = "commune";
+			switch_legende (indicateur, maillage);
 			document.getElementById('popup').style.display = "none";
 			document.getElementById('defaut').style.display = "none";
 			document.getElementById('onglet_departement').style.display = "none";
@@ -660,11 +677,10 @@
 		if(com_select) {map.removeLayer(com_select);}
 		if(departement) map.removeLayer(departement);
 		map.addLayer(epci);
-		
 		if (indicateur == "indicateur1"){
 		com_select = L.geoJSON(JS_todo, {
 			filter: function(feature, layer) {return  feature.properties.ID_EPCI == epci_cible && feature.properties.type == "commune"; },
-			style : indicateur1,
+			style : style_indicateur1,
 			onEachFeature: function(feature, layer) {
 				layer.bindTooltip(feature.properties.libgeo, {className: 'Tooltips'});
 				layer.on('click', function(e) {
@@ -678,7 +694,7 @@
 		else if (indicateur == "indicateur2"){
 		com_select = L.geoJSON(JS_todo, {
 			filter: function(feature, layer) {return  feature.properties.ID_EPCI == epci_cible && feature.properties.type == "commune"; },
-			style : indicateur2,
+			style : style_indicateur2,
 			onEachFeature: function(feature, layer) {
 				layer.bindTooltip(feature.properties.libgeo, {className: 'Tooltips'});
 				layer.on('click', function(e) {
@@ -692,7 +708,16 @@
 		map.addLayer(com_select);
 		}
 		
-		
+		function switch_legende (indicateur, niveau) {
+			if (indicateur === "indicateur1") {
+				if (niveau=="département"){map.addLayer(legende1dep);if(legende2){map.removeLayer(legende2)};if(legende1){map.removeLayer(legende1)};if(legende2dep){map.removeLayer(legende2dep)};}
+				else {map.addLayer(legende1);if(legende2){map.removeLayer(legende2)};if(legende1dep){map.removeLayer(legende1dep)};if(legende2dep){map.removeLayer(legende2dep)};}
+			}
+			else if (indicateur== "indicateur2") {
+				if (niveau=="département"){map.addLayer(legende2dep);if(legende1){map.removeLayer(legende1)};if(legende1dep){map.removeLayer(legende1dep)};if(legende2){map.removeLayer(legende2)};}
+				else {map.addLayer(legende2);if(legende1){map.removeLayer(legende1)};if(legende1dep){map.removeLayer(legende1dep)};if(legende2dep){map.removeLayer(legende2dep)};}
+			}
+		}
 		
 		
    </script>
