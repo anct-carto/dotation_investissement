@@ -19,9 +19,12 @@
 </head>
 
 <body>
-
+	
+	<!-- Construction de panneau latéral -->
     <div id="sidebar" class="sidebar collapsed">
-        <div class="sidebar-tabs" id="barre-verticale">
+        
+		 <!-- Boutons de menu -->
+		<div class="sidebar-tabs" id="barre-verticale">
             <ul role="tablist" >
                 <li><a href="#home" role="tab" id="logo" title="Retour à l'accueil" class="onglets"><i style="vertical-align:middle;" class="fas fa-home"></i></a></li>
 				<li><a href="#home" role="tab" class="onglets" id="logo_dep" title="Départements"><img src="img/blanktabdep.png"/></a></li>
@@ -31,15 +34,16 @@
 			</ul>
         </div>
 
-        <!-- Tab panes -->
+        <!-- Contenu des onglets -->
         <div class="sidebar-content">
             <div class="sidebar-pane" id="home">
-                <h1>L'État dans les territoires
+                
+				<h1>L'État dans les territoires
 				<span class="sidebar-close"><i class="fa fa-caret-left"></i></span>
                 </h1>
 				
+				<!-- Page d'accueil -->
 				<div class="presentation" id="defaut">
-					
 					<div>
 						<h2>Répartition de la dotation globale de fonctionnement (DGF) en 2019</h2>
 						<p style="color:#f26664;">26,94 milliards d'euros de dotation globale de fonctionnement pour les communes, les intercommunalités et les conseils départementaux</p>
@@ -48,33 +52,25 @@
 						<p>Au sein de la DGF, l’État consacre <span style="color:white;">7,7 milliards d’euros</span> à la solidarité en faveur collectivités les plus en difficulté via notamment la dotation de solidarité urbaine ou la dotation de solidarité rurale.</p>
 						<p>La part dédiée à la solidarité territoriale augmente cette année de <span style="color:white;">190 millions d’euros</span>.
 					</div>
-					
 					<div class="boutons">
-						<h2>Accédez aux informations relatives à la DGF 2019 pour votre commune, intercommunalité ou département&nbsp;:</h2>
-						<p class="indicateur"><img src="img/bullet.png" style="vertical-align:middle; width:15px;padding:0px 00px;"  />Montant de la DGF en 2019</p>
-						<p class="indicateur"><img src="img/bullet.png" style="vertical-align:middle; width:15px;padding:0px 00px;"  />Montant de la DGF par habitant en 2019</p>
-						<p class="indicateur bouton_on" id="indicateur1" title="voir la carte"><img src="img/bullet.png" style="vertical-align:middle; width:15px;padding:0px 0px;"  />Variation de la DGF entre 2018 et 2019</p>
-						<p class="indicateur"><img src="img/bullet.png" style="vertical-align:middle; width:15px;padding:0px 00px;"  />Part de la DGF dans les recettes réelles de fonctionnement en 2019</p>
-						<p class="indicateur bouton" id="indicateur2" title="voir la carte"><img src="img/bullet.png" style="vertical-align:middle; width:15px;padding:0px 00px;"  />Variation de la DGF entre 2018 et 2019 en pourcentage des recettes réelles de fonctionnement</p>
-						<p class="indicateur"><img src="img/bullet.png" style="vertical-align:middle; width:15px;padding:0px 00px;"  />Part de la solidarité territoriale dans la DGF en 2019</p>
+						<h2>Accédez aux informations relatives à la DGF 2019</h2>
+						<p>Cliquer sur un territoire pour voir le montant de la DGF, le montant de la DGF par habitant, la part de la DGF dans les recettes réelles de fonctionnement, la part de la solidarité territoriale dans la DGF.</p>
+						<p class="indicateur bouton_on" id="indicateur1" title="voir la carte"><img src="img/bullet.png" style="vertical-align:middle; width:15px;padding:0px 0px;"  />Carte de variation de la DGF entre 2018 et 2019</p>
+						<p class="indicateur bouton" id="indicateur2" title="voir la carte"><img src="img/bullet.png" style="vertical-align:middle; width:15px;padding:0px 00px;"  />Carte de variation de la DGF entre 2018 et 2019 en pourcentage des recettes réelles de fonctionnement</p>
 						</br>
 						<div class="bouton bouton_dep" ><img src="img/fleche.png" style="vertical-align:middle; width:20px;padding:0px 10px;" />Voir les conseils départementaux</div>
 						<div class="bouton bouton_epci" ><img src="img/fleche.png" style="vertical-align:middle; width:20px;padding:0px 10px;" />Voir les intercommunalités</div>
 						<div class="bouton bouton_com" ><img src="img/fleche.png" style="vertical-align:middle; width:20px;padding:0px 10px;" />Rechercher une commune</div>
 						</br>
-						
-						
-					</div>
-						
+					</div>	
 					<div id="sources" style="width:70%;">
 						<p><i>Sources&nbsp;: <a href="http://www.dotations-dgcl.interieur.gouv.fr/consultation/accueil.php" target="_blank">Direction générale des collectivités locales (DGCL) </a>• Réalisation&nbsp;: <a href="https://cartotheque.cget.gouv.fr/cartes?filters%5Bquery%5D=interactif&current_page=1&category=&page_size=20" target="_blank">CGET service cartographie</a></i><p>
 						<p><img src="img/cget.png" style="vertical-align:middle; width:100%;"/></p>
 						<p><img src="img/dgcl.png" style="vertical-align:middle; width:100%;"/></p>
 					</div>
-					
 				</div>
 				
-				
+				<!-- Contenu onglet départements -->
 				<div class="presentation" id="onglet_departement">
 					<h2 style='color:#f26664'>Les conseils départementaux</h2>
 					<p>La DGF des conseils départementaux s’élève à <span style="color:white;">8,6 milliards d’euros en 2019</span>. Elle est stable par rapport à 2018.</p>
@@ -90,19 +86,7 @@
 					</div>
 				</div>
 				
-				<div class="presentation" id="onglet_commune">
-					<h2 style='color:#f26664'>Les communes</h2>
-					<p style="font-weight:bold;height:21px;color:white;">Rechercher une commune ou double-cliquer sur l'intercommunalité correspondante<div id="boiteRecherche"></div></p>
-					<br/><br/>
-					<p>La DGF des communes s’élève à <span style="color:white;">XX milliards d’euros en 2019.</p>
-					<p>La DGF représente en moyenne <span style="color:white;">14,56% (2018)</span> des recettes réelles de fonctionnement des communes. La part de la DGF est supérieure à la moyenne pour <span style="color:white;">26 120 (2018)</span> communes.</p>
-					<p>La DGF augmente pour <span style="color:white;">18 312 (2018)</span> communes. Les crédits supplémentaires représentent en moyenne <span style="color:white;">0,63%</span> des recettes réelles de fonctionnement des communes concernées. Elle est stable pour <span style="color:white;">17 (chiffre 2018) communes</span>.</p>
-					<p>Elle diminue pour <span style="color:white;">16 743 (2018)</span> communes. Cette diminution représente en moyenne <span style="color:white;">0,52% (2018)</span> des recettes réelles de fonctionnement des communes concernées.</p>
-					<p>En dehors des évolutions de population, les modifications de DGF sont principalement dues au choix du gouvernement de renforcer la solidarité avec les communes qui le justifient le plus. Ces transferts de solidarité représentent <span style="color:white;">38,29% (2018)</span> de la DGF des communes. La part de la solidarité territoriale est supérieure à la moyenne pour <span style="color:white;">13 355 (2018) communes.</p>
-					
-					<div class="bas retour bouton"><img src='img/fleche.png' style='vertical-align:middle; width:20px;padding:0px 10px;'  />Retour</div>
-				</div>
-				
+				<!-- Contenu onglet epci -->
 				<div class="presentation" id="onglet_epci">
 					<h2 style='color:#f26664'>Les intercommunalités</h2>
 					<p>La DGF des intercommunalités s’élève à <span style="color:white;">XX milliards d’euros en 2019</p>
@@ -110,6 +94,7 @@
 					<p>La DGF augmente pour <span style="color:white;">226 (2018)</span> intercommunalités. Les crédits supplémentaires représentent en moyenne <span style="color:white;">1,17% (2018)</span> des recettes réelles de fonctionnement des intercommunalités concernés.</p>
 					<p>Elle diminue pour <span style="color:white;">1 026 (2018)</span> intercommunalités. Cette diminution représente en moyenne <span style="color:white;">0,32% (2018)</span> des recettes réelles de fonctionnement des intercommunalités concernés.</p>
 					<p>En dehors des évolutions de population, les modifications de DGF sont principalement dues au choix du gouvernement de renforcer la solidarité avec les intercommunalités qui le justifient le plus. Ces transferts de solidarité représentent <span style="color:white;">22,91% (2018)</span> de la DGF des intercommunalités. La part de la solidarité territoriale est supérieure à la moyenne pour <span style="color:white;">852 (2018) intercommunalités.</p>
+					<p style="color:#f26664;">Double-cliquer sur une intercommunalité pour accéder aux informations concernant les communes qui le composent</p>
 					<div class="bas">
 						<div class="bouton switch_indicateur" title="indicateur1"><img src='img/fleche.png' style='vertical-align:middle; width:20px;padding:0px 10px;' />Voir la variation de la DGF entre 2018 et 2019 en pourcentage des recettes réelles de fonctionnement</div>
 						<div class="bouton bouton_dep"><img src="img/fleche.png" style="vertical-align:middle; width:20px;padding:0px 10px;" />Voir les conseil départementaux</div>
@@ -117,34 +102,54 @@
 						<div class="bouton retour"><img src='img/fleche.png' style='vertical-align:middle; width:20px;padding:0px 10px;'  />Retour</div>
 					</div>
 				</div>
-
+				
+				<!-- Contenu onglet communes -->
+				<div class="presentation" id="onglet_commune">
+					<h2 style='color:#f26664'>Les communes</h2>
+					<p style="color:#f26664;">Rechercher une commune ou double-cliquer sur l'intercommunalité correspondante</p>
+					<p id="boiteRecherche"></p>
+					<br/>
+					<p>La DGF des communes s’élève à <span style="color:white;">XX milliards d’euros en 2019.</p>
+					<p>La DGF représente en moyenne <span style="color:white;">14,56% (2018)</span> des recettes réelles de fonctionnement des communes. La part de la DGF est supérieure à la moyenne pour <span style="color:white;">26 120 (2018)</span> communes.</p>
+					<p>La DGF augmente pour <span style="color:white;">18 312 (2018)</span> communes. Les crédits supplémentaires représentent en moyenne <span style="color:white;">0,63%</span> des recettes réelles de fonctionnement des communes concernées. Elle est stable pour <span style="color:white;">17 (chiffre 2018) communes</span>.</p>
+					<p>Elle diminue pour <span style="color:white;">16 743 (2018)</span> communes. Cette diminution représente en moyenne <span style="color:white;">0,52% (2018)</span> des recettes réelles de fonctionnement des communes concernées.</p>
+					<p>En dehors des évolutions de population, les modifications de DGF sont principalement dues au choix du gouvernement de renforcer la solidarité avec les communes qui le justifient le plus. Ces transferts de solidarité représentent <span style="color:white;">38,29% (2018)</span> de la DGF des communes. La part de la solidarité territoriale est supérieure à la moyenne pour <span style="color:white;">13 355 (2018) communes.</p>
+					<div class="bas">
+					<div class="bouton bouton_dep"><img src="img/fleche.png" style="vertical-align:middle; width:20px;padding:0px 10px;" />Voir les conseil départementaux</div>
+					<div class="bouton bouton_epci"><img src="img/fleche.png" style="vertical-align:middle; width:20px;padding:0px 10px;" />Voir les intercommunalités</div>
+					<div class="retour bouton"><img src='img/fleche.png' style='vertical-align:middle; width:20px;padding:0px 10px;'  />Retour</div>
+					</div>
+					
+				</div>
+				
+				<!-- Contenu de la fiche d'information -->
 				<div class="divTable" id="popup">
 					<div id="titre"></div>
 					<div class="divTableBody">
 						<div class="divTableCell">
-								<div class="divTableRow"><h3>Montant de la dotation globale de fonctionnement en 2019&nbsp;:</h3></div>
+								<h3 class="divTableRow">Montant de la dotation globale de fonctionnement en 2019&nbsp;:</h3>
 								<div class="divTableRow chiffre" id="N2MONTANT"></div>
 								<div class="divTableRow ptichiffre" id="N2_DP"></div>
 						</div>
 						<div class="divTableCell">
-								<div class="divTableRow"><h3>Montant de la DGF par habitant en 2019&nbsp;:</h3></div>
+								<h3 class="divTableRow">Montant de la DGF par habitant en 2019&nbsp;:</h3>
 								<div class="divTableRow chiffre" id="N3DGFHAB"></div>
 						</div>
 						<div class="divTableCell">
-								<div class="divTableRow"><h3>Variation de la DGF entre 2018 et 2019&nbsp;:</h3></div>
+								<h3 class="divTableRow">Variation de la DGF entre 2018 et 2019&nbsp;:</h3>
 								<div class="divTableRow chiffre" id="N1EVO"></div>
 						</div>
 						<div class="divTableCell">
-								<div class="divTableRow"><h3>Part de la DGF dans les recettes réelles de fonctionnement&nbsp;:</h3></div>
+								<h3 class="divTableRow">Part de la DGF dans les recettes réelles de fonctionnement&nbsp;:</h3>
 								<div class="divTableRow chiffre" id="N6PCTRRF"></div>
 						</div>
 						<div class="divTableCell">
-								<div class="divTableRow"><h3>Variation de la DGF entre 2018 et 2019 par rapport aux recettes réelles de fonctionnement (en %)&nbsp;:</h3></div>
+								<h3 class="divTableRow">Variation de la DGF entre 2018 et 2019 par rapport aux recettes réelles de fonctionnement (en %)&nbsp;:</h3>
 								<div class="divTableRow chiffre" id="N4VARRRF"></div>
 								<div class="divTableRow description" id="N4info"></div>
 						</div>
 						<div class="divTableCell">
-								<div class="divTableRow"><h3>Part de la solidarité territoriale dans la DGF 2019 (en %)&nbsp;:</h3></div>
+								<h3 class="divTableRow">Part de la solidarité territoriale dans la DGF 2019 (en %)&nbsp;:</h3>
 								<div class="divTableRow chiffre" id="N5PEREK"></div>
 						</div>
 					</div>
@@ -157,6 +162,7 @@
         </div>
     </div>
 
+	<!-- Bloc de la carte -->
 	<div id="mapid"></div>
 
     <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"></script>
@@ -177,21 +183,15 @@
 		.setView([46.5, -1.8], 6);
 		map.zoomControl.setPosition('topright');
 		map.attributionControl.addAttribution('<a href="https://cartotheque.cget.gouv.fr/cartes" style="text-decoration:none;" target="_blank ">CGET</a>');
+			
+		//Ajout du panneau latéral
+		var sidebar = L.control.sidebar('sidebar').addTo(map);
+		sidebar.open('home');
 		
-		var GeoportailFrance_parcels = L.tileLayer('https://wxs.ign.fr/{apikey}/geoportail/wmts?REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0&STYLE={style}&TILEMATRIXSET=PM&FORMAT={format}&LAYER=CADASTRALPARCELS.PARCELS&TILEMATRIX={z}&TILEROW={y}&TILECOL={x}', {
-		attribution: '',
-		apikey: 'choisirgeoportail',
-		format: 'image/png',
-		style: 'bdparcellaire'
-		});
+/* COULEURS - STYLES - LEGENDE */
 		
-		//GeoportailFrance_parcels.addTo(map);
-		
-		//Ajout des couches du fond de carte
-		Cache = L.geoJSON(JS_masque, {color: "#7183ab", weight: 0, opacity: 1, fillOpacity: 1}).addTo(map);
-		Cercles_drom = L.geoJSON(JS_drom, {color: "#ffffff", weight: 0.5, opacity: 0.7, fillOpacity: 0}).addTo(map);
-		
-		function getColor1(a,d) { //N1_EVO1718
+		//Fonctions de définition des couleurs
+		function getColor1(a,d) { //N1_EVO1718 indicateur 1
 			if(a=="département") {
 				return 	d > 0.005 ? '#f4661d' : //augmentation
 				d <= -0.005  ? '#fbd9c7' : //diminution
@@ -206,7 +206,7 @@
 			}
 		}
 		
-		function getColor2(a,d) { //N4_VAR_RRF
+		function getColor2(a,d) { //N4_VAR_RRF indicateur 2
 			if(a=="département") {
 				return 	d > 0.0005 ? '#ff4c4c' : //augmentation
 				d <= -0.0005  ? '#ffcccc' : //diminution
@@ -221,39 +221,12 @@
 			}
 		}
 		
-		commune = L.geoJSON(JS_todo, {
-			filter: function(feature, layer) {return feature.properties.type == "commune";},
-			style : {weight: 0.8, color: "#3e62a4", opacity: 1, fillOpacity: 1, fillColor:"#00bdce"},
-			onEachFeature: function(feature, layer) {
-					layer.bindTooltip(feature.properties.libgeo, {className: 'Tooltips'});
-					layer.on('click', function(e) {
-						popup(feature.properties);
-						territoireCible(e.target._latlngs);
-						preventDefault(e);
-						})
-					}
-		});
-		
-		//Ajout de la légende sur la carte
-		var legende1 = L.imageOverlay('img/legende_indicateur1.png', [[51.4, -5.4],[49.6, 0.16]], {zIndex : '1000'} );
-		var legende2 = L.imageOverlay('img/legende_indicateur2.png', [[51.4, -5.4],[49.6, 0.16]], {zIndex : '1000'} );
-		var legende1dep = L.imageOverlay('img/legende_indicateur1dep.png', [[51.4, -5.4],[49.6, 0.16]], {zIndex : '1000'} );
-		var legende2dep = L.imageOverlay('img/legende_indicateur2dep.png', [[51.4, -5.4],[49.6, 0.16]], {zIndex : '1000'} );
-		map.addLayer(legende1dep);
-		
-		//Niveau d'affichage des couches
-		map.createPane('territoireCible');
-		map.getPane('territoireCible').style.zIndex = 600;
-		map.createPane('regions');
-		map.getPane('regions').style.zIndex = 500;
-		
 		function style_indicateur1(feature) {
 			return {
 			fillColor: getColor1(feature.properties.type, feature.properties.N1_EVO1718),
 			weight: 0.8,
 			opacity: 1,
 			color: 'white',
-			//dashArray: '3',
 			fillOpacity: 1
 		};
 		}
@@ -264,16 +237,43 @@
 			weight: 0.8,
 			opacity: 1,
 			color: 'white',
-			//dashArray: '3',
 			fillOpacity: 1
 		};
 		}
 		
-		//Reglage double click
+		//Ajout des légendes
+		var imageBounds = [[51.9, -5.4],[49.8, 0.16]]; 
+		var legende1 = L.imageOverlay('img/legende_indicateur1.png', imageBounds, {zIndex : '1000'} );
+		var legende2 = L.imageOverlay('img/legende_indicateur2.png', imageBounds, {zIndex : '1000'} );
+		var legende1dep = L.imageOverlay('img/legende_indicateur1dep.png', imageBounds, {zIndex : '1000'} );
+		var legende2dep = L.imageOverlay('img/legende_indicateur2dep.png', imageBounds, {zIndex : '1000'} );
+		map.addLayer(legende1dep);
+		
+		
+		
+		
+/* CREATION DES COUCHES */		
+		
+		//Niveaux d'affichage des couches
+		map.createPane('territoireCible');
+		map.getPane('territoireCible').style.zIndex = 600;
+		map.createPane('regions');
+		map.getPane('regions').style.zIndex = 500;
+		
+		//Couches du fond de carte
+		Cache = L.geoJSON(JS_masque, {color: "#7183ab", weight: 0, opacity: 1, fillOpacity: 1}).addTo(map);
+		Cercles_drom = L.geoJSON(JS_drom, {color: "#ffffff", weight: 0.5, opacity: 0.7, fillOpacity: 0}).addTo(map);
+		Contour_Regions = L.geoJSON(JS_todo, {
+			filter: function(feature, layer) {return feature.properties.type == "région";},
+			style: {interactive: false, color: "#ffffff", weight: 1.5, opacity: 1, pane:'territoireCible', fillOpacity: 0}
+		}).addTo(map);
+		
+		//Reglage double-clic
 		var timer = 0;
 		var delay = 200;
 		var prevent = false;
 		
+		//Départements
 		departement = L.geoJSON(JS_todo, {
 			filter: function(feature, layer) {return feature.properties.type == "département";},
 			style: style_indicateur1,
@@ -301,6 +301,7 @@
 					}
 		}).addTo(map);
 		
+		//EPCI
 		epci = L.geoJSON(JS_todo, {
 			filter: function(feature, layer) {return feature.properties.type == "epci";},
 			style: style_indicateur1,
@@ -318,29 +319,38 @@
 					layer.on('dblclick', function(e) {
 						clearTimeout(timer);
 						prevent = true;
+						popup(feature.properties);
 						map.fitBounds(e.target._latlngs, { paddingTopLeft: [300, 0] , maxZoom :10});
 						selectCom(e.target.feature.properties.codgeo, indicateur);
-						epciCible(e.target._latlngs);
+						epciCible(e.target._latlngs,e.target.feature.properties.libgeo);
 						e.preventDefault();
 						});
 					}
-		}).addTo(map);
+		}).addTo(map);	
 		
-		Contour_Regions = L.geoJSON(JS_todo, {
-			filter: function(feature, layer) {return feature.properties.type == "région";},
-			style: {interactive: false, color: "#ffffff", weight: 1.5, opacity: 1, pane:'territoireCible', fillOpacity: 0}
-		}).addTo(map);
+		//Communes
+		commune = L.geoJSON(JS_todo, {
+			filter: function(feature, layer) {return feature.properties.type == "commune";},
+			style : {weight: 0.8, color: "#3e62a4", opacity: 1, fillOpacity: 1, fillColor:"#00bdce"},
+			onEachFeature: function(feature, layer) {
+					layer.bindTooltip(feature.properties.libgeo, {className: 'Tooltips'});
+					layer.on('click', function(e) {
+						popup(feature.properties);
+						territoireCible(e.target._latlngs);
+						preventDefault(e);
+						})
+					}
+		});
 		
-		//Ajout de la sidebar
-		var sidebar = L.control.sidebar('sidebar').addTo(map);
+		
+
+/* FICHE TERRITOIRE */
 		
 		//Fonctions de formatage de nombres
-		
 		function format1(nombre){ //2 chiffres après la virgule
 		  nombre=parseFloat(nombre).toFixed(2);
 		  return nombre;
 		}
-		
 		function format2(nombre){ //séparateurs de milliers
 		  nombre += '';
 		  var sep = '&nbsp;';
@@ -350,88 +360,129 @@
 		  }
 		  return nombre;
 		}
-		
 		function format3(nombre){ // pas de chiffre après la virgule
 		  nombre=parseFloat(nombre).toFixed(0);
 		  return nombre;
 		}
-		
 		function format4(nombre){ // valeur absolue
 		  nombre=parseFloat(nombre).toFixed(2);
 		  return Math.abs(nombre);
 		}
 		
-		//Action au clic sur un marker
+		//Création d'une fiche
 		function popup(e) {
-			
-			if (document.getElementById('sidebar').classList.contains('collapsed')){
-				sidebar.open('home');
-				}
-			
-			//Remplissage de la popup
+			if (document.getElementById('sidebar').classList.contains('collapsed')){sidebar.open('home');}
 			document.getElementById('popup').style.display = "block";
 			document.getElementById('defaut').style.display = "none";
 			document.getElementById('onglet_departement').style.display = "none";
 			document.getElementById('onglet_commune').style.display = "none";
 			document.getElementById('onglet_epci').style.display = "none";
+			//Remplissage de la popup
 			document.getElementById('titre').innerHTML = "<h1 style='color:#f26664'>"+e.libgeo+"</h1><p>Les données concernant votre "+e.type+"</p>";
 			document.getElementById('N1EVO').innerHTML = "<span>"+format1(e.N1_EVO1718*100)+"&nbsp;%</span>";
 			document.getElementById('N2MONTANT').innerHTML = "<span>"+format2(e.N2_MONTANT)+"&nbsp;€</span>";
-			document.getElementById('N2_DP').innerHTML = "<span>dont dotation de solidarité territoriale&nbsp;&nbsp;:&nbsp;"+format2(e.N2_DP)+"&nbsp;€</span></br>";
+				document.getElementById('N2_DP').innerHTML = "<span>dont dotation de solidarité territoriale&nbsp;&nbsp;:&nbsp;"+format2(e.N2_DP)+"&nbsp;€</span></br>";
 			document.getElementById('N6PCTRRF').innerHTML = "<span>"+format1(e.N6_PCTRRF*100)+"&nbsp;%</span>";
 			document.getElementById('N3DGFHAB').innerHTML = "<span>"+format3(e.N3_DGFHAB)+"&nbsp;€</span>";
 			document.getElementById('N4VARRRF').innerHTML = "<span>"+format1(e.N4_VAR_RRF*100)+"&nbsp;%</span>";
-			if(e.N4_VAR_RRF > 0) {document.getElementById('N4info').innerHTML = "<span>L'augmentation de DGF représente "+format1(e.N4_VAR_RRF*100)+"% des RRF</span>";}
-			if(e.N4_VAR_RRF <= 0) {document.getElementById('N4info').innerHTML = "<span>La diminution de DGF représente "+format4(e.N4_VAR_RRF*100)+"% des RRF</span>";}
+				if(e.N4_VAR_RRF > 0) {document.getElementById('N4info').innerHTML = "<span>L'augmentation de DGF représente "+format1(e.N4_VAR_RRF*100)+"% des RRF</span>";}
+				if(e.N4_VAR_RRF <= 0) {document.getElementById('N4info').innerHTML = "<span>La diminution de DGF représente "+format4(e.N4_VAR_RRF*100)+"% des RRF</span>";}
 			document.getElementById('N5PEREK').innerHTML = "<span>"+format1(e.N5_PEREK*100)+"&nbsp;%</span>";
 			document.getElementById('lien').innerHTML = "<span><a href='http://www.dotations-dgcl.interieur.gouv.fr/consultation/dotation_commune_html.php?code="+e.codgeo+"' target='blank'>En savoir plus</a></span>";
 		}
-		
-		//Indiquer territoire sélectionné
+	
+
+	
+/* ACTIONS */
+
+		//Entourer territoire sélectionné
 		var territoireCib; //lors d'un simple clic
 		function territoireCible(e) {
 			if(epciCib) {map.removeLayer(epciCib);}
+			if(epciCib2) {map.removeLayer(epciCib2);}
 			if(territoireCib) {map.removeLayer(territoireCib);}
 			territoireCib = new L.polygon(e, {weight:3, color:"#ffee00",pane:'territoireCible', fillOpacity: 0});
 			territoireCib.addTo(map);
 		}
 		
 		var epciCib; //lorsqu'on affiche un ensemble de communes appartenant au même epci
-		function epciCible(e) {
+		function epciCible(e,nom) {
 			if(territoireCib) {map.removeLayer(territoireCib);}
 			if(epciCib) {map.removeLayer(epciCib);}
+			if(epciCib2) {map.removeLayer(epciCib2);}
 			epciCib = new L.polygon(e, {weight:3, color:"red",pane:'territoireCible', fillOpacity: 0, interactive:false});
-			epciCib.addTo(map);
+			epciCib.bindTooltip(nom, {className: 'epci_Tooltips', permanent:true, direction: 'center'});
+			epciCib.addTo(map).openTooltip();
 		}
 		
-		function clickMap () {
+		var epciCib2; //lorsqu'on trouve une commune
+		function epciCible2(e) {
+			if(territoireCib) {map.removeLayer(territoireCib);}
+			if(epciCib) {map.removeLayer(epciCib);}
+			if(epciCib2) {map.removeLayer(epciCib2);}
+			epciCib2 = L.geoJSON(JS_todo, {
+				filter: function(feature, layer) {return  feature.properties.codgeo == e && feature.properties.type == "epci"; },
+				style : {weight:3, color:"red",pane:'territoireCible', fillOpacity: 0, interactive:false},
+				onEachFeature: function(feature, layer) {
+					layer.bindTooltip(feature.properties.libgeo, {className: 'epci_Tooltips', permanent:true, direction: 'center'});
+					}
+			});
+			epciCib2.addTo(map).openTooltip();
+		}
+		
+		function resetView() {
+			map.setView([46.5, -1.8], 6);		
+		}
+		
+		function resetMap () {
 			if(territoireCib) {map.removeLayer(territoireCib);}
 			if(com_select) {map.removeLayer(com_select);}
-			//fermer ou ouvrir la sidebar
-			if (document.getElementById('sidebar').classList.contains('collapsed')) {
-				sidebar.open('home');
-			}
-			//else {
-			//	sidebar.close();
-			//}
-			//remettre le texte d'intro
+			if(epciCib) {map.removeLayer(epciCib);}
+			if(epciCib2) {map.removeLayer(epciCib2);}
+			sidebar.open('home');
 			document.getElementById('popup').style.display = "none";
 			document.getElementById('defaut').style.display = "block";
+			document.getElementById('onglet_departement').style.display = "none";
+			document.getElementById('onglet_commune').style.display = "none";
+			document.getElementById('onglet_epci').style.display = "none";
 			}
 			
-		//Events au clic sur la carte
-		map.on('click', clickMap);
+		function retourAcceuil () {
+			resetView();
+			resetMap ();
+		}
+			
+		//Action au clic sur la carte
+		map.on('click', resetMap);
 		
-		//Event au clic sur "home"
+		//Action au clic sur "home"
 		document.getElementById("logo").addEventListener("click", function(event){
 			event.stopPropagation();
 			retourAcceuil();
 		});
 		
-		//Event au clic sur les onglets
+		//Action au clic sur "retour"
+		var boutons_retour = document.getElementsByClassName("retour");
+		for (var i = 0; i < boutons_retour.length; i++) {
+			boutons_retour[i].addEventListener('click', retourAcceuil, false);
+		}
+		
+		//Action au clic sur la barre verticale
+		document.getElementById("barre-verticale").addEventListener("click", function(event){
+			if (document.getElementById('sidebar').classList.contains('collapsed')) {
+				sidebar.open('home');
+			}
+			else {
+				sidebar.close();
+			}
+		});
+		
+		//Action au clic sur les onglets de menu
 		document.getElementById("logo_com").addEventListener("click", function(event){event.stopPropagation();showCom();;});
 		document.getElementById("logo_epci").addEventListener("click", function(event){event.stopPropagation();showEpci();});
 		document.getElementById("logo_dep").addEventListener("click", function(event){event.stopPropagation();showDep();});
+		
+		//Action au clic sur un bouton indicateur
 		document.getElementById("indicateur1").addEventListener("click", function(event){
 			event.stopPropagation();
 			departement.setStyle(style_indicateur1);
@@ -453,11 +504,8 @@
 			switch_legende ("indicateur2", maillage)
 			});
 		
-		//Changement d'indicateur dans une page de maillage
-		
-		
+		//Changement d'indicateur dans une page 
 		var boutons_switch = document.getElementsByClassName("switch_indicateur");
-		
 		for (var i = 0; i < boutons_switch.length; i++) {
 			boutons_switch[i].addEventListener('click', function(i){
 				if(com_select) {map.removeLayer(com_select);}
@@ -500,123 +548,27 @@
 			}
 		}
 		
+		//Changement d'échelon dans une page
 		var boutons_com = document.getElementsByClassName("bouton_com");
 		for (var i = 0; i < boutons_com.length; i++) {
 			boutons_com[i].addEventListener('click', showCom, false);
 		}
-		
 		var boutons_epci = document.getElementsByClassName("bouton_epci");
 		for (var i = 0; i < boutons_epci.length; i++) {
 			boutons_epci[i].addEventListener('click', showEpci, false);
 		}
-		
 		var boutons_dep = document.getElementsByClassName("bouton_dep");
 		for (var i = 0; i < boutons_dep.length; i++) {
 			boutons_dep[i].addEventListener('click', showDep, false);
 		}
 		
-		//Event au clic sur "retour"
-		var boutons_retour = document.getElementsByClassName("retour");
-		for (var i = 0; i < boutons_retour.length; i++) {
-			boutons_retour[i].addEventListener('click', retourAcceuil, false);
-		}
-			
-		//Event au clic sur la barre verticale
-		document.getElementById("barre-verticale").addEventListener("click", function(event){
-			
-			if (document.getElementById('sidebar').classList.contains('collapsed')) {
-				sidebar.open('home');
-			}
-			else {
-				sidebar.close();
-			}
-		});
-		
-		//Barre de recherche
-		var Recherche = L.layerGroup([commune]);
-		
-		var searchControl = new L.control.search({
-			layer: Recherche,
-			initial: false,
-			//position:'topright',
-			propertyName: 'libgeo',
-			marker: false,
-			moveToLocation: function(latlng, title, map) {
-				var zoom = map.getBoundsZoom(latlng.layer.getBounds());
-				map.setView(latlng, zoom-1);
-			}
-		})
-		
-		searchControl.on('search:locationfound', function(e) {
-			if(territoireCib) {map.removeLayer(territoireCib);}
-			popup(e.layer.feature.properties);
-			selectCom(e.layer.feature.properties.ID_EPCI, indicateur);
-			territoireCible(e.layer._latlngs);
-		});
-		
-		var searchControl2 = new L.control.search({
-			layer: Recherche,
-			initial: false,
-			position:'topright',
-			propertyName: 'libgeo',
-			collapsed: true,
-			marker: false,
-			moveToLocation: function(latlng, title, map) {
-				var zoom = map.getBoundsZoom(latlng.layer.getBounds());
-				map.setView(latlng, zoom-1);
-			}
-		})
-		
-		searchControl2.on('search:locationfound', function(e) {
-			if(territoireCib) {map.removeLayer(territoireCib);}
-			popup(e.layer.feature.properties);
-			selectCom(e.layer.feature.properties.ID_EPCI,indicateur);
-			territoireCible(e.layer._latlngs);
-		});
-		
-		map.addControl(searchControl2);
-		map.addControl(searchControl);
-		
-		// déplacement du controle de recherche
-		var htmlObject = searchControl.getContainer();
-		var a = document.getElementById('boiteRecherche');
-		function setParent(el, newParent)
-		{newParent.appendChild(el);}
-		setParent(htmlObject, a);
-		
-		
-		sidebar.open('home');
-		
-		map.removeLayer(commune);
-		map.removeLayer(epci);
-		
-		//Fonctions 
-		
-		function retourAcceuil () {
-			resetView();
-			sidebar.open('home');
-			if(com_select) {map.removeLayer(com_select);}
-			//remettre le texte d'intro
-			document.getElementById('popup').style.display = "none";
-			document.getElementById('defaut').style.display = "block";
-			document.getElementById('onglet_departement').style.display = "none";
-			document.getElementById('onglet_commune').style.display = "none";
-			document.getElementById('onglet_epci').style.display = "none";
-			document.getElementById('logo_epci').setAttribute("class", "onglets");
-			document.getElementById('logo_dep').setAttribute("class", "onglets");
-			document.getElementById('logo_com').setAttribute("class", "onglets");
-			//event.stopPropagation();
-		}
-		
-		function resetView() {
-			map.setView([46.5, -1.8], 6);		
-		}
-
 		function showDep() {
 			//event.stopPropagation();
 			resetView();
 			sidebar.open('home');
 			if(territoireCib) {map.removeLayer(territoireCib);}
+			if(epciCib) {map.removeLayer(epciCib);}
+			if(epciCib2) {map.removeLayer(epciCib2);}
 			if(com_select) {map.removeLayer(com_select);}
 			maillage = "département";
 			switch_legende (indicateur, maillage);
@@ -637,6 +589,8 @@
 			resetView();
 			sidebar.open('home');
 			if(territoireCib) {map.removeLayer(territoireCib);}
+			if(epciCib) {map.removeLayer(epciCib);}
+			if(epciCib2) {map.removeLayer(epciCib2);}
 			if(com_select) {map.removeLayer(com_select);}
 			maillage = "epci";
 			switch_legende (indicateur, maillage);
@@ -657,8 +611,12 @@
 			resetView();
 			sidebar.open('home');
 			if(territoireCib) {map.removeLayer(territoireCib);}
+			if(epciCib) {map.removeLayer(epciCib);}
+			if(epciCib2) {map.removeLayer(epciCib2);}
 			if(com_select) {map.removeLayer(com_select);}
 			maillage = "commune";
+			if(departement) {map.removeLayer(departement);}
+			map.addLayer(epci);
 			switch_legende (indicateur, maillage);
 			document.getElementById('popup').style.display = "none";
 			document.getElementById('defaut').style.display = "none";
@@ -670,44 +628,7 @@
 			document.getElementById('logo_epci').setAttribute("class", "onglets");	
 		}
 		
-		var com_select;
-		
-		function selectCom(epci_cible,indicateur) {
-		if(territoireCib) {map.removeLayer(territoireCib);}
-		if(com_select) {map.removeLayer(com_select);}
-		if(departement) map.removeLayer(departement);
-		map.addLayer(epci);
-		if (indicateur == "indicateur1"){
-		com_select = L.geoJSON(JS_todo, {
-			filter: function(feature, layer) {return  feature.properties.ID_EPCI == epci_cible && feature.properties.type == "commune"; },
-			style : style_indicateur1,
-			onEachFeature: function(feature, layer) {
-				layer.bindTooltip(feature.properties.libgeo, {className: 'Tooltips'});
-				layer.on('click', function(e) {
-					popup(feature.properties);
-					territoireCible(e.target._latlngs);
-					preventDefault(e);
-				})
-				}
-		});
-		}
-		else if (indicateur == "indicateur2"){
-		com_select = L.geoJSON(JS_todo, {
-			filter: function(feature, layer) {return  feature.properties.ID_EPCI == epci_cible && feature.properties.type == "commune"; },
-			style : style_indicateur2,
-			onEachFeature: function(feature, layer) {
-				layer.bindTooltip(feature.properties.libgeo, {className: 'Tooltips'});
-				layer.on('click', function(e) {
-					popup(feature.properties);
-					territoireCible(e.target._latlngs);
-					preventDefault(e);
-				})
-				}
-		});
-		}
-		map.addLayer(com_select);
-		}
-		
+		//Changement de légende en fonction de l'indicateur et de l'échelon
 		function switch_legende (indicateur, niveau) {
 			if (indicateur === "indicateur1") {
 				if (niveau=="département"){map.addLayer(legende1dep);if(legende2){map.removeLayer(legende2)};if(legende1){map.removeLayer(legende1)};if(legende2dep){map.removeLayer(legende2dep)};}
@@ -718,12 +639,110 @@
 				else {map.addLayer(legende2);if(legende1){map.removeLayer(legende1)};if(legende1dep){map.removeLayer(legende1dep)};if(legende2dep){map.removeLayer(legende2dep)};}
 			}
 		}
+
+		//Affichage des communes au double-clic sur un EPCI ou pour montrer le résultat d'une recherche 
+		var com_select;
+		function selectCom(epci_cible,indicateur) {
+			if(territoireCib) {map.removeLayer(territoireCib);}
+			if(com_select) {map.removeLayer(com_select);}
+			if(departement) map.removeLayer(departement);
+			map.addLayer(epci);
+			
+			if (indicateur == "indicateur1"){
+			com_select = L.geoJSON(JS_todo, {
+				filter: function(feature, layer) {return  feature.properties.ID_EPCI == epci_cible && feature.properties.type == "commune"; },
+				style : style_indicateur1,
+				onEachFeature: function(feature, layer) {
+					layer.bindTooltip(feature.properties.libgeo, {className: 'Tooltips'});
+					layer.on('click', function(e) {
+						popup(feature.properties);
+						territoireCible(e.target._latlngs);
+						preventDefault(e);
+					})
+					}
+			});
+			}
+			else if (indicateur == "indicateur2"){
+			com_select = L.geoJSON(JS_todo, {
+				filter: function(feature, layer) {return  feature.properties.ID_EPCI == epci_cible && feature.properties.type == "commune"; },
+				style : style_indicateur2,
+				onEachFeature: function(feature, layer) {
+					layer.bindTooltip(feature.properties.libgeo, {className: 'Tooltips'});
+					layer.on('click', function(e) {
+						popup(feature.properties);
+						territoireCible(e.target._latlngs);
+						preventDefault(e);
+					})
+					}
+			});
+			}
+			map.addLayer(com_select);
+		}
+
 		
+/* BARRES DE RECHERCHE */		
+		
+		//Barre de recherche n°1 (panneau latéral)
+		var Recherche = L.layerGroup([commune]);
+		
+		var searchControl = new L.control.search({
+			layer: Recherche,
+			initial: false,
+			propertyName: 'libgeo',
+			marker: false,
+			moveToLocation: function(latlng, title, map) {
+				var zoom = map.getBoundsZoom(latlng.layer.getBounds());
+				map.setView(latlng, zoom-1);
+			}
+		})
+		
+		searchControl.on('search:locationfound', function(e) {
+			if(territoireCib) {map.removeLayer(territoireCib);}
+			popup(e.layer.feature.properties);
+			selectCom(e.layer.feature.properties.ID_EPCI, indicateur);
+			territoireCible(e.layer._latlngs);
+			epciCible2(e.layer.feature.properties.ID_EPCI);
+		});
+		
+		map.addControl(searchControl);
+		
+		//Déplacement du controle de recherche n°1
+		var htmlObject = searchControl.getContainer();
+		var a = document.getElementById('boiteRecherche');
+		function setParent(el, newParent)
+		{newParent.appendChild(el);}
+		setParent(htmlObject, a);
+		
+		//Barre de recherche n°2 (en haut à droite)
+		var searchControl2 = new L.control.search({
+			layer: Recherche,
+			initial: false,
+			position:'topright',
+			propertyName: 'libgeo',
+			collapsed: true,
+			marker: false,
+			moveToLocation: function(latlng, title, map) {
+				var zoom = map.getBoundsZoom(latlng.layer.getBounds());
+				map.setView(latlng, zoom-1);
+			}
+		})
+		
+		searchControl2.on('search:locationfound', function(e) {
+			if(territoireCib) {map.removeLayer(territoireCib);}
+			popup(e.layer.feature.properties);
+			selectCom(e.layer.feature.properties.ID_EPCI,indicateur);
+			territoireCible(e.layer._latlngs);
+			epciCible2(e.layer.feature.properties.ID_EPCI);
+		});
+		
+		map.addControl(searchControl2);
+		
+		//Retirer les couches de recherche qui s'affichent par défaut
+		map.removeLayer(commune);
+		map.removeLayer(epci);
 		
    </script>
 	
 </body>
-
-
 
 </html>

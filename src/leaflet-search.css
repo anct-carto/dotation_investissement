@@ -17,11 +17,13 @@
 .leaflet-control-search.search-exp {/*expanded*/
 	background: #fff;
 	border: 2px solid rgba(0,0,0,0.2);
-	background-clip: padding-box;	
+	background-clip: padding-box;
+	width:95%;	
 }
 .leaflet-control-search .search-input {
 	display:block;
 	float:left;
+	width:75%;
 	background: #fff;
 	border:1px solid #666;
 	border-radius:2px;
@@ -63,7 +65,7 @@
 }
 .leaflet-control-search .search-button {
 	display:block;
-	float:left;
+	float:right;
 	width:30px;
 	height:30px;	
 	background: url('../img/search-icon.png') no-repeat 4px 4px #fff;

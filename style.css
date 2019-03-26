@@ -18,19 +18,75 @@ a {
 a:hover {
   color : #ffee00;
 }
-	
-	
-#legende {
-	margin-top: 30px;
-	position:auto;
-	width: 100%;
+
+i {
+	font-size:0.9em;
+	font-style: italic;	
 	}
 	
-#sources {
-	margin-top:100px;
-	font-size:0.7em;
+strong {
+	font-weight: bold;
 	}
 		
+h1{
+	font-size:2 em;
+	text-transform:uppercase;
+	color: white;
+	}
+	
+h2{
+	font-size:1.2em;
+	font-weight: bold;
+	color: #ffffff;
+}
+
+h3{
+	font-size:0.9em;
+	font-weight: bold;
+	color: white;
+}
+	
+.leaflet-left {
+	left: 0;
+	}	
+	
+.fas {
+  color : white;
+}
+	
+#sources {
+	margin-top:50px;
+	font-size:0.8em;
+	}
+
+.Tooltips {
+	font-size:0.9em;
+	padding:5px;
+	border:none;
+	color: #061032;
+	background-color: white;
+	}
+	
+.epci_Tooltips {
+	font-size:1em;
+	padding:5px;
+	border:none;
+	color: red;
+	background-color: rgba(255, 255, 255, 0.6);
+	box-shadow: none;
+	border: none;
+	}
+
+.bas {
+	margin-top:50px;
+}
+
+#boiteRecherche{
+	margin-bottom:40px;
+}
+	
+	
+	/*Affichage des onglets*/	
 		
 #popup {
 	display: none;
@@ -101,84 +157,15 @@ a:hover {
 }
 
 .onglets:hover {
-	
 	color: #004494;
 	background-color: #ffee00;
 }
 
 .onglets_on a{
-	
 	background-color: #f26664;
 	border : 0.1px solid #5a77b7;
 }
 		
-.Tooltips {
-	font-size:0.9em;
-	padding:5px;
-	border:none;
-	color: #061032;
-	background-color: white;
-	}
-
-i {
-	font-size:0.9em;
-	font-style: italic;	
-	}
-	
-strong {
-	font-weight: bold;
-	}
-		
-h1{
-	font-size:2 em;
-	text-transform:uppercase;
-	color: white;
-	}
-	
-h2{
-	font-size:1.2em;
-	font-weight: bold;
-	color: #ffffff;
-}
-
-h3{
-	font-size:0.9em;
-	font-weight: bold;
-	color: white;
-}
-
-.chiffre{
-	font-size:1.5em;
-	font-weight: bold;
-	color:#f26664;
-}
-
-.ptichiffre{
-	font-size:0.8em;
-	font-weight: bold;
-	color:#f26664;
-}
-
-.description {
-	font-size:0.8em;
-	font-weight: bold;
-	color:#ffffff;
-}
-
-.indicateur {
-	
-	
-}
-		
-.leaflet-left {
-	left: 0;
-	}	
-	
-.fas {
-  color : white;
-}
-
-
 .boutons {
 		margin-top: 20px;
 		}
@@ -198,25 +185,43 @@ h3{
 		font-weight: bold;
 		}
 
-.bas {
-	margin-top:50px;
-}
+
+
+
+/*Style du tableau*/
 	
 .divTable{
 	display: table;
 	
 }
 .divTableRow {
-	display: table-row;
-	margin-top:30px;	
+	display: table-row;	
 }
 
 .divTableCell, .divTableHead {
 	border: 0.1px solid #88a0b7;
 	vertical-align:middle;
-	padding: 3px 10px;
+	padding: 7px 8px;
 }
 
 .divTableBody {
 	display: table-row-group;
+}
+
+.chiffre{
+	font-size:1.5em;
+	font-weight: bold;
+	color:#f26664;
+}
+
+.ptichiffre{
+	font-size:0.8em;
+	font-weight: bold;
+	color:#f26664;
+}
+
+.description {
+	font-size:0.8em;
+	font-weight: bold;
+	color:#ffffff;
 }
