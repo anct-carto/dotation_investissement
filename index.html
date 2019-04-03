@@ -211,14 +211,14 @@
 		function getColor2(a,d) { //N4_VAR_RRF indicateur 2
 			if(a=="département") {
 				return 	d > 0.0005 ? '#00968c' : //augmentation // rose '#ff4c4c'
-				d <= -0.0005  ? '#4dc5b6' : //diminution // rose '#ffcccc'
-				d <= 0.0005 ? '#88d8ce' : //stabilité // rose '#ff7878'
+				d <= -0.0005  ? '#88d8ce' : //diminution // rose '#ffcccc'
+				d <= 0.0005 ? '#4dc5b6' : //stabilité // rose '#ff7878'
 				'grey' ;
 			}
 			else {
 				return 	d > 0.01 ? '#00968c' : //augmentation
-				d <= -0.01  ? '#4dc5b6' : //diminution
-				d <= 0.01 ? '#88d8ce' : //stabilité
+				d <= -0.01  ? '#88d8ce' : //diminution
+				d <= 0.01 ? '#4dc5b6' : //stabilité
 				'grey' ;
 			}
 		}
