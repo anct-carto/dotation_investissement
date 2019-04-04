@@ -211,13 +211,13 @@
 		function getColor2(a,d) { //N4_VAR_RRF indicateur 2
 			if(a=="département") {
 				return 	d > 0.0005 ? '#00968c' : //augmentation // rose '#ff4c4c'
-				d <= -0.0005  ? '#88d8ce' : //diminution // rose '#ffcccc'
+				d <= -0.0005  ? '#a7e3da' : //diminution // rose '#ffcccc'
 				d <= 0.0005 ? '#4dc5b6' : //stabilité // rose '#ff7878'
 				'grey' ;
 			}
 			else {
 				return 	d > 0.01 ? '#00968c' : //augmentation
-				d <= -0.01  ? '#88d8ce' : //diminution
+				d <= -0.01  ? '#a7e3da' : //diminution
 				d <= 0.01 ? '#4dc5b6' : //stabilité
 				'grey' ;
 			}
@@ -403,7 +403,7 @@
 		var territoireCib; //lors d'un simple clic
 		function territoireCible(e) {
 			if(epciCib) {map.removeLayer(epciCib);}
-			if(epciCib2) {map.removeLayer(epciCib2);}
+			//if(epciCib2) {map.removeLayer(epciCib2);}
 			if(territoireCib) {map.removeLayer(territoireCib);}
 			territoireCib = new L.polygon(e, {weight:3, color:"#ffee00",pane:'territoireCible', fillOpacity: 0});
 			territoireCib.addTo(map);
@@ -421,7 +421,6 @@
 		
 		var epciCib2; //lorsqu'on trouve une commune
 		function epciCible2(e) {
-			if(territoireCib) {map.removeLayer(territoireCib);}
 			if(epciCib) {map.removeLayer(epciCib);}
 			if(epciCib2) {map.removeLayer(epciCib2);}
 			epciCib2 = L.geoJSON(JS_todo, {
@@ -658,7 +657,7 @@
 		//Affichage des communes au double-clic sur un EPCI ou pour montrer le résultat d'une recherche 
 		var com_select;
 		function selectCom(epci_cible,indicateur) {
-			if(territoireCib) {map.removeLayer(territoireCib);}
+			//if(territoireCib) {map.removeLayer(territoireCib);}
 			if(com_select) {map.removeLayer(com_select);}
 			if(departement) map.removeLayer(departement);
 			map.addLayer(epci);
@@ -671,7 +670,7 @@
 					layer.bindTooltip(feature.properties.libgeo, {className: 'Tooltips'});
 					layer.on('click', function(e) {
 						popup(feature.properties);
-						territoireCible(e.target._latlngs);
+						//territoireCible(e.target._latlngs);
 						preventDefault(e);
 					})
 					}
@@ -685,7 +684,7 @@
 					layer.bindTooltip(feature.properties.libgeo, {className: 'Tooltips'});
 					layer.on('click', function(e) {
 						popup(feature.properties);
-						territoireCible(e.target._latlngs);
+						//territoireCible(e.target._latlngs);
 						preventDefault(e);
 					})
 					}
@@ -715,8 +714,8 @@
 			if(territoireCib) {map.removeLayer(territoireCib);}
 			popup(e.layer.feature.properties);
 			selectCom(e.layer.feature.properties.ID_EPCI, indicateur);
-			territoireCible(e.layer._latlngs);
 			epciCible2(e.layer.feature.properties.ID_EPCI);
+			territoireCible(e.layer._latlngs);
 		});
 		
 		map.addControl(searchControl);
@@ -746,8 +745,8 @@
 			if(territoireCib) {map.removeLayer(territoireCib);}
 			popup(e.layer.feature.properties);
 			selectCom(e.layer.feature.properties.ID_EPCI,indicateur);
-			territoireCible(e.layer._latlngs);
 			epciCible2(e.layer.feature.properties.ID_EPCI);
+			territoireCible(e.layer._latlngs);
 		});
 		
 		map.addControl(searchControl2);
