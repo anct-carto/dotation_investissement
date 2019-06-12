@@ -1,5 +1,4 @@
 /**
-*https://github.com/Turbo87/sidebar-v2
  * @name Sidebar
  * @class L.Control.Sidebar
  * @extends L.Control
@@ -153,7 +152,7 @@ L.Control.Sidebar = L.Control.extend(/** @lends L.Control.Sidebar.prototype */ {
         this.fire('content', { id: id });
 
         // open sidebar (if necessary)
-        if (L.DomUtil.(this._sidebar, 'collapsed')) {
+        if (L.DomUtil.hasClass(this._sidebar, 'collapsed')) {
             this.fire('opening');
             L.DomUtil.removeClass(this._sidebar, 'collapsed');
         }
@@ -197,8 +196,6 @@ L.Control.Sidebar = L.Control.extend(/** @lends L.Control.Sidebar.prototype */ {
     _onCloseClick: function () {
         this.close();
     }
-	
-	
 });
 
 /**

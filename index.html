@@ -169,7 +169,7 @@
 
     <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"></script>
 	<script src="src/leaflet-search.js"></script>
-    <script src="https://turbo87.github.io/sidebar-v2/js/leaflet-sidebar.js"></script>
+    <script src="src/leaflet-sidebar.js"></script>
 	<script type="text/javascript" src="data/masque.js"></script>
 	<script type="text/javascript" src="data/geoData2019.js"></script>
 	<script type="text/javascript" src="data/cercles_drom.js"></script>
@@ -282,24 +282,10 @@
 			onEachFeature: function(feature, layer) {
 					layer.bindTooltip(feature.properties.libgeo, {className: 'Tooltips'});
 					layer.on('click', function(e) {
-						 //timer = setTimeout(function() {
-							//if (!prevent) {
 								popup(feature.properties);
 								territoireCible(e.target._latlngs);
-								e.preventDefault();
-							//}
-							//prevent = false;
-							//}, delay);			
+								e.preventDefault();			
 						});
-					/*layer.on('dblclick', function(e) {
-						clearTimeout(timer);
-						prevent = true;
-						//preventDefault(e);
-						//territoireCible(e.target._latlngs);
-						map.fitBounds(e.target._latlngs, { paddingTopLeft: [300, 0] });
-						selectCom(e.target.feature.properties.codgeo, indicateur);
-						e.preventDefault();
-						});*/
 					}
 		}).addTo(map);
 		
