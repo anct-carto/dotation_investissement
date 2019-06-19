@@ -13,11 +13,13 @@
 	<link rel="stylesheet" href="src/leaflet-search.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css" />
     <link rel="stylesheet" href="src/leaflet-sidebar.css" />
+	<link rel="stylesheet" href="src/MarkerCluster.css" />
+	<link rel="stylesheet" href="src/MarkerCluster.Default.css" />
 	<link href="https://fonts.googleapis.com/css?family=Asap:400,400i,500,500i,600,600i,700,700i|Crimson+Text:400,400i,600,600i,700,700i" rel="stylesheet">
 	<link rel="stylesheet" href="style.css" />
 	
-	<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.css" />
-	<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.Default.css" />
+	<link rel="stylesheet" href="src/MarkerCluster.css" />
+	<link rel="stylesheet" href="src/MarkerCluster.Default.css" />
 	
 </head>
 
@@ -47,12 +49,21 @@
 				<div class="presentation" id="defaut">
 					<div>
 						<h2>Répartition des dotations d'investissement de l'État en 2018</h2>
-						<p style="color:#f26664;">1,776 milliard au titre de la Dotation de soutien à l’investissement local, de la Dotation d’équipement des territoires ruraux et de la Dotation politique de la ville</p>
+						<p style="color:white;">1,776 milliard au titre de la Dotation de soutien à l’investissement local, de la Dotation d’équipement des territoires ruraux et de la Dotation politique de la ville</p>
 						<p>Cette somme a permis de financer directement <span style="color:white;">27 328 projets</span> portés par les communes et les intercommunalités dans tous les départements de notre pays.</p>
 						<p>Elle représente <span style="color:white;">24,07%</span> du montant total des projets.</p>
 						<p>Le soutien de l’Etat en faveur de l’investissement des communes et des intercommunalités se répartit de la façon suivante pour la DSIL et la DTER.</p>
 						<p><img src="img/graphe.jpg" style="vertical-align:middle; width:100%;"/></p>
 					</div>
+					
+					<button class="bouton_categorie" onclick="creationProjets('1')" title="Santé, sanitaire et social" id="CHECK1" value="1"><img id="picto1" src="img/picto_on1.png" style="width:20px; padding-right:10px;" />Santé, sanitaire et social</button><br/>
+						<button class="bouton_categorie" onclick="creationProjets('2')" title="Économie et emploi" id="CHECK2" value="2"><img id="picto2" src="img/picto_on2.png" style="width:20px; padding-right:10px;" />Économie et emploi</button><br/>
+						<button class="bouton_categorie" onclick="creationProjets('3')" title="Environnement, transition énergétique et écologie" id="CHECK3" value="3"><img id="picto3" src="img/picto_on3.png" style="width:20px; padding-right:10px;" />Environnement, transition énergétique et écologie</button><br/>
+						<button class="bouton_categorie" onclick="creationProjets('4')" title="Éducation" id="CHECK4" value="4"><img id="picto4" src="img/picto_on4.png" style="width:20px; padding-right:10px;" />Éducation</button><br/>
+						<button class="bouton_categorie" onclick="creationProjets('5')" title="Actions et Services publics" id="CHECK5" value="5"><img id="picto5" src="img/picto_on5.png" style="width:20px; padding-right:10px;" />Actions et Services publics</button><br/>
+						<button class="bouton_categorie" onclick="creationProjets('6')" title="Construction, habitat, urbanisme, transport et mise aux normes" id="CHECK6" value="6"><img id="picto6" src="img/picto_on6.png" style="width:20px; padding-right:10px;" />Construction, habitat, urbanisme, transport</button><br/>
+						<button class="bouton_categorie" onclick="creationProjets('7')" title="Contrat de ruralité" id="CHECK7" value="7"><img id="picto7" src="img/picto_on7.png" style="width:20px; padding-right:10px;" />Contrat de ruralité</button><br/><br/>
+					</button>
 					
 					<div id="sources" style="width:70%;">
 						<p><i>Sources&nbsp;: <a href="http://www.dotations-dgcl.interieur.gouv.fr/consultation/accueil.php" target="_blank">Direction générale des collectivités locales (DGCL) </a>• Réalisation&nbsp;: <a href="https://cartotheque.cget.gouv.fr/cartes?filters%5Bquery%5D=interactif&current_page=1&category=&page_size=20" target="_blank">CGET service cartographie</a></i><p>
@@ -112,7 +123,7 @@
 	<script type="text/javascript" src="data/Projets.js"></script>
 	<script type="text/javascript" src="data/cercles_drom.js"></script>
 	
-	<script src="https://unpkg.com/leaflet.markercluster@1.3.0/dist/leaflet.markercluster.js"></script>
+	<script src="https://leaflet.github.io/Leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
 	
 
 	
@@ -182,7 +193,7 @@
 		map.getPane('regions').style.zIndex = 500;
 		
 		//Couches du fond de carte
-		Cache = L.geoJSON(JS_masque, {color: "#7183ab", weight: 0, opacity: 1, fillOpacity: 1}).addTo(map);
+		Cache = L.geoJSON(JS_masque, {color: "#7ecfc6", weight: 0, opacity: 1, fillOpacity: 1}).addTo(map);
 		Cercles_drom = L.geoJSON(JS_drom, {color: "#ffffff", weight: 0.5, opacity: 0.7, fillOpacity: 0}).addTo(map);
 		Contour_Regions = L.geoJSON(JS_depreg, {
 			filter: function(feature, layer) {return feature.properties.TYPE == "Région";},
@@ -203,29 +214,48 @@
 					}*/
 		}).addTo(map);
 		
-		var pictogramme;
+		
 		function creationPicto(categorie) {
-			return pictogramme = "pictoOFF" + categorie ;
+			if (categorie == '1') { return pictoOFF1; } 
+			else if (categorie == '2') { return pictoOFF2; }
+			else if (categorie == '3') { return pictoOFF3; }
+			else if (categorie == '4') { return pictoOFF4; }
+			else if (categorie == '5') { return pictoOFF5; }
+			else if (categorie == '6') { return pictoOFF6; }
+			else { return pictoOFF7; }
 		}
 		
-		var markers = L.markerClusterGroup();
+		var markers = L.markerClusterGroup({ spiderfyOnMaxZoom: true, showCoverageOnHover: false, zoomToBoundsOnClick: true });
 		
-		//Ajout des points
-		var Projets_dotation = L.geoJSON(JS_projets, {
-			pointToLayer: function(feature, latlng) {
-					//return L.marker(latlng,{icon:creationPicto(feature.properties.NUMCATEGORIE)})	
-					return L.marker(latlng,{icon:pictoOFF1})
-					},
-				//filter: function(feature, layer) {
-				//	return feature.properties.categorie == "sig" ;
-				//	},
-				onEachFeature : function(feature, layer) {
-					layer.bindTooltip(feature.properties.libgeo, {className: 'TooltipsNAT', closeButton: false});
-					}
-		});
+		var Projets_dotations;
 		
-		markers.addLayer(Projets_dotation);
-		map.addLayer(markers);
+		//ALLER CHERCHER ET FILTRER LES POINTS
+		function creationProjets(categorie) {
+		
+			//Reinitialisation de la couche de points
+			markers.eachLayer(function (layer) {markers.removeLayer(layer);});
+			
+			//Ajout des points
+			Projets_dotation = L.geoJSON(JS_projets, {
+					pointToLayer: function(feature, latlng) {
+						//console.log(pictogramme);
+						return L.marker(latlng,{icon:creationPicto(feature.properties.NUMCATEGORIE)})
+						},
+					filter: function(feature, layer) {
+						if (categorie == '0') { return feature.properties.NUMCATEGORIE != categorie ; }
+						else { return feature.properties.NUMCATEGORIE == categorie ; }
+						
+						},
+					onEachFeature : function(feature, layer) {
+						layer.bindTooltip(feature.properties.libgeo, {className: 'TooltipsNAT', closeButton: false});
+						}
+			});
+		
+			markers.addLayer(Projets_dotation);
+			map.addLayer(markers);
+		}
+		
+		creationProjets('0');
 		
 
 /* FICHE TERRITOIRE */
@@ -258,8 +288,6 @@
 
 	
 /* ACTIONS */
-
-		
 		
 		function resetView() {
 			map.setView([46.5, -1.8], 6);		
