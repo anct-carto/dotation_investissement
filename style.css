@@ -29,14 +29,14 @@ strong {
 	}
 	
 span {
-	color: #00414d;
+	color: white;
 	font-size:1em;
 }
 		
 h1{
 	font-size:2 em;
 	text-transform:uppercase;
-	color: #00414d;
+	color: white;
 	}
 	
 h2{
@@ -48,7 +48,7 @@ h2{
 h3{
 	font-size:0.9em;
 	font-weight: bold;
-	color: white;
+	color: #00414d;
 }
 	
 .leaflet-left {
@@ -170,24 +170,40 @@ h3{
 	background-color: #f26664;
 	border : 0.1px solid #5a77b7;
 }
-		
-.boutons {
-		margin-top: 20px;
-		}
+
 		
 .bouton_off {
-		color:#ffffff;
+		color: #00414d;
 		font-weight: bold;
-		cursor: pointer;
+		background-color: transparent;
+		border: none;
+		height: 30px;
+		cursor:pointer;
+		padding: 5px;
+		margin: 5px;
+		border-radius: 4px;
+		vertical-align: middle;
 		}
 		
-.bouton:hover {
-		color: #ffee00;
+.bouton_off:hover {
+		background-color: #e1ff2f;
 		}
 		
 .bouton_on {
-		color: #f26664;
+		color: #e1ff2f;
 		font-weight: bold;
+		background-color: transparent;
+		border: none;
+		height: 30px;
+		cursor:pointer;
+		padding: 5px;
+		margin: 5px;
+		border-radius: 4px;
+		vertical-align: middle;
+		}
+
+.retour {
+		cursor:pointer;	
 		}
 
 

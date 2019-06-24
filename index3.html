@@ -447,10 +447,10 @@
 		
 /* BARRES DE RECHERCHE */		
 		
-		//Barre de recherche n°1 (panneau latéral)
-		var Recherche = L.layerGroup([projets1,projets2,projets3,projets4,projets5,projets6,projets7 ]);
+		/*Barre de recherche n°1 (panneau latéral)
+		var Recherche = L.layerGroup([commune]);
 		
-		/*var searchControl = new L.control.search({
+		var searchControl = new L.control.search({
 			layer: Recherche,
 			initial: false,
 			propertyName: 'libgeo',
@@ -467,40 +467,44 @@
 			selectCom(e.layer.feature.properties.ID_EPCI, indicateur);
 			epciCible2(e.layer.feature.properties.ID_EPCI);
 			territoireCible(e.layer._latlngs);
-		});
+		});*/
 		
-		map.addControl(searchControl);
+		//map.addControl(searchControl);
 		
-		//Déplacement du controle de recherche n°1
+		/*Déplacement du controle de recherche n°1
 		var htmlObject = searchControl.getContainer();
 		var a = document.getElementById('boiteRecherche');
 		function setParent(el, newParent)
 		{newParent.appendChild(el);}
 		setParent(htmlObject, a);*/
 		
-		//Barre de recherche n°2 (en haut à droite)
+		/*Barre de recherche n°2 (en haut à droite)
 		var searchControl2 = new L.control.search({
 			layer: Recherche,
 			initial: false,
 			position:'topright',
-			propertyName: 'NOM',
+			propertyName: 'libgeo',
 			collapsed: true,
 			marker: false,
 			moveToLocation: function(latlng, title, map) {
-				//var zoom = map.getBoundsZoom(latlng.layer.getBounds());
-				map.setView(latlng, 10);
+				var zoom = map.getBoundsZoom(latlng.layer.getBounds());
+				map.setView(latlng, zoom-1);
 			}
-		})
+		})*/
 		
-		searchControl2.on('search:locationfound', function(e) {
-			//if(territoireCib) {map.removeLayer(territoireCib);}
-			//popup(e.layer.feature.properties);
-			//selectCom(e.layer.feature.properties.ID_EPCI,indicateur);
-			//epciCible2(e.layer.feature.properties.ID_EPCI);
-			//territoireCible(e.layer._latlngs);
-		});
+		/*searchControl2.on('search:locationfound', function(e) {
+			if(territoireCib) {map.removeLayer(territoireCib);}
+			popup(e.layer.feature.properties);
+			selectCom(e.layer.feature.properties.ID_EPCI,indicateur);
+			epciCible2(e.layer.feature.properties.ID_EPCI);
+			territoireCible(e.layer._latlngs);
+		});*/
 		
-		map.addControl(searchControl2);
+		//map.addControl(searchControl2);
+		
+		//Retirer les couches de recherche qui s'affichent par défaut
+		//map.removeLayer(commune);
+		//map.removeLayer(epci);
 		
    </script>
 	

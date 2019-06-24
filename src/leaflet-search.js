@@ -62,7 +62,7 @@ L.Control.Search = L.Control.extend({
 		//TODO implements uniq option 'sourceData' to recognizes source type: url,array,callback or layer				
 		jsonpParam: null,				//jsonp param name for search by jsonp service, ex: "callback"
 		propertyLoc: 'loc',				//field for remapping location, using array: ['latname','lonname'] for select double fields(ex. ['lat','lon'] ) support dotted format: 'prop.subprop.title'
-		propertyName: 'title',			//property in marker.options(or feature.properties for vector layer) trough filter elements in layer,
+		propertyName: 'libgeo',			//property in marker.options(or feature.properties for vector layer) trough filter elements in layer,
 		formatData: null,				//callback for reformat all data from source to indexed data object
 		filterData: null,				//callback for filtering data from text searched, params: textSearch, allRecords
 		moveToLocation: null,			//callback run on location found, params: latlng, title, map
@@ -545,11 +545,11 @@ L.Control.Search = L.Control.extend({
         loc.layer = layer;
         retRecords[ self._getPath(layer.options,propName) ] = loc;
       }
-      else if(self._getPath(layer.feature.properties,propName))
+      else if(self._getPath(layer.properties,propName))
       {
         loc = layer.getLatLng();
         loc.layer = layer;
-        retRecords[ self._getPath(layer.feature.properties,propName) ] = loc;
+        retRecords[ self._getPath(layer.properties,propName) ] = loc;
       }
       else {
         //throw new Error("propertyName '"+propName+"' not found in marker"); 
