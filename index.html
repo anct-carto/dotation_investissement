@@ -50,21 +50,22 @@
 					<div>
 						<h2>Répartition des dotations d'investissement de l'État en 2018</h2>
 						<p style="color:white;">1,776 milliard au titre de la Dotation de soutien à l’investissement local, de la Dotation d’équipement des territoires ruraux et de la Dotation politique de la ville</p>
-						<p>Cette somme a permis de financer directement <span style="color:white;">27 328 projets</span> portés par les communes et les intercommunalités dans tous les départements de notre pays.</p>
+						<p>Cette somme a permis de financer directement <span style="color:white;">27&nbsp;328 projets</span> portés par les communes et les intercommunalités dans tous les départements de notre pays.</p>
 						<p>Elle représente <span style="color:white;">24,07%</span> du montant total des projets.</p>
-						<p>Le soutien de l’Etat en faveur de l’investissement des communes et des intercommunalités se répartit de la façon suivante pour la DSIL et la DTER.</p>
-						<p><img src="img/graphe.jpg" style="vertical-align:middle; width:100%;"/></p>
+						<p>Le soutien de l’Etat en faveur de l’investissement des communes et des intercommunalités se répartit de la façon suivante pour la DSIL et la DTER&nbsp;:</p>
+						<p><img src="img/picto_graphique.png" style="vertical-align:middle; width:95%;"/></p>
 					</div>
 					
-						<button class="bouton bouton_on" onclick="toggle('0');" title="toutes les catégories" id="CHECK0" value="on">Voir toutes les catégories</button><br/>
-						<button class="bouton bouton_off" onclick="toggle('1');" title="Santé, sanitaire et social" id="CHECK1" value="on"><img id="picto1" src="img/picto_on1.png" style="width:20px; padding-right:10px;" />Santé, sanitaire et social</button><br/>
-						<button class="bouton bouton_off" onclick="toggle('2')" title="Économie et emploi" id="CHECK2" value="on"><img id="picto2" src="img/picto_on2.png" style="width:20px; padding-right:10px;" />Économie et emploi</button><br/>
-						<button class="bouton bouton_off" onclick="toggle('3')" title="Environnement, transition énergétique et écologie" id="CHECK3" value="on"><img id="picto3" src="img/picto_on3.png" style="width:20px; padding-right:10px;" />Environnement, transition énergétique et écologie</button><br/>
-						<button class="bouton bouton_off" onclick="toggle('4')" title="Éducation" id="CHECK4" value="on"><img id="picto4" src="img/picto_on4.png" style="width:20px; padding-right:10px;" />Éducation</button><br/>
-						<button class="bouton bouton_off" onclick="toggle('5')" title="Actions et Services publics" id="CHECK5" value="on"><img id="picto5" src="img/picto_on5.png" style="width:20px; padding-right:10px;" />Actions et Services publics</button><br/>
-						<button class="bouton bouton_off" onclick="toggle('6')" title="Construction, habitat, urbanisme, transport et mise aux normes" id="CHECK6" value="on"><img id="picto6" src="img/picto_on6.png" style="width:20px; padding-right:10px;" />Construction, habitat, urbanisme, transport</button><br/>
-						<button class="bouton bouton_off" onclick="toggle('7')" title="Contrat de ruralité" id="CHECK7" value="on"><img id="picto7" src="img/picto_on7.png" style="width:20px; padding-right:10px;" />Contrat de ruralité</button><br/><br/>
-					
+					<div class="button_container">
+						<div class="bouton"><button class="bouton_on" onclick="toggle('0');" title="toutes les catégories" id="CHECK0" value="on">Voir toutes les catégories</button></div>
+						<div class="bouton"><button class="bouton_off" onclick="toggle('1');" title="Santé, sanitaire et social" id="CHECK1" value="on"><img id="picto1" src="img/picto_on1.png" style="width:20px; padding-right:10px;" />Santé, sanitaire et social</button></div>
+						<div class="bouton"><button class="bouton_off" onclick="toggle('2')" title="Économie et emploi" id="CHECK2" value="on"><img id="picto2" src="img/picto_on2.png" style="width:20px; padding-right:10px;" />Économie et emploi</button></div>
+						<div class="bouton"><button class="bouton_off" onclick="toggle('3')" title="Environnement, transition énergétique et écologie" id="CHECK3" value="on"><img id="picto3" src="img/picto_on3.png" style="width:20px; padding-right:10px;" />Environnement, transition énergétique et écologie</button></div>
+						<div class="bouton"><button class="bouton_off" onclick="toggle('4')" title="Éducation" id="CHECK4" value="on"><img id="picto4" src="img/picto_on4.png" style="width:20px; padding-right:10px;" />Éducation</button></div>
+						<div class="bouton"><button class="bouton_off" onclick="toggle('5')" title="Actions et Services publics" id="CHECK5" value="on"><img id="picto5" src="img/picto_on5.png" style="width:20px; padding-right:10px;" />Actions et Services publics</button></div>
+						<div class="bouton"><button class="bouton_off" onclick="toggle('6')" title="Construction, habitat, urbanisme, transport et mise aux normes" id="CHECK6" value="on"><img id="picto6" src="img/picto_on6.png" style="width:20px; padding-right:10px;" />Construction, habitat, urbanisme, transport</button></div>
+						<div class="bouton"><button class="bouton_off" onclick="toggle('7')" title="Contrat de ruralité" id="CHECK7" value="on"><img id="picto7" src="img/picto_on7.png" style="width:20px; padding-right:10px;" />Contrat de ruralité</button></div><br/>
+					</div>
 					
 					<div id="sources" style="width:70%;">
 						<p><i>Sources&nbsp;: <a href="http://www.dotations-dgcl.interieur.gouv.fr/consultation/accueil.php" target="_blank">Direction générale des collectivités locales (DGCL) </a>• Réalisation&nbsp;: <a href="https://cartotheque.cget.gouv.fr/cartes?filters%5Bquery%5D=interactif&current_page=1&category=&page_size=20" target="_blank">CGET service cartographie</a></i><p>
@@ -121,8 +122,6 @@
     <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"></script>
 	<script src="src/leaflet-search.js"></script>
     <script src="src/leaflet-sidebar.js"></script>
-	<!--<script src="src/leaflet-canvas-geojson.js"></script>-->
-	<!--<script src="src/leaflet-canvas-markers.js"></script>>-->
 	<script type="text/javascript" src="data/masque.js"></script>
 	<script type="text/javascript" src="data/depreg.js"></script>
 	<script type="text/javascript" src="data/Projets.js"></script>
@@ -133,10 +132,6 @@
 
 	
     <script>
-		
-		//Définition des variables globales
-		//var maillage = "département";
-		//var indicateur = "indicateur1";
 			
 		// Création de la carte
 		var map = L.map('mapid', {maxZoom:11, minZoom:5 })
@@ -156,24 +151,14 @@
 		map.addLayer(legende);
 		
 		//Définition des pictos
-		var LeafIcon = L.Icon.extend({
-		options: {
-			//shadowUrl: 'img/shadow.png',
-			//shadowSize:   [23, 45],
-			//shadowAnchor: [0, 0],
-			//iconSize:     [25, 25],
-			//iconAnchor:   [0, 0],
-			//popupAnchor:  [0, -30]
-		}
-		});
-		
-		var pictoOFF1 = new LeafIcon({iconUrl: 'img/picto_off1.png', iconSize: [5,6], iconAnchor:[3,3]}),
-			pictoOFF2 = new LeafIcon({iconUrl: 'img/picto_off2.png', iconSize: [5,6], iconAnchor:[3,3]}),
-			pictoOFF3 = new LeafIcon({iconUrl: 'img/picto_off3.png', iconSize: [5,6], iconAnchor:[3,3]}),
-			pictoOFF4 = new LeafIcon({iconUrl: 'img/picto_off4.png', iconSize: [5,6], iconAnchor:[3,3]}),
-			pictoOFF5 = new LeafIcon({iconUrl: 'img/picto_off5.png', iconSize: [5,6], iconAnchor:[3,3]}),
-			pictoOFF6 = new LeafIcon({iconUrl: 'img/picto_off6.png', iconSize: [5,6], iconAnchor:[3,3]}),
-			pictoOFF7 = new LeafIcon({iconUrl: 'img/picto_off7.png', iconSize: [5,6], iconAnchor:[3,3]});
+		var LeafIcon = L.Icon.extend({options: {}});
+		var pictoOFF1 = new LeafIcon({iconUrl: 'img/picto_off1.png', iconSize: [23,30], iconAnchor:[12,30]}),
+			pictoOFF2 = new LeafIcon({iconUrl: 'img/picto_off2.png', iconSize: [23,30], iconAnchor:[12,30]}),
+			pictoOFF3 = new LeafIcon({iconUrl: 'img/picto_off3.png', iconSize: [23,30], iconAnchor:[12,30]}),
+			pictoOFF4 = new LeafIcon({iconUrl: 'img/picto_off4.png', iconSize: [23,30], iconAnchor:[12,30]}),
+			pictoOFF5 = new LeafIcon({iconUrl: 'img/picto_off5.png', iconSize: [23,30], iconAnchor:[12,30]}),
+			pictoOFF6 = new LeafIcon({iconUrl: 'img/picto_off6.png', iconSize: [23,30], iconAnchor:[12,30]}),
+			pictoOFF7 = new LeafIcon({iconUrl: 'img/picto_off7.png', iconSize: [23,30], iconAnchor:[12,30]});
 		
 		
 		//Fonctions de définition des couleurs
@@ -184,6 +169,7 @@
 			'grey' ;
 		}
 		
+		//Style des polygones départements
 		function style_indicateur(feature) {
 			return {
 			fillColor: getColor(feature.properties.DIHA),
@@ -192,6 +178,29 @@
 			color: 'white',
 			fillOpacity: 1
 		};
+		}
+		
+		//Création des pictos de sélection
+		function creationPicto(categorie) {
+			if (categorie == '1') { return pictoOFF1; } 
+			else if (categorie == '2') { return pictoOFF2; }
+			else if (categorie == '3') { return pictoOFF3; }
+			else if (categorie == '4') { return pictoOFF4; }
+			else if (categorie == '5') { return pictoOFF5; }
+			else if (categorie == '6') { return pictoOFF6; }
+			else { return pictoOFF7; }
+		}
+		
+		//Couleur des circle
+		var couleur;
+		function getCircleColor(categorie) {
+			if (categorie == '1') {couleur = "#009aa5"; return couleur;}
+			else if (categorie == '2') {couleur = "#f39700"; return couleur;}
+			else if (categorie == '3') {couleur = "#a182ba"; return couleur;}
+			else if (categorie == '4') {couleur = "#d873aa"; return couleur;}
+			else if (categorie == '5') {couleur = "#02a765"; return couleur;}
+			else if (categorie == '6') {couleur = "#74b62b"; return couleur;}
+			else {couleur = "#e5016b"; return couleur;}
 		}
 		
 /* CREATION DES COUCHES */		
@@ -203,8 +212,6 @@
 		map.getPane('regions').style.zIndex = 500;
 		map.createPane('markers');
 		map.getPane('markers').style.zIndex = 550;
-		map.createPane('markersConstruction');
-		map.getPane('markersConstruction').style.zIndex = 540;
 		
 		//Couches du fond de carte
 		Cache = L.geoJSON(JS_masque, {color: "#9de0d4", weight: 0, opacity: 1, fillOpacity: 1}).addTo(map);
@@ -229,23 +236,6 @@
 		});
 		departement.addTo(map);
 		
-		function creationPicto(categorie) {
-			if (categorie == '1') { return pictoOFF1; } 
-			else if (categorie == '2') { return pictoOFF2; }
-			else if (categorie == '3') { return pictoOFF3; }
-			else if (categorie == '4') { return pictoOFF4; }
-			else if (categorie == '5') { return pictoOFF5; }
-			else if (categorie == '6') { return pictoOFF6; }
-			else { return pictoOFF7; }
-		}
-
-		
-		
-		
-		//var circle = L.circle( [48,2], {  } );
-		//circle.addTo(map);
-		
-		
 		// Ajout des couches de point
 		
 		var Projets_dotation = [];
@@ -257,33 +247,22 @@
 		var projets6 = new L.layerGroup({pane:'markers'}).addTo(map);
 		var projets7 = new L.layerGroup({pane:'markers'}).addTo(map);
 		
-		
 		var myRenderer = L.canvas({ padding: 0.5, tolerance: 1, pane: 'markers' });
 
-		var couleur;
-		function getCircleColor(categorie) {
-			if (categorie == '1') {couleur = "#009aa5"; return couleur;}
-			else if (categorie == '2') {couleur = "#f39700"; return couleur;}
-			else if (categorie == '3') {couleur = "#a182ba"; return couleur;}
-			else if (categorie == '4') {couleur = "#d873aa"; return couleur;}
-			else if (categorie == '5') {couleur = "#02a765"; return couleur;}
-			else if (categorie == '6') {couleur = "#74b62b"; return couleur;}
-			else {couleur = "#e5016b"; return couleur;}
-		}
-	
 		function creationProjets() {
 		
 			Projets_dotation = L.geoJSON(JS_projets, {
 				pointToLayer: function(feature, latlng) {
 					var marker = L.circleMarker(latlng,{renderer: myRenderer, radius : 2.5, color: 'white', fillColor: getCircleColor(feature.properties.NUMCATEGORIE), weight: 0.2, fillOpacity: 1, opacity: 1});
 					marker.bindTooltip(feature.properties.libgeo, {className: 'Tooltips'});
-					
+					marker.on('click', function(e) {selectMarker(e.target); });
 					marker.on('click', function(e) {popup(e.target.properties); });
 					marker.properties = {};
 					marker.properties.NOM = feature.properties.libgeo;
 					marker.properties.DOT = feature.properties.DOT;
 					marker.properties.ECHELON = feature.properties.ECHELON;
 					marker.properties.CATEGORIE = feature.properties.CATEGORIE;
+					marker.properties.NUMCATEGORIE = feature.properties.NUMCATEGORIE;
 					marker.properties.COMMENT = feature.properties.COMMENT;
 					marker.properties.COUT = feature.properties.COUT;
 					marker.properties.SUBVENTION = feature.properties.SUBVENTION;
@@ -304,30 +283,6 @@
 	
 		creationProjets();
 
-		
-		var cat;
-		function toggle(categorie) {
-			cat = "CHECK"+categorie;
-				document.getElementById("CHECK0").setAttribute("class", "bouton_off");
-				document.getElementById("CHECK1").setAttribute("class", "bouton_off");
-				document.getElementById("CHECK2").setAttribute("class", "bouton_off");
-				document.getElementById("CHECK3").setAttribute("class", "bouton_off");
-				document.getElementById("CHECK4").setAttribute("class", "bouton_off");
-				document.getElementById("CHECK5").setAttribute("class", "bouton_off");
-				document.getElementById("CHECK6").setAttribute("class", "bouton_off");
-				document.getElementById("CHECK7").setAttribute("class", "bouton_off");
-				
-				document.getElementById(cat).setAttribute("class", "bouton_on");
-				if (categorie=='0'){map.addLayer(projets1); map.addLayer(projets2); map.addLayer(projets3); map.addLayer(projets4); map.addLayer(projets5); map.addLayer(projets6); map.addLayer(projets7)};
-				if (categorie=='1'){map.addLayer(projets1); map.removeLayer(projets2); map.removeLayer(projets3); map.removeLayer(projets4); map.removeLayer(projets5); map.removeLayer(projets6); map.removeLayer(projets7)};
-				if (categorie=='2'){map.removeLayer(projets1); map.addLayer(projets2); map.removeLayer(projets3); map.removeLayer(projets4); map.removeLayer(projets5); map.removeLayer(projets6); map.removeLayer(projets7)};
-				if (categorie=='3'){map.removeLayer(projets1); map.removeLayer(projets2); map.addLayer(projets3); map.removeLayer(projets4); map.removeLayer(projets5); map.removeLayer(projets6); map.removeLayer(projets7)};
-				if (categorie=='4'){map.removeLayer(projets1); map.removeLayer(projets2); map.removeLayer(projets3); map.addLayer(projets4); map.removeLayer(projets5); map.removeLayer(projets6); map.removeLayer(projets7)};
-				if (categorie=='5'){map.removeLayer(projets1); map.removeLayer(projets2); map.removeLayer(projets3); map.removeLayer(projets4); map.addLayer(projets5); map.removeLayer(projets6); map.removeLayer(projets7)};
-				if (categorie=='6'){map.removeLayer(projets1); map.removeLayer(projets2); map.removeLayer(projets3); map.removeLayer(projets4); map.removeLayer(projets5); map.addLayer(projets6); map.removeLayer(projets7)};
-				if (categorie=='7'){map.removeLayer(projets1); map.removeLayer(projets2); map.removeLayer(projets3); map.removeLayer(projets4); map.removeLayer(projets5); map.removeLayer(projets6); map.addLayer(projets7)};
-			}
-		
 		
 /* FICHE TERRITOIRE */
 		
@@ -389,27 +344,10 @@
 		}
 		
 		function resetMap () {
-			//if(territoireCib) {map.removeLayer(territoireCib);}
-			//if(com_select) {map.removeLayer(com_select);}
-			//if(epciCib) {map.removeLayer(epciCib);}
-			//if(epciCib2) {map.removeLayer(epciCib2);}
 			sidebar.open('home');
-			//document.getElementById('onglet_departement').style.display = "none";
-			//document.getElementById('onglet_commune').style.display = "none";
-			//document.getElementById('onglet_epci').style.display = "none";
 			document.getElementById('popup').style.display = "none";
 			document.getElementById('defaut').style.display = "block";
-			//if (indicateur === "indicateur1") {
-			//document.getElementById('indicateur1').className = "bouton_on";
-			//document.getElementById('indicateur2').className = "bouton";
-			//}
-			//if (indicateur === "indicateur2") {
-			//document.getElementById('indicateur1').className = "bouton";
-			//document.getElementById('indicateur2').className = "bouton_on";
-			//}
-			//document.getElementById('logo_epci').setAttribute("class", "onglets");
-			//document.getElementById('logo_dep').setAttribute("class", "onglets");
-			//document.getElementById('logo_com').setAttribute("class", "onglets");
+			if(markerCible) {map.removeLayer(markerCible);}
 			}
 			
 		function retourAcceuil () {
@@ -442,7 +380,37 @@
 			}
 		});
 		
+		//Action de filtre
+		var cat;
+		function toggle(categorie) {
+			if(markerCible) {map.removeLayer(markerCible);}
+			cat = "CHECK"+categorie;
+			document.getElementById("CHECK0").setAttribute("class", "bouton_off");
+			document.getElementById("CHECK1").setAttribute("class", "bouton_off");
+			document.getElementById("CHECK2").setAttribute("class", "bouton_off");
+			document.getElementById("CHECK3").setAttribute("class", "bouton_off");
+			document.getElementById("CHECK4").setAttribute("class", "bouton_off");
+			document.getElementById("CHECK5").setAttribute("class", "bouton_off");
+			document.getElementById("CHECK6").setAttribute("class", "bouton_off");
+			document.getElementById("CHECK7").setAttribute("class", "bouton_off");	
+			document.getElementById(cat).setAttribute("class", "bouton_on");
+			if (categorie=='0'){map.addLayer(projets1); map.addLayer(projets2); map.addLayer(projets3); map.addLayer(projets4); map.addLayer(projets5); map.addLayer(projets6); map.addLayer(projets7)};
+			if (categorie=='1'){map.addLayer(projets1); map.removeLayer(projets2); map.removeLayer(projets3); map.removeLayer(projets4); map.removeLayer(projets5); map.removeLayer(projets6); map.removeLayer(projets7)};
+			if (categorie=='2'){map.removeLayer(projets1); map.addLayer(projets2); map.removeLayer(projets3); map.removeLayer(projets4); map.removeLayer(projets5); map.removeLayer(projets6); map.removeLayer(projets7)};
+			if (categorie=='3'){map.removeLayer(projets1); map.removeLayer(projets2); map.addLayer(projets3); map.removeLayer(projets4); map.removeLayer(projets5); map.removeLayer(projets6); map.removeLayer(projets7)};
+			if (categorie=='4'){map.removeLayer(projets1); map.removeLayer(projets2); map.removeLayer(projets3); map.addLayer(projets4); map.removeLayer(projets5); map.removeLayer(projets6); map.removeLayer(projets7)};
+			if (categorie=='5'){map.removeLayer(projets1); map.removeLayer(projets2); map.removeLayer(projets3); map.removeLayer(projets4); map.addLayer(projets5); map.removeLayer(projets6); map.removeLayer(projets7)};
+			if (categorie=='6'){map.removeLayer(projets1); map.removeLayer(projets2); map.removeLayer(projets3); map.removeLayer(projets4); map.removeLayer(projets5); map.addLayer(projets6); map.removeLayer(projets7)};
+			if (categorie=='7'){map.removeLayer(projets1); map.removeLayer(projets2); map.removeLayer(projets3); map.removeLayer(projets4); map.removeLayer(projets5); map.removeLayer(projets6); map.addLayer(projets7)};
+			}
 		
+		//Création des markers après une recherche
+		var markerCible; 
+		function selectMarker(e) {
+			if(markerCible) {map.removeLayer(markerCible);}
+			markerCible = new L.marker(e._latlng, {icon:creationPicto(e.properties.NUMCATEGORIE)});
+			markerCible.addTo(map);
+		}
 
 		
 /* BARRES DE RECHERCHE */		
@@ -493,11 +461,9 @@
 		})
 		
 		searchControl2.on('search:locationfound', function(e) {
-			//if(territoireCib) {map.removeLayer(territoireCib);}
-			//popup(e.layer.feature.properties);
-			//selectCom(e.layer.feature.properties.ID_EPCI,indicateur);
-			//epciCible2(e.layer.feature.properties.ID_EPCI);
-			//territoireCible(e.layer._latlngs);
+			if(markerCible) {map.removeLayer(markerCible);}
+			popup(e.layer.properties);
+			selectMarker(e.layer);
 		});
 		
 		map.addControl(searchControl2);
