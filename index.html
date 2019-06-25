@@ -77,18 +77,6 @@
 						<div id="boiteRecherche"></div>
 				</div>
 				
-				<!-- Contenu de la fiche départements -->
-				<div class="divTable" id="popupDEP">
-					<div id="NOMDEP"></div>
-					<div class="divTableBody">
-						<div class="divTableCell">
-								<h3 class="divTableRow">Type de dotation&nbsp;:</h3>
-								<div class="divTableRow chiffre" id="IDDEP"></div>
-						</div>
-					</div>
-					<div class="retour"><img src='img/fleche.png' style='vertical-align:middle; width:20px;padding:0px 10px;'  />Retour</div>
-				</div>
-				
 				<!-- Contenu de la fiche d'information -->
 				<div class="divTable" id="popup">
 					<div id="titre"></div>
@@ -240,15 +228,15 @@
 		//Départements
 		departement = L.geoJSON(JS_depreg, {
 			filter: function(feature, layer) {return feature.properties.TYPE == "Départemen";},
-			style: style_indicateur,
-			onEachFeature: function(feature, layer) {
+			style: style_indicateur
+			/*onEachFeature: function(feature, layer) {
 					layer.bindTooltip(feature.properties.libgeo, {className: 'Tooltips'});
 					layer.on('click', function(e) {
 							alert("coucou");
 							popupDEP(feature.properties);
 							e.preventDefault();							
 						});
-					}
+					}*/
 		});
 		departement.addTo(map);
 		
@@ -350,18 +338,6 @@
 			document.getElementById('SUBVENTION').innerHTML = "<span>"+format2(e.SUBVENTION)+"</span>";
 			document.getElementById('LEVIER').innerHTML = "<span>"+format5(e.LEVIER)+"</span>";
 		
-		}
-		
-		//Création d'une fiche
-		function popup(e) {
-			if (document.getElementById('sidebar').classList.contains('collapsed')){sidebar.open('home');}
-			document.getElementById('popupDEP').style.display = "block";
-			document.getElementById('popup').style.display = "none";
-			document.getElementById('defaut').style.display = "none";
-			document.getElementById('filtres').style.display = "none";
-			//Remplissage de la popup
-			document.getElementById('NOMDEP').innerHTML = e;
-			alert("coucou");
 		}
 		
 		
