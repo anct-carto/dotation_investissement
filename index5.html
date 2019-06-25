@@ -32,7 +32,8 @@
 		<div class="sidebar-tabs" id="barre-verticale">
             <ul role="tablist" >
                 <li><a href="#home" role="tab" id="logo" title="Retour à l'accueil" class="onglets"><i style="vertical-align:middle;" class="fas fa-home"></i></a></li>
-				<li><a  role="tab" class="onglets" id="filtre" title="Filtrer les projets"><img src="img/picto_onglet_off.png"/></a></li>
+				<li><a  role="tab" class="onglets" id="filtre" title="Filtrer les projets"><img src="img/picto_points_off.png"/></a></li>
+				<li><a  role="tab" class="onglets" id="departements" title="Voir les départements"><img src="img/picto_onglet_off.png"/></a></li>
 				<li><a href="img/Cartes_DGF_2019_vert_BD.pdf" role="tab" target="_blank" title="Télécharger les cartes" class="onglets"><i style="vertical-align:middle;" class="fa fa-download"></i></a></li>
 			</ul>
         </div>
@@ -79,13 +80,10 @@
 				
 				<!-- Contenu de la fiche départements -->
 				<div class="divTable" id="popupDEP">
-					<div id="NOMDEP"></div>
-					<div class="divTableBody">
-						<div class="divTableCell">
-								<h3 class="divTableRow">Type de dotation&nbsp;:</h3>
-								<div class="divTableRow chiffre" id="IDDEP"></div>
-						</div>
-					</div>
+					<h2>Cliquer sur un département pour voir les infos et télécharger la carte</h2>
+					
+					<div id="LIEN" ></div>
+					<br/>
 					<div class="retour"><img src='img/fleche.png' style='vertical-align:middle; width:20px;padding:0px 10px;'  />Retour</div>
 				</div>
 				
@@ -242,11 +240,11 @@
 			filter: function(feature, layer) {return feature.properties.TYPE == "Départemen";},
 			style: style_indicateur,
 			onEachFeature: function(feature, layer) {
-					layer.bindTooltip(feature.properties.libgeo, {className: 'Tooltips'});
+					//layer.bindTooltip(feature.properties.libgeo, {className: 'Tooltips'});
 					layer.on('click', function(e) {
-							alert("coucou");
+							//event.stopPropagation();
 							popupDEP(feature.properties);
-							e.preventDefault();							
+							//e.preventDefault();							
 						});
 					}
 		});
@@ -255,13 +253,13 @@
 		// Ajout des couches de point
 		
 		var Projets_dotation = [];
-		var projets1 = new L.layerGroup({pane:'markers'}).addTo(map);
-		var projets2 = new L.layerGroup({pane:'markers'}).addTo(map);
-		var projets3 = new L.layerGroup({pane:'markers'}).addTo(map);
-		var projets4 = new L.layerGroup({pane:'markers'}).addTo(map);
-		var projets5 = new L.layerGroup({pane:'markers'}).addTo(map);
-		var projets6 = new L.layerGroup({pane:'markers'}).addTo(map);
-		var projets7 = new L.layerGroup({pane:'markers'}).addTo(map);
+		var projets1 = new L.layerGroup({pane:'markers'});
+		var projets2 = new L.layerGroup({pane:'markers'});
+		var projets3 = new L.layerGroup({pane:'markers'});
+		var projets4 = new L.layerGroup({pane:'markers'});
+		var projets5 = new L.layerGroup({pane:'markers'});
+		var projets6 = new L.layerGroup({pane:'markers'});
+		var projets7 = new L.layerGroup({pane:'markers'});
 		
 		var myRenderer = L.canvas({ padding: 0.5, tolerance: 1.5, pane: 'markers' });
 
@@ -284,20 +282,20 @@
 					marker.properties.SUBVENTION = feature.properties.SUBVENTION;
 					marker.properties.LEVIER = feature.properties.LEVIER;
 					
-					if (feature.properties.NUMCATEGORIE == '1') {projets1.addLayer(marker);}
-					else if (feature.properties.NUMCATEGORIE == '2') {projets2.addLayer(marker);}
-					else if (feature.properties.NUMCATEGORIE == '3') {projets3.addLayer(marker);}
-					else if (feature.properties.NUMCATEGORIE == '4') {projets4.addLayer(marker);}
-					else if (feature.properties.NUMCATEGORIE == '5') {projets5.addLayer(marker);}
-					else if (feature.properties.NUMCATEGORIE == '6') {projets6.addLayer(marker);}
-					else {projets7.addLayer(marker);}
+					if (feature.properties.NUMCATEGORIE == '1') {projets1.addLayer(marker).addTo(map);}
+					else if (feature.properties.NUMCATEGORIE == '2') {projets2.addLayer(marker).addTo(map);}
+					else if (feature.properties.NUMCATEGORIE == '3') {projets3.addLayer(marker).addTo(map);}
+					else if (feature.properties.NUMCATEGORIE == '4') {projets4.addLayer(marker).addTo(map);}
+					else if (feature.properties.NUMCATEGORIE == '5') {projets5.addLayer(marker).addTo(map);}
+					else if (feature.properties.NUMCATEGORIE == '6') {projets6.addLayer(marker).addTo(map);}
+					else {projets7.addLayer(marker).addTo(map);}
 				}
 				});
 		
 			
 		}
 	
-		creationProjets();
+		//creationProjets();
 
 		
 /* FICHE TERRITOIRE */
@@ -352,16 +350,15 @@
 		
 		}
 		
-		//Création d'une fiche
-		function popup(e) {
+		//Création d'une fiche pour les départements
+		function popupDEP(e) {
 			if (document.getElementById('sidebar').classList.contains('collapsed')){sidebar.open('home');}
 			document.getElementById('popupDEP').style.display = "block";
 			document.getElementById('popup').style.display = "none";
 			document.getElementById('defaut').style.display = "none";
 			document.getElementById('filtres').style.display = "none";
 			//Remplissage de la popup
-			document.getElementById('NOMDEP').innerHTML = e;
-			alert("coucou");
+			document.getElementById('LIEN').innerHTML = "<span><a href='maps/"+e.LIBGEO.toUpperCase()+".png' target=_blank >Télécharger la carte pour le département</br>"+e.LIBGEO+" ("+e.codgeo+")</a></span>";
 		}
 		
 		
@@ -378,6 +375,7 @@
 			document.getElementById('popup').style.display = "none";
 			document.getElementById('defaut').style.display = "block";
 			document.getElementById('filtres').style.display = "none";
+			document.getElementById('popupDEP').style.display = "none";
 			if(markerCible) {map.removeLayer(markerCible);}
 			if(bigMarker) {map.removeLayer(bigMarker);}
 			}
@@ -404,9 +402,24 @@
 			event.stopPropagation();
 			if(markerCible) {map.removeLayer(markerCible);}
 			if(bigMarker) {map.removeLayer(bigMarker);}
+			creationProjets();
 			document.getElementById('popup').style.display = "none";
 			document.getElementById('defaut').style.display = "none";
 			document.getElementById('filtres').style.display = "block";
+			document.getElementById('popupDEP').style.display = "none";
+			//retourAcceuil();
+		});
+		
+		//Action au clic sur "départements"
+		document.getElementById("departements").addEventListener("click", function(event){
+			event.stopPropagation();
+			if(markerCible) {map.removeLayer(markerCible);}
+			if(bigMarker) {map.removeLayer(bigMarker);}
+			document.getElementById('popup').style.display = "none";
+			document.getElementById('defaut').style.display = "none";
+			document.getElementById('filtres').style.display = "none";
+			document.getElementById('popupDEP').style.display = "block";
+			map.removeLayer(projets1);map.removeLayer(projets2); map.removeLayer(projets3);	map.removeLayer(projets4); map.removeLayer(projets5); map.removeLayer(projets6); map.removeLayer(projets7);
 			//retourAcceuil();
 		});
 		
@@ -463,7 +476,6 @@
 		//Grossissement du cercle onhover
 		var bigMarker;
 		function createBigMarker(e) {
-			
 			if(bigMarker) {map.removeLayer(bigMarker);}
 			bigMarker = new L.circleMarker(e._latlng,{interactive: false, pane : "bigMarker", radius : 2.5, color: '#e1ff2f', fillColor: getCircleColor(e.properties.NUMCATEGORIE), weight: 3, fillOpacity: 1, opacity: 1});
 			bigMarker.addTo(map);

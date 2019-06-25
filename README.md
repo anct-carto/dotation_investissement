@@ -26,3 +26,14 @@ Descriptif des champs:
 "LAT": latitude 
 "LNG": longitude 
 
+
+CATEGORIES
+1 - Santé, sanitaire et social
+2 - Economie et emploi
+3 - Environnement, transition énergétique et écologie
+4 - Education
+5 - Actions et Services publics
+6 - Construction, habitat, urbanisme, transport et mise aux normes
+7 - Contrat de ruralité
+
+
