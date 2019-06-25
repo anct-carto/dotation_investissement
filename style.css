@@ -66,10 +66,10 @@ h3{
 	}
 
 .Tooltips {
-	font-size:0.9em;
+	font-size:1.1em;
 	padding:5px;
 	border:none;
-	color: #061032;
+	color: #00414d;
 	background-color: white;
 	}
 	
@@ -95,6 +95,10 @@ h3{
 	/*Affichage des onglets*/	
 		
 #popup {
+	display: none;
+	}
+	
+#filtres {
 	display: none;
 	}
 	
@@ -191,7 +195,7 @@ h3{
 		}
 		
 .bouton_on {
-		color: #e1ff2f;
+		color: white;
 		font-weight: bold;
 		background-color: transparent;
 		border: none;

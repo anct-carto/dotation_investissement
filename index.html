@@ -32,7 +32,7 @@
 		<div class="sidebar-tabs" id="barre-verticale">
             <ul role="tablist" >
                 <li><a href="#home" role="tab" id="logo" title="Retour à l'accueil" class="onglets"><i style="vertical-align:middle;" class="fas fa-home"></i></a></li>
-				<li><a href="#home" role="tab" class="onglets" id="logo_dep" title="Départements"><img src="img/picto_onglet_off.png"/></a></li>
+				<li><a  role="tab" class="onglets" id="filtre" title="Filtrer les projets"><img src="img/picto_onglet_off.png"/></a></li>
 				<li><a href="img/Cartes_DGF_2019_vert_BD.pdf" role="tab" target="_blank" title="Télécharger les cartes" class="onglets"><i style="vertical-align:middle;" class="fa fa-download"></i></a></li>
 			</ul>
         </div>
@@ -56,8 +56,16 @@
 						<p><img src="img/picto_graphique.png" style="vertical-align:middle; width:95%;"/></p>
 					</div>
 					
-					<div class="button_container">
-						<div class="bouton"><button class="bouton_on" onclick="toggle('0');" title="toutes les catégories" id="CHECK0" value="on">Voir toutes les catégories</button></div>
+					<div id="sources" style="width:70%;">
+						<p><i>Sources&nbsp;: <a href="http://www.dotations-dgcl.interieur.gouv.fr/consultation/accueil.php" target="_blank">Direction générale des collectivités locales (DGCL) </a>• Réalisation&nbsp;: <a href="https://cartotheque.cget.gouv.fr/cartes?filters%5Bquery%5D=interactif&current_page=1&category=&page_size=20" target="_blank">CGET service cartographie</a></i><p>
+						<p><img src="img/cget.png" style="vertical-align:middle; width:100%;"/></p>
+						<p><img src="img/dgcl.png" style="vertical-align:middle; width:100%;"/></p>
+					</div>
+				</div>
+				
+				
+				<div class="button_container" id="filtres">
+						<div class="bouton"><button class="bouton_on" onclick="toggle('0');" title="toutes les catégories" id="CHECK0" value="on" style="font-size:1em; padding-bottom:10px">Voir toutes les catégories</button></div>
 						<div class="bouton"><button class="bouton_off" onclick="toggle('1');" title="Santé, sanitaire et social" id="CHECK1" value="on"><img id="picto1" src="img/picto_on1.png" style="width:20px; padding-right:10px;" />Santé, sanitaire et social</button></div>
 						<div class="bouton"><button class="bouton_off" onclick="toggle('2')" title="Économie et emploi" id="CHECK2" value="on"><img id="picto2" src="img/picto_on2.png" style="width:20px; padding-right:10px;" />Économie et emploi</button></div>
 						<div class="bouton"><button class="bouton_off" onclick="toggle('3')" title="Environnement, transition énergétique et écologie" id="CHECK3" value="on"><img id="picto3" src="img/picto_on3.png" style="width:20px; padding-right:10px;" />Environnement, transition énergétique et écologie</button></div>
@@ -65,13 +73,8 @@
 						<div class="bouton"><button class="bouton_off" onclick="toggle('5')" title="Actions et Services publics" id="CHECK5" value="on"><img id="picto5" src="img/picto_on5.png" style="width:20px; padding-right:10px;" />Actions et Services publics</button></div>
 						<div class="bouton"><button class="bouton_off" onclick="toggle('6')" title="Construction, habitat, urbanisme, transport et mise aux normes" id="CHECK6" value="on"><img id="picto6" src="img/picto_on6.png" style="width:20px; padding-right:10px;" />Construction, habitat, urbanisme, transport</button></div>
 						<div class="bouton"><button class="bouton_off" onclick="toggle('7')" title="Contrat de ruralité" id="CHECK7" value="on"><img id="picto7" src="img/picto_on7.png" style="width:20px; padding-right:10px;" />Contrat de ruralité</button></div><br/>
-					</div>
-					
-					<div id="sources" style="width:70%;">
-						<p><i>Sources&nbsp;: <a href="http://www.dotations-dgcl.interieur.gouv.fr/consultation/accueil.php" target="_blank">Direction générale des collectivités locales (DGCL) </a>• Réalisation&nbsp;: <a href="https://cartotheque.cget.gouv.fr/cartes?filters%5Bquery%5D=interactif&current_page=1&category=&page_size=20" target="_blank">CGET service cartographie</a></i><p>
-						<p><img src="img/cget.png" style="vertical-align:middle; width:100%;"/></p>
-						<p><img src="img/dgcl.png" style="vertical-align:middle; width:100%;"/></p>
-					</div>
+						<div><span style="font-size:0.8em;"><i>Rechercher une commune ou intercommunalité bénéficiaire&nbsp;:</i></span></div>
+						<div id="boiteRecherche"></div>
 				</div>
 				
 				<!-- Contenu de la fiche d'information -->
@@ -212,6 +215,8 @@
 		map.getPane('regions').style.zIndex = 500;
 		map.createPane('markers');
 		map.getPane('markers').style.zIndex = 550;
+		map.createPane('bigMarker');
+		map.getPane('bigMarker').style.zIndex = 580;
 		
 		//Couches du fond de carte
 		Cache = L.geoJSON(JS_masque, {color: "#9de0d4", weight: 0, opacity: 1, fillOpacity: 1}).addTo(map);
@@ -247,16 +252,16 @@
 		var projets6 = new L.layerGroup({pane:'markers'}).addTo(map);
 		var projets7 = new L.layerGroup({pane:'markers'}).addTo(map);
 		
-		var myRenderer = L.canvas({ padding: 0.5, tolerance: 1, pane: 'markers' });
+		var myRenderer = L.canvas({ padding: 0.5, tolerance: 1.5, pane: 'markers' });
 
 		function creationProjets() {
 		
 			Projets_dotation = L.geoJSON(JS_projets, {
 				pointToLayer: function(feature, latlng) {
 					var marker = L.circleMarker(latlng,{renderer: myRenderer, radius : 2.5, color: 'white', fillColor: getCircleColor(feature.properties.NUMCATEGORIE), weight: 0.2, fillOpacity: 1, opacity: 1});
+					marker.on('mouseover', function(e) {createBigMarker(e.target);});
 					marker.bindTooltip(feature.properties.libgeo, {className: 'Tooltips'});
-					marker.on('click', function(e) {selectMarker(e.target); });
-					marker.on('click', function(e) {popup(e.target.properties); });
+					marker.on('click', function(e) {selectMarker(e.target);popup(e.target.properties); });
 					marker.properties = {};
 					marker.properties.NOM = feature.properties.libgeo;
 					marker.properties.DOT = feature.properties.DOT;
@@ -323,6 +328,7 @@
 			if (document.getElementById('sidebar').classList.contains('collapsed')){sidebar.open('home');}
 			document.getElementById('popup').style.display = "block";
 			document.getElementById('defaut').style.display = "none";
+			document.getElementById('filtres').style.display = "none";
 			//Remplissage de la popup
 			document.getElementById('titre').innerHTML = "<h1 style='color:#00414d'>"+e.NOM+"</h1>";
 			document.getElementById('DOT').innerHTML = "<span>"+e.DOT+"</span>";
@@ -332,9 +338,10 @@
 			document.getElementById('COUT').innerHTML = "<span>"+format2(e.COUT)+"</span>";
 			document.getElementById('SUBVENTION').innerHTML = "<span>"+format2(e.SUBVENTION)+"</span>";
 			document.getElementById('LEVIER').innerHTML = "<span>"+format5(e.LEVIER)+"</span>";
-			
-			
+		
 		}
+		
+		
 		
 	
 /* ACTIONS */
@@ -347,7 +354,9 @@
 			sidebar.open('home');
 			document.getElementById('popup').style.display = "none";
 			document.getElementById('defaut').style.display = "block";
+			document.getElementById('filtres').style.display = "none";
 			if(markerCible) {map.removeLayer(markerCible);}
+			if(bigMarker) {map.removeLayer(bigMarker);}
 			}
 			
 		function retourAcceuil () {
@@ -362,6 +371,17 @@
 		document.getElementById("logo").addEventListener("click", function(event){
 			event.stopPropagation();
 			retourAcceuil();
+		});
+		
+		//Action au clic sur "filtres"
+		document.getElementById("filtre").addEventListener("click", function(event){
+			event.stopPropagation();
+			if(markerCible) {map.removeLayer(markerCible);}
+			if(bigMarker) {map.removeLayer(bigMarker);}
+			document.getElementById('popup').style.display = "none";
+			document.getElementById('defaut').style.display = "none";
+			document.getElementById('filtres').style.display = "block";
+			//retourAcceuil();
 		});
 		
 		//Action au clic sur "retour"
@@ -384,6 +404,7 @@
 		var cat;
 		function toggle(categorie) {
 			if(markerCible) {map.removeLayer(markerCible);}
+			if(bigMarker) {map.removeLayer(bigMarker);}
 			cat = "CHECK"+categorie;
 			document.getElementById("CHECK0").setAttribute("class", "bouton_off");
 			document.getElementById("CHECK1").setAttribute("class", "bouton_off");
@@ -411,6 +432,14 @@
 			markerCible = new L.marker(e._latlng, {icon:creationPicto(e.properties.NUMCATEGORIE)});
 			markerCible.addTo(map);
 		}
+		
+		//Grossissement du cercle onhover
+		var bigMarker;
+		function createBigMarker(e) {
+			if(bigMarker) {map.removeLayer(bigMarker);}
+			bigMarker = new L.circleMarker(e._latlng,{interactive: false, pane : "bigMarker", radius : 2.5, color: '#e1ff2f', fillColor: getCircleColor(e.properties.NUMCATEGORIE), weight: 3, fillOpacity: 1, opacity: 1});
+			bigMarker.addTo(map);
+		}
 
 		
 /* BARRES DE RECHERCHE */		
@@ -418,23 +447,20 @@
 		//Barre de recherche n°1 (panneau latéral)
 		var Recherche = L.layerGroup([projets1,projets2,projets3,projets4,projets5,projets6,projets7 ]);
 		
-		/*var searchControl = new L.control.search({
+		var searchControl = new L.control.search({
 			layer: Recherche,
 			initial: false,
-			propertyName: 'libgeo',
+			propertyName: 'NOM',
 			marker: false,
 			moveToLocation: function(latlng, title, map) {
-				var zoom = map.getBoundsZoom(latlng.layer.getBounds());
-				map.setView(latlng, zoom-1);
+				map.setView(latlng, 10);
 			}
 		})
 		
 		searchControl.on('search:locationfound', function(e) {
-			if(territoireCib) {map.removeLayer(territoireCib);}
-			popup(e.layer.feature.properties);
-			selectCom(e.layer.feature.properties.ID_EPCI, indicateur);
-			epciCible2(e.layer.feature.properties.ID_EPCI);
-			territoireCible(e.layer._latlngs);
+			if(markerCible) {map.removeLayer(markerCible);}
+			popup(e.layer.properties);
+			selectMarker(e.layer);
 		});
 		
 		map.addControl(searchControl);
@@ -444,7 +470,7 @@
 		var a = document.getElementById('boiteRecherche');
 		function setParent(el, newParent)
 		{newParent.appendChild(el);}
-		setParent(htmlObject, a);*/
+		setParent(htmlObject, a);
 		
 		//Barre de recherche n°2 (en haut à droite)
 		var searchControl2 = new L.control.search({
