@@ -158,13 +158,41 @@ h3{
 .onglets{
 	background-color: #00414d;
 	border: 0.1px solid #5a77b7;
+	
 }
-
 
 .onglets img{
 	vertical-align:middle;
 	padding:7px;
 }
+
+#filtre {
+	background-image: url("img/picto_points_off.png");
+	background-repeat: no-repeat;
+	background-size: 18px;
+	background-position: center;
+	}
+	
+#filtre:hover {
+	background-image: url("img/picto_points_on.png");
+	background-repeat: no-repeat;
+	background-size: 18px;
+	background-position: center;
+	}
+
+#departements {
+	background-image: url("img/picto_onglet_off.png");
+	background-repeat: no-repeat;
+	background-size: 18px;
+	background-position: center;
+	}
+	
+#departements:hover {	
+	background-image: url("img/picto_onglet_on.png");
+	background-repeat: no-repeat;
+	background-size: 18px;
+	background-position: center;
+	}		
 
 .onglets:hover {
 	color: #004494;
@@ -193,6 +221,7 @@ h3{
 		background-color: #e1ff2f;
 		border-radius: 4px;
 		}
+
 		
 .bouton_on {
 		color: white;

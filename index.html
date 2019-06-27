@@ -22,6 +22,8 @@
 	<link rel="stylesheet" href="src/MarkerCluster.Default.css" />
 	
 </head>
+	
+
 
 <body>
 	
@@ -32,8 +34,9 @@
 		<div class="sidebar-tabs" id="barre-verticale">
             <ul role="tablist" >
                 <li><a href="#home" role="tab" id="logo" title="Retour à l'accueil" class="onglets"><i style="vertical-align:middle;" class="fas fa-home"></i></a></li>
-				<li><a  role="tab" class="onglets" id="filtre" title="Filtrer les projets"><img src="img/picto_onglet_off.png"/></a></li>
-				<li><a href="img/Cartes_DGF_2019_vert_BD.pdf" role="tab" target="_blank" title="Télécharger les cartes" class="onglets"><i style="vertical-align:middle;" class="fa fa-download"></i></a></li>
+				<li><a  role="tab" class="onglets" id="filtre" title="Filtrer les projets"><img src="img/picto_tab.png"/></a></li>
+				<li><a  role="tab" class="onglets" id="departements" title="Voir les départements"><img src="img/picto_tab.png"/></a></li>
+				<li><a href="img/Cartes_DGF_2019_vert_BD.pdf" id="download" role="tab" target="_blank" title="Télécharger les cartes" class="onglets"><i style="vertical-align:middle;" class="fa fa-download"></i></a></li>
 			</ul>
         </div>
 
@@ -75,6 +78,15 @@
 						<div class="bouton"><button class="bouton_off" onclick="toggle('7')" title="Contrat de ruralité" id="CHECK7" value="on"><img id="picto7" src="img/picto_on7.png" style="width:20px; padding-right:10px;" />Contrat de ruralité</button></div><br/>
 						<div><span style="font-size:0.8em;"><i>Rechercher une commune ou intercommunalité bénéficiaire&nbsp;:</i></span></div>
 						<div id="boiteRecherche"></div>
+				</div>
+				
+				<!-- Contenu de la fiche départements -->
+				<div class="divTable" id="popupDEP">
+					<h2>Cliquer sur un département pour voir les infos et télécharger la carte</h2>
+					
+					<div id="LIEN" ></div>
+					<br/>
+					<div class="retour"><img src='img/fleche.png' style='vertical-align:middle; width:20px;padding:0px 10px;'  />Retour</div>
 				</div>
 				
 				<!-- Contenu de la fiche d'information -->
@@ -121,16 +133,23 @@
 	<!-- Bloc de la carte -->
 	<div id="mapid"></div>
 
-    <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js"></script>
+	
 	<script src="src/leaflet-search.js"></script>
     <script src="src/leaflet-sidebar.js"></script>
+
+	<!--<script src="src/Leaflet.VectorGrid.min.js"></script>-->
+	<script type="text/javascript"  src="https://unpkg.com/leaflet.vectorgrid@1.2.0"></script>
+	<script type="text/javascript" src="data/admin.js"></script>
 	<script type="text/javascript" src="data/masque.js"></script>
 	<script type="text/javascript" src="data/depreg.js"></script>
 	<script type="text/javascript" src="data/Projets.js"></script>
 	<script type="text/javascript" src="data/cercles_drom.js"></script>
+	<script type="text/javascript" src="data/communes.js"></script>
+	
+	
 	
 	<script src="https://leaflet.github.io/Leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
-	
 
 	
     <script>
@@ -146,6 +165,10 @@
 		sidebar.open('home');
 		
 /* COULEURS - STYLES - LEGENDE */
+		
+		//Création des canvas
+		var myRenderer = L.canvas({ padding: 0.5, tolerance: 1.5, pane: 'markers' });
+		var comRenderer = L.canvas({ padding: 0.5, tolerance: 1.5 });
 		
 		//Image de légende
 		var imageBounds = [[51.9, -5.4],[49.8, 0.16]]; 
@@ -172,7 +195,7 @@
 		}
 		
 		//Style des polygones départements
-		function style_indicateur(feature) {
+		function style1(feature) {
 			return {
 			fillColor: getColor(feature.properties.DIHA),
 			weight: 0.8,
@@ -181,6 +204,18 @@
 			fillOpacity: 1
 		};
 		}
+		
+		//Style des départements simples
+		function style2(feature) {
+			return {
+			fillColor: '#63c0bb',
+			weight: 0.8,
+			opacity: 1,
+			color: 'white',
+			fillOpacity: 1
+		};
+		}
+		
 		
 		//Création des pictos de sélection
 		function creationPicto(categorie) {
@@ -220,39 +255,76 @@
 		//Couches du fond de carte
 		Cache = L.geoJSON(JS_masque, {color: "#9de0d4", weight: 0, opacity: 1, fillOpacity: 1}).addTo(map);
 		Cercles_drom = L.geoJSON(JS_drom, {color: "#ffffff", weight: 0.5, opacity: 0.7, fillOpacity: 0}).addTo(map);
-		Contour_Regions = L.geoJSON(JS_depreg, {
-			filter: function(feature, layer) {return feature.properties.TYPE == "Région";},
+		Contour_Regions = L.geoJSON(JS_depregepcicom, {
+			filter: function(feature, layer) {return feature.properties.type == "région";},
 			style: {interactive: false, color: "#ffffff", weight: 1.5, opacity: 1, pane:'regions', fillOpacity: 0}
 		}).addTo(map);
+		
+		var Contour_EPCICOM = L.geoJSON(JS_depregepcicom, {
+			filter: function(feature, layer) {return feature.properties.type == "commune" || feature.properties.type == "epci" },
+		})
 		
 		//Départements
 		departement = L.geoJSON(JS_depreg, {
 			filter: function(feature, layer) {return feature.properties.TYPE == "Départemen";},
-			style: style_indicateur
-			/*onEachFeature: function(feature, layer) {
-					layer.bindTooltip(feature.properties.libgeo, {className: 'Tooltips'});
+			style: style1,
+			onEachFeature: function(feature, layer) {
+					//layer.bindTooltip(feature.properties.libgeo, {className: 'Tooltips'});
 					layer.on('click', function(e) {
-							alert("coucou");
 							popupDEP(feature.properties);
-							e.preventDefault();							
+							territoireCible(e.target._latlngs);						
 						});
-					}*/
+					}
 		});
 		departement.addTo(map);
+		
+		var vectorGridCom = L.vectorGrid.slicer( JS_depregepcicom, { 
+			rendererFactory: L.canvas.tile,
+			pane:'regions',
+			vectorTileLayerStyles: {
+				sliced: function(properties) {
+					if(properties.type =='commune'){
+						return {
+							fillOpacity: 0,
+							color: 'white',
+							weight: 0.15
+							
+						}}
+					else { return{ opacity: 0}}
+				}
+			}
+		})
+		
+		var vectorGridEpci = L.vectorGrid.slicer( JS_depregepcicom, { 
+			rendererFactory: L.canvas.tile,
+			pane:'regions',
+			vectorTileLayerStyles: {
+				sliced: function(properties) {
+					if (properties.type =='epci'){ 
+						return{
+							fillOpacity: 0,
+							color: 'white',
+							weight: 0.5
+							
+						}}
+					else { return{ opacity: 0}}
+				}
+			}
+		})
+		
+		
 		
 		// Ajout des couches de point
 		
 		var Projets_dotation = [];
-		var projets1 = new L.layerGroup({pane:'markers'}).addTo(map);
-		var projets2 = new L.layerGroup({pane:'markers'}).addTo(map);
-		var projets3 = new L.layerGroup({pane:'markers'}).addTo(map);
-		var projets4 = new L.layerGroup({pane:'markers'}).addTo(map);
-		var projets5 = new L.layerGroup({pane:'markers'}).addTo(map);
-		var projets6 = new L.layerGroup({pane:'markers'}).addTo(map);
-		var projets7 = new L.layerGroup({pane:'markers'}).addTo(map);
+		var projets1 = new L.layerGroup({pane:'markers'});
+		var projets2 = new L.layerGroup({pane:'markers'});
+		var projets3 = new L.layerGroup({pane:'markers'});
+		var projets4 = new L.layerGroup({pane:'markers'});
+		var projets5 = new L.layerGroup({pane:'markers'});
+		var projets6 = new L.layerGroup({pane:'markers'});
+		var projets7 = new L.layerGroup({pane:'markers'});
 		
-		var myRenderer = L.canvas({ padding: 0.5, tolerance: 1.5, pane: 'markers' });
-
 		function creationProjets() {
 		
 			Projets_dotation = L.geoJSON(JS_projets, {
@@ -280,13 +352,19 @@
 					else if (feature.properties.NUMCATEGORIE == '6') {projets6.addLayer(marker);}
 					else {projets7.addLayer(marker);}
 				}
+				
 				});
 		
-			
+			projets1.addTo(map); 
+			projets2.addTo(map); 
+			projets3.addTo(map); 
+			projets4.addTo(map); 
+			projets5.addTo(map); 
+			projets6.addTo(map); 
+			projets7.addTo(map); 
 		}
 	
-		creationProjets();
-
+		//creationProjets();
 		
 /* FICHE TERRITOIRE */
 		
@@ -340,6 +418,17 @@
 		
 		}
 		
+		//Création d'une fiche pour les départements
+		function popupDEP(e) {
+			if (document.getElementById('sidebar').classList.contains('collapsed')){sidebar.open('home');}
+			document.getElementById('popupDEP').style.display = "block";
+			document.getElementById('popup').style.display = "none";
+			document.getElementById('defaut').style.display = "none";
+			document.getElementById('filtres').style.display = "none";
+			//Remplissage de la popup
+			document.getElementById('LIEN').innerHTML = "<span><a href='maps/"+e.LIBGEO+".png' target=_blank >Télécharger la carte pour le département</br>"+e.LIBGEO+" ("+e.codgeo+")</a></span>";
+		}
+		
 		
 		
 	
@@ -354,8 +443,10 @@
 			document.getElementById('popup').style.display = "none";
 			document.getElementById('defaut').style.display = "block";
 			document.getElementById('filtres').style.display = "none";
+			document.getElementById('popupDEP').style.display = "none";
 			if(markerCible) {map.removeLayer(markerCible);}
 			if(bigMarker) {map.removeLayer(bigMarker);}
+			if(territoireCib) {map.removeLayer(territoireCib);}
 			}
 			
 		function retourAcceuil () {
@@ -365,24 +456,44 @@
 			
 		/*Action au clic sur la carte
 		map.on('click', function(e) { 
-			if(markerCible) {map.removeLayer(markerCible);}
-			if(bigMarker) {map.removeLayer(bigMarker);}
+			
+			alert('cliconmap');
+			
 			});*/
 		
 		//Action au clic sur "home"
 		document.getElementById("logo").addEventListener("click", function(event){
-			event.stopPropagation();
 			retourAcceuil();
 		});
 		
 		//Action au clic sur "filtres"
 		document.getElementById("filtre").addEventListener("click", function(event){
 			event.stopPropagation();
+			departement.setStyle(style2);
 			if(markerCible) {map.removeLayer(markerCible);}
 			if(bigMarker) {map.removeLayer(bigMarker);}
+			creationProjets();
+			if(territoireCib) {map.removeLayer(territoireCib);}
+			map.removeLayer(legende);
 			document.getElementById('popup').style.display = "none";
 			document.getElementById('defaut').style.display = "none";
 			document.getElementById('filtres').style.display = "block";
+			document.getElementById('popupDEP').style.display = "none";
+			//retourAcceuil();
+		});
+		
+		//Action au clic sur "départements"
+		document.getElementById("departements").addEventListener("click", function(event){
+			event.stopPropagation();
+			if(markerCible) {map.removeLayer(markerCible);}
+			if(bigMarker) {map.removeLayer(bigMarker);}
+			departement.setStyle(style1);
+			map.addLayer(legende);
+			document.getElementById('popup').style.display = "none";
+			document.getElementById('defaut').style.display = "none";
+			document.getElementById('filtres').style.display = "none";
+			document.getElementById('popupDEP').style.display = "block";
+			map.removeLayer(myRenderer);
 			//retourAcceuil();
 		});
 		
@@ -439,22 +550,36 @@
 		//Grossissement du cercle onhover
 		var bigMarker;
 		function createBigMarker(e) {
-			
 			if(bigMarker) {map.removeLayer(bigMarker);}
 			bigMarker = new L.circleMarker(e._latlng,{interactive: false, pane : "bigMarker", radius : 2.5, color: '#e1ff2f', fillColor: getCircleColor(e.properties.NUMCATEGORIE), weight: 3, fillOpacity: 1, opacity: 1});
 			bigMarker.addTo(map);
 		}
 
+		//Entourer territoire sélectionné
+		var territoireCib; //lors d'un simple clic
+		function territoireCible(e) {
+			if(territoireCib) {map.removeLayer(territoireCib);}
+			territoireCib = new L.polygon(e, {weight:3, color:"#e1ff2f",interactive: false, pane:'territoireCible', fillOpacity: 0});
+			territoireCib.addTo(map);
+		}
+		
+		map.on('zoomend', function() {
+			var zoom = map.getZoom();
+			if (zoom < 8) {map.removeLayer(vectorGridCom); map.removeLayer(vectorGridEpci)}
+			else if (zoom >= 8 && zoom < 9) { map.addLayer(vectorGridEpci);map.removeLayer(vectorGridCom)}
+			else if (zoom >= 9) {map.addLayer(vectorGridEpci); map.addLayer(vectorGridCom)}
+		});
+		
 		
 /* BARRES DE RECHERCHE */		
 		
 		//Barre de recherche n°1 (panneau latéral)
-		var Recherche = L.layerGroup([projets1,projets2,projets3,projets4,projets5,projets6,projets7 ]);
+		//var Recherche = L.layerGroup([projets1,projets2,projets3,projets4,projets5,projets6,projets7]);
 		
 		var searchControl = new L.control.search({
-			layer: Recherche,
+			layer: Contour_EPCICOM,
 			initial: false,
-			propertyName: 'NOM',
+			propertyName: "libgeo",
 			marker: false,
 			moveToLocation: function(latlng, title, map) {
 				map.setView(latlng, 10);
@@ -463,8 +588,8 @@
 		
 		searchControl.on('search:locationfound', function(e) {
 			if(markerCible) {map.removeLayer(markerCible);}
-			popup(e.layer.properties);
-			selectMarker(e.layer);
+			territoireCible(e.layer._latlngs);
+			creationProjets();
 		});
 		
 		map.addControl(searchControl);
@@ -478,10 +603,10 @@
 		
 		//Barre de recherche n°2 (en haut à droite)
 		var searchControl2 = new L.control.search({
-			layer: Recherche,
+			layer: Contour_EPCICOM,
 			initial: false,
 			position:'topright',
-			propertyName: 'NOM',
+			propertyName: 'libgeo',
 			collapsed: true,
 			marker: false,
 			moveToLocation: function(latlng, title, map) {
@@ -492,11 +617,15 @@
 		
 		searchControl2.on('search:locationfound', function(e) {
 			if(markerCible) {map.removeLayer(markerCible);}
-			popup(e.layer.properties);
-			selectMarker(e.layer);
+			territoireCible(e.layer._latlngs);
+			creationProjets();
 		});
 		
 		map.addControl(searchControl2);
+		
+		map.removeLayer(vectorGridCom); 
+		map.removeLayer(vectorGridEpci);
+		map.removeLayer(Contour_EPCICOM);
 		
    </script>
 	
