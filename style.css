@@ -204,6 +204,24 @@ h3{
 	border : 0.1px solid #5a77b7;
 }
 
+.bouton_min_off {
+		background-color: transparent;
+		border: 0.2px;
+		cursor:pointer;
+		padding:10px;
+		vertical-align: middle;
+		text-align: center;
+		}
+
+.bouton_min_on {
+		background-color: #206a75;
+		border-radius: 4px;
+		border: 0.2px;
+		cursor:pointer;
+		padding:10px;
+		vertical-align: middle;
+		text-align: center;
+		}
 		
 .bouton_off {
 		color: #00414d;
@@ -221,8 +239,8 @@ h3{
 		background-color: #e1ff2f;
 		border-radius: 4px;
 		}
-
 		
+
 .bouton_on {
 		color: white;
 		font-weight: bold;
@@ -235,15 +253,48 @@ h3{
 		text-align: left;
 		}
 
-.retour {
+#retourDEP {
 		cursor:pointer;	
+		margin-top:15px;
+		}
+		
+#retourCategories {
+		cursor:pointer;	
+		margin-top:15px;
 		}
 
-.button {
+button {
 	vertical-align: middle;	
+	background-color: transparent;
 	}	
 
+.button_container {
+	margin-top:15px;
+	}
+	
+.bouton_accueil {
+	background-color: #206a75;
+	opacity:0.8;
+	width:49%;
+	color: white;
+	font-weight: bold;
+	border-radius: 4px;
+	cursor:pointer;
+	display: inline-block;
+	padding:4px;
+	font-size:0.9em;
+}
 
+.bouton_accueil img {
+	width:15px;
+	padding:2px;
+}
+
+.bouton_accueil:hover {
+		background-color: #e1ff2f;
+		border-radius: 4px;
+		color: #00414d;
+		}
 
 
 /*Style du tableau*/
@@ -252,6 +303,8 @@ h3{
 	display: table;
 	
 }
+
+
 .divTableRow {
 	display: table-row;	
 }
@@ -296,3 +349,7 @@ h3{
     margin-top: -20px;
     margin-left: -20px;
 }
+
+
+
+
