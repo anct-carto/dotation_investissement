@@ -79,6 +79,9 @@
 						<div class="bouton"><button class="bouton_off" onclick="creationProjets('7')" title="Contrat de ruralité" id="CHECK7" ><img id="picto7" src="img/picto_on7.png" style="width:20px; padding-right:10px;" />Contrat de ruralité</button></div><br/>
 						<div><span style="font-size:0.8em;"><i>Rechercher une commune ou intercommunalité bénéficiaire&nbsp;:</i></span></div>
 						<div id="boiteRecherche"></div>
+						<div class="button_container">
+							<button class="bouton_accueil" onclick="retourDepartements();" title="Départements"><img src="img/picto_onglet_off.png"/><div>Voir les départements</div></button>
+						</div>
 				</div>
 				
 				<!-- Contenu de la fiche départements -->
@@ -88,8 +91,10 @@
 					<div class="divTableCell" id="POPDEP" ></div>
 					<div class="divTableCell" id="LIEN" ></div>
 					
-					<!--<br/>
-					<div id="retourDEP"><img src='img/fleche.png' style='vertical-align:middle; width:20px;padding:0px 10px;'  />Retour</div>-->
+					<div class="button_container">
+							<button class="bouton_accueil" onclick="retourFiltres();" title="Projets"><img src="img/picto_points_off.png"/><div>Explorer les projets</div></button>
+					</div>
+					
 				</div>
 				
 				<!-- Contenu de la fiche d'information -->
