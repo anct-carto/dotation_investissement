@@ -221,6 +221,16 @@ h3{
 		vertical-align: middle;
 		text-align: center;
 		}
+
+.tip {
+	position:absolute;
+	margin-left:5px;
+	height: 47.8;
+	background-color: #e1ff2f;
+	border-radius: 4px;
+	font-size:0.8em;
+	padding:2px;
+}
 		
 .bouton_off {
 		color: #00414d;

@@ -136,13 +136,13 @@
 					</div>
 					
 					<div class="button_container" id="filtres-min">
-						<button class="bouton bouton_min_off" onclick="creationProjets('1')" title="Santé, sanitaire et social" id="CHECK1a" ><img id="picto1" src="img/picto_on1.png" style="width:20px;" /></button>
-						<button class="bouton bouton_min_off" onclick="creationProjets('2')" title="Économie et emploi" id="CHECK2a" ><img id="picto2" src="img/picto_on2.png" style="width:20px;" /></button>
-						<button class="bouton bouton_min_off" onclick="creationProjets('3')" title="Environnement, transition énergétique et écologie" id="CHECK3a" ><img id="picto3" src="img/picto_on3.png" style="width:20px;" /></button>
-						<button class="bouton bouton_min_off" onclick="creationProjets('4')" title="Éducation" id="CHECK4a" ><img id="picto4" src="img/picto_on4.png" style="width:20px;" /></button>
-						<button class="bouton bouton_min_off" onclick="creationProjets('5')" title="Actions et Services publics" id="CHECK5a" ><img id="picto5" src="img/picto_on5.png" style="width:20px; " /></button>
-						<button class="bouton bouton_min_off" onclick="creationProjets('6')" title="Construction, habitat, urbanisme, transport et mise aux normes" id="CHECK6a" ><img id="picto6" src="img/picto_on6.png" style="width:20px; " /></button>
-						<button class="bouton bouton_min_off" onclick="creationProjets('7')" title="Contrat de ruralité" id="CHECK7a" ><img id="picto7" src="img/picto_on7.png" style="width:20px; " /></button><br/>
+						<button class="bouton bouton_min_off" onclick="creationProjets('1')" title="Santé, sanitaire et social" id="CHECK1a" onmouseover="document.getElementById('tip1').style.display = 'inline-block'" onmouseout="document.getElementById('tip1').style.display = 'none'"><img id="picto1" src="img/picto_on1.png" style="width:20px;" /></button><div class="tip "id="tip1" style="display:none;">Santé, sanitaire et social</div>
+						<button class="bouton bouton_min_off" onclick="creationProjets('2')" title="Économie et emploi" id="CHECK2a"  onmouseover="document.getElementById('tip2').style.display = 'inline-block'" onmouseout="document.getElementById('tip2').style.display = 'none'"><img id="picto2" src="img/picto_on2.png" style="width:20px;" /></button><div class="tip "id="tip2" style="display:none;">Économie et emploi</div>
+						<button class="bouton bouton_min_off" onclick="creationProjets('3')" title="Environnement, transition énergétique et écologie" id="CHECK3a"  onmouseover="document.getElementById('tip3').style.display = 'inline-block'" onmouseout="document.getElementById('tip3').style.display = 'none'"><img id="picto3" src="img/picto_on3.png" style="width:20px;" /></button><div class="tip "id="tip3" style="display:none;">Environnement, transition énergétique et écologie</div>
+						<button class="bouton bouton_min_off" onclick="creationProjets('4')" title="Éducation" id="CHECK4a"  onmouseover="document.getElementById('tip4').style.display = 'inline-block'" onmouseout="document.getElementById('tip4').style.display = 'none'"><img id="picto4" src="img/picto_on4.png" style="width:20px;" /></button><div class="tip "id="tip4" style="display:none;">Éducation</div>
+						<button class="bouton bouton_min_off" onclick="creationProjets('5')" title="Actions et Services publics" id="CHECK5a"  onmouseover="document.getElementById('tip5').style.display = 'inline-block'" onmouseout="document.getElementById('tip5').style.display = 'none'"><img id="picto5" src="img/picto_on5.png" style="width:20px; " /></button><div class="tip "id="tip5" style="display:none;">Actions et Services publics</div>
+						<button class="bouton bouton_min_off" onclick="creationProjets('6')" title="Construction, habitat, urbanisme, transport et mise aux normes" id="CHECK6a"  onmouseover="document.getElementById('tip6').style.display = 'inline-block'" onmouseout="document.getElementById('tip6').style.display = 'none'"><img id="picto6" src="img/picto_on6.png" style="width:20px; " /></button><div class="tip "id="tip6" style="display:none;">Construction, habitat, urbanisme, transport et mise aux normes</div>
+						<button class="bouton bouton_min_off" onclick="creationProjets('7')" title="Contrat de ruralité" id="CHECK7a"  onmouseover="document.getElementById('tip7').style.display = 'block'" onmouseout="document.getElementById('tip7').style.display = 'none'"><img id="picto7" src="img/picto_on7.png" style="width:20px; " /></button><br/><div class="tip "id="tip7" style="display:none;">Contrat de ruralité</div>
 					</div>
 					
 					<div id="retourCategories"><img src='img/fleche.png' style='vertical-align:middle; width:20px;padding:0px 15px;'  />Retour</div>
@@ -311,7 +311,7 @@
 						popupDEP(feature.properties);
 						territoireCible(e.target._latlngs);	
 						map.fitBounds(e.target._latlngs, { paddingTopLeft: [300, 0] , maxZoom :10});
-						creationProjets('6');
+						creationProjets('tout');
 						departement.setStyle(style2);
 						e.preventDefault();
 						});		
@@ -551,7 +551,7 @@
 			document.getElementById('filtres').style.display = "block";
 			document.getElementById('popupDEP').style.display = "none";
 			//resetView();
-			creationProjets('1');
+			creationProjets('tout');
 		}
 			
 		/*Action au clic sur la carte
@@ -661,7 +661,7 @@
 		searchControl.on('search:locationfound', function(e) {
 			if(markerCible) {map.removeLayer(markerCible);}
 			territoireCible(e.layer._latlngs);
-			creationProjets('1');
+			creationProjets('tout');
 			departement.setStyle(style2);
 			map.removeLayer(legende);
 			document.getElementById('popup').style.display = "none";
@@ -696,7 +696,7 @@
 		searchControl2.on('search:locationfound', function(e) {
 			if(markerCible) {map.removeLayer(markerCible);}
 			territoireCible(e.layer._latlngs);
-			creationProjets('1');
+			creationProjets('tout');
 			departement.setStyle(style2);
 			map.removeLayer(legende);
 			document.getElementById('popup').style.display = "none";
