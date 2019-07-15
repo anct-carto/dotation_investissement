@@ -90,7 +90,6 @@
 				<h2>Cliquer sur un département pour voir les infos et télécharger la carte</h2>
 				
 				<div class="divTable" id="tableDEP">
-					
 					<div class="divTableCell" >
 						<div class="divTableRow"  id="NOMDEP"></div>
 						<div class="divTableRow" id="LIEN"></div>
@@ -110,13 +109,13 @@
 					<div class="divTableCell" >
 						<h3 class="divTableRow">Nombre de projets financés via la DSIL et la DETR en 2018 dans le département&nbsp;:</h3>
 						<div class="divTableRow chiffre" id="NB_PROJETS"></div>
-					</div>
-					
-					<div class="button_container">
-							<button class="bouton_accueil" onclick="retourFiltres();" title="Projets"><img src="img/picto_points_off.png"/><div>Explorer les projets</div></button>
-					</div>
-					
+					</div>	
 				</div>
+				
+				<div class="button_container">
+					<button class="bouton_accueil" onclick="retourFiltres();" title="Projets"><img src="img/picto_points_off.png"/><div>Explorer les projets</div></button>
+				</div>
+				
 				</div>
 				
 				<!-- Contenu de la fiche d'information -->
@@ -559,7 +558,13 @@
 			document.getElementById('defaut').style.display = "none";
 			document.getElementById('filtres').style.display = "none";
 			document.getElementById('popupDEP').style.display = "block";
-			map.removeLayer(myRenderer);
+			map.removeLayer(projets1);
+			map.removeLayer(projets2);
+			map.removeLayer(projets3);
+			map.removeLayer(projets4); 
+			map.removeLayer(projets5);
+			map.removeLayer(projets6);
+			map.removeLayer(projets7);
 			document.getElementById('tableDEP').style.display = "none";
 			resetView();
 		}
