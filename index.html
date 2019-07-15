@@ -47,7 +47,7 @@
 				<div class="presentation" id="defaut">
 					<div>
 						<h2>Répartition des dotations d'investissement de l'État en 2018</h2>
-						<p><span style="color:white;">1,935 milliard au titre de la DSIL</span> (dotation de soutien à l’investissement local), <span style="color:white;">de la DETR</span> (dotation d’équipement des territoires ruraux), <span style="color:white;">de la DPV</span> (dotation politique de la ville)<span style="color:white;"> et de la DGE</span> (dotation globale d'équipement des départements), remplacée en 2018 par la DSID (dotation de soutien à l'investissement des départements).</p>
+						<p><span style="color:white;">1,935 milliard au titre de la DSIL</span> (dotation de soutien à l’investissement local), <span style="color:white;">de la DETR</span> (dotation d’équipement des territoires ruraux), <span style="color:white;">de la DPV</span> (dotation politique de la ville)<span style="color:white;"> et de la DGE</span> (dotation globale d'équipement des départements), remplacée en 2019 par la DSID (dotation de soutien à l'investissement des départements).</p>
 						<p>L'État intervient en faveur du développement économique et social de tous les territoires. Il a financé directement <span style="color:white;">27&nbsp;328 projets</span> portés par les communes et les intercommunalités dans tous les départements de notre pays.</p>
 						<p>Les sommes versées représentent <span style="color:white;">24,07%</span> du montant total des projets.</p>
 						<p>Pour la DSIL et la DETR, le soutien de l’État en faveur des communes et des intercommunalités <span style="color:white;">se répartit de la façon suivante&nbsp;:</span></p>
@@ -332,9 +332,11 @@
 						popupDEP(feature.properties);
 						territoireCible(e.target._latlngs);	
 						map.fitBounds(e.target._latlngs, { paddingTopLeft: [300, 0] , maxZoom :10});
-						
 						departement.setStyle(style2);
-						e.preventDefault();creationProjets('tout');
+						creationProjets('tout');
+						map.addLayer(myRenderer);
+						e.preventDefault();
+						
 						});		
 					}
 		});
@@ -558,13 +560,14 @@
 			document.getElementById('defaut').style.display = "none";
 			document.getElementById('filtres').style.display = "none";
 			document.getElementById('popupDEP').style.display = "block";
-			map.removeLayer(projets1);
-			map.removeLayer(projets2);
-			map.removeLayer(projets3);
-			map.removeLayer(projets4); 
-			map.removeLayer(projets5);
-			map.removeLayer(projets6);
-			map.removeLayer(projets7);
+			//map.removeLayer(projets1);
+			//map.removeLayer(projets2);
+			//map.removeLayer(projets3);
+			//map.removeLayer(projets4); 
+			//map.removeLayer(projets5);
+			//map.removeLayer(projets6);
+			//map.removeLayer(projets7);
+			map.removeLayer(myRenderer);
 			document.getElementById('tableDEP').style.display = "none";
 			resetView();
 		}
@@ -581,6 +584,7 @@
 			document.getElementById('filtres').style.display = "block";
 			document.getElementById('popupDEP').style.display = "none";
 			//resetView();
+			map.addLayer(myRenderer);
 			creationProjets('tout');
 		}
 			
@@ -625,6 +629,7 @@
 		//Action au clic sur retour vers les categories
 		document.getElementById("retourCategories").addEventListener("click", function(event){
 			retourFiltres();
+			resetView();
 		});
 		
 		//Action au clic sur la barre verticale
@@ -642,7 +647,7 @@
 		//Création des markers après une recherche
 		var markerCible; 
 		function selectMarker(e) {
-			
+			if(territoireCib) {map.removeLayer(territoireCib);}
 			if(markerCible) {map.removeLayer(markerCible);}
 			markerCible = new L.marker(e._latlng, {icon:creationPicto(e.properties.NUMCATEGORIE)});
 			markerCible.addTo(map);
@@ -651,7 +656,7 @@
 		//Grossissement du cercle onhover
 		var bigMarker;
 		function createBigMarker(e) {
-			if(territoireCib) {map.removeLayer(territoireCib);}
+			
 			if(bigMarker) {map.removeLayer(bigMarker);}
 			bigMarker = new L.circleMarker(e._latlng,{interactive: false, pane : "bigMarker", radius : 2.5, color: '#e1ff2f', fillColor: getCircleColor(e.properties.NUMCATEGORIE), weight: 3, fillOpacity: 1, opacity: 1});
 			bigMarker.addTo(map);
