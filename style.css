@@ -224,12 +224,14 @@ h3{
 
 .tip {
 	position:absolute;
-	margin-left:5px;
-	height: 47.8;
+	margin-top:5px;
 	background-color: #e1ff2f;
 	border-radius: 4px;
 	font-size:0.8em;
-	padding:2px;
+	padding:4px;
+	left: 5%;
+	opacity: 0;
+	transition: opacity 0.2s;
 }
 		
 .bouton_off {
@@ -329,7 +331,7 @@ button {
 }
 
 .chiffre{
-	font-size:1.5em;
+	font-size:1.2em;
 	font-weight: bold;
 	color:#f26664;
 }

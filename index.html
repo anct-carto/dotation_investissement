@@ -47,7 +47,7 @@
 				<div class="presentation" id="defaut">
 					<div>
 						<h2>Répartition des dotations d'investissement de l'État en 2018</h2>
-						<p><span style="color:white;">1,935 milliard au titre de la DSIL</span> (dotation de soutien à l’investissement local), <span style="color:white;">de la DETR</span> (dotation d’équipement des territoires ruraux), <span style="color:white;">de la DPV</span> (dotation politique de la ville)<span style="color:white;"> et de la DGE</span> (dotation globale d'équipement des départements).</p>
+						<p><span style="color:white;">1,935 milliard au titre de la DSIL</span> (dotation de soutien à l’investissement local), <span style="color:white;">de la DETR</span> (dotation d’équipement des territoires ruraux), <span style="color:white;">de la DPV</span> (dotation politique de la ville)<span style="color:white;"> et de la DGE</span> (dotation globale d'équipement des départements), remplacée en 2018 par la DSID (dotation de soutien à l'investissement des départements).</p>
 						<p>L'État intervient en faveur du développement économique et social de tous les territoires. Il a financé directement <span style="color:white;">27&nbsp;328 projets</span> portés par les communes et les intercommunalités dans tous les départements de notre pays.</p>
 						<p>Les sommes versées représentent <span style="color:white;">24,07%</span> du montant total des projets.</p>
 						<p>Pour la DSIL et la DETR, le soutien de l’État en faveur des communes et des intercommunalités <span style="color:white;">se répartit de la façon suivante&nbsp;:</span></p>
@@ -85,16 +85,38 @@
 				</div>
 				
 				<!-- Contenu de la fiche départements -->
-				<div class="divTable" id="popupDEP">
-					<h2>Cliquer sur un département pour voir les infos et télécharger la carte</h2>
-					<div class="divTableCell" id="NOMDEP" ></div>
-					<div class="divTableCell" id="POPDEP" ></div>
-					<div class="divTableCell" id="LIEN" ></div>
+				
+				<div  id="popupDEP">
+				<h2>Cliquer sur un département pour voir les infos et télécharger la carte</h2>
+				
+				<div class="divTable" id="tableDEP">
+					
+					<div class="divTableCell" >
+						<div class="divTableRow"  id="NOMDEP"></div>
+						<div class="divTableRow" id="LIEN"></div>
+					</div>
+					<div class="divTableCell" >
+						<h3 class="divTableRow">Population en 2018&nbsp;:</h3>
+						<div class="divTableRow chiffre" id="POPDEP"></div>
+					</div>
+					<div class="divTableCell" >
+						<h3 class="divTableRow">Dotations d'investissement versées dans le département en 2018&nbsp;:</h3>
+						<div class="divTableRow chiffre" id="DIDEP"></div>
+					</div>
+					<div class="divTableCell" >
+						<h3 class="divTableRow">Dotations d'investissement par habitant&nbsp;:</h3>
+						<div class="divTableRow chiffre" id="DIHA"></div>
+					</div>
+					<div class="divTableCell" >
+						<h3 class="divTableRow">Nombre de projets financés via la DSIL et la DETR en 2018 dans le département&nbsp;:</h3>
+						<div class="divTableRow chiffre" id="NB_PROJETS"></div>
+					</div>
 					
 					<div class="button_container">
 							<button class="bouton_accueil" onclick="retourFiltres();" title="Projets"><img src="img/picto_points_off.png"/><div>Explorer les projets</div></button>
 					</div>
 					
+				</div>
 				</div>
 				
 				<!-- Contenu de la fiche d'information -->
@@ -136,15 +158,15 @@
 					</div>
 					
 					<div class="button_container" id="filtres-min">
-						<button class="bouton bouton_min_off" onclick="creationProjets('1')" title="Santé, sanitaire et social" id="CHECK1a" onmouseover="document.getElementById('tip1').style.display = 'inline-block'" onmouseout="document.getElementById('tip1').style.display = 'none'"><img id="picto1" src="img/picto_on1.png" style="width:20px;" /></button><div class="tip "id="tip1" style="display:none;">Santé, sanitaire et social</div>
-						<button class="bouton bouton_min_off" onclick="creationProjets('2')" title="Économie et emploi" id="CHECK2a"  onmouseover="document.getElementById('tip2').style.display = 'inline-block'" onmouseout="document.getElementById('tip2').style.display = 'none'"><img id="picto2" src="img/picto_on2.png" style="width:20px;" /></button><div class="tip "id="tip2" style="display:none;">Économie et emploi</div>
-						<button class="bouton bouton_min_off" onclick="creationProjets('3')" title="Environnement, transition énergétique et écologie" id="CHECK3a"  onmouseover="document.getElementById('tip3').style.display = 'inline-block'" onmouseout="document.getElementById('tip3').style.display = 'none'"><img id="picto3" src="img/picto_on3.png" style="width:20px;" /></button><div class="tip "id="tip3" style="display:none;">Environnement, transition énergétique et écologie</div>
-						<button class="bouton bouton_min_off" onclick="creationProjets('4')" title="Éducation" id="CHECK4a"  onmouseover="document.getElementById('tip4').style.display = 'inline-block'" onmouseout="document.getElementById('tip4').style.display = 'none'"><img id="picto4" src="img/picto_on4.png" style="width:20px;" /></button><div class="tip "id="tip4" style="display:none;">Éducation</div>
-						<button class="bouton bouton_min_off" onclick="creationProjets('5')" title="Actions et Services publics" id="CHECK5a"  onmouseover="document.getElementById('tip5').style.display = 'inline-block'" onmouseout="document.getElementById('tip5').style.display = 'none'"><img id="picto5" src="img/picto_on5.png" style="width:20px; " /></button><div class="tip "id="tip5" style="display:none;">Actions et Services publics</div>
-						<button class="bouton bouton_min_off" onclick="creationProjets('6')" title="Construction, habitat, urbanisme, transport et mise aux normes" id="CHECK6a"  onmouseover="document.getElementById('tip6').style.display = 'inline-block'" onmouseout="document.getElementById('tip6').style.display = 'none'"><img id="picto6" src="img/picto_on6.png" style="width:20px; " /></button><div class="tip "id="tip6" style="display:none;">Construction, habitat, urbanisme, transport et mise aux normes</div>
-						<button class="bouton bouton_min_off" onclick="creationProjets('7')" title="Contrat de ruralité" id="CHECK7a"  onmouseover="document.getElementById('tip7').style.display = 'block'" onmouseout="document.getElementById('tip7').style.display = 'none'"><img id="picto7" src="img/picto_on7.png" style="width:20px; " /></button><br/><div class="tip "id="tip7" style="display:none;">Contrat de ruralité</div>
+						<button class="bouton bouton_min_off" onclick="creationProjets('1')" title="Santé, sanitaire et social" id="CHECK1a" onmouseover="document.getElementById('tip1').style.opacity = '1'" onmouseout="document.getElementById('tip1').style.opacity = '0'"><img id="picto1" src="img/picto_on1.png" style="width:20px;" /></button><div class="tip "id="tip1">Santé, sanitaire et social</div>
+						<button class="bouton bouton_min_off" onclick="creationProjets('2')" title="Économie et emploi" id="CHECK2a"  onmouseover="document.getElementById('tip2').style.opacity = '1'" onmouseout="document.getElementById('tip2').style.opacity = '0'"><img id="picto2" src="img/picto_on2.png" style="width:20px;" /></button><div class="tip "id="tip2">Économie et emploi</div>
+						<button class="bouton bouton_min_off" onclick="creationProjets('3')" title="Environnement, transition énergétique et écologie" id="CHECK3a"  onmouseover="document.getElementById('tip3').style.opacity = '1'" onmouseout="document.getElementById('tip3').style.opacity = '0'"><img id="picto3" src="img/picto_on3.png" style="width:20px;" /></button><div class="tip "id="tip3">Environnement, transition énergétique et écologie</div>
+						<button class="bouton bouton_min_off" onclick="creationProjets('4')" title="Éducation" id="CHECK4a"  onmouseover="document.getElementById('tip4').style.opacity = '1'" onmouseout="document.getElementById('tip4').style.opacity = '0'"><img id="picto4" src="img/picto_on4.png" style="width:20px;" /></button><div class="tip "id="tip4">Éducation</div>
+						<button class="bouton bouton_min_off" onclick="creationProjets('5')" title="Actions et Services publics" id="CHECK5a"  onmouseover="document.getElementById('tip5').style.opacity = '1'" onmouseout="document.getElementById('tip5').style.opacity = '0'"><img id="picto5" src="img/picto_on5.png" style="width:20px; " /></button><div class="tip "id="tip5">Actions et Services publics</div>
+						<button class="bouton bouton_min_off" onclick="creationProjets('6')" title="Construction, habitat, urbanisme, transport et mise aux normes" id="CHECK6a"  onmouseover="document.getElementById('tip6').style.opacity = '1'" onmouseout="document.getElementById('tip6').style.opacity = '0'"><img id="picto6" src="img/picto_on6.png" style="width:20px; " /></button><div class="tip "id="tip6">Construction, habitat, urbanisme, transport et mise aux normes</div>
+						<button class="bouton bouton_min_off" onclick="creationProjets('7')" title="Contrat de ruralité" id="CHECK7a"  onmouseover="document.getElementById('tip7').style.opacity = '1'" onmouseout="document.getElementById('tip7').style.opacity = '0'"><img id="picto7" src="img/picto_on7.png" style="width:20px; " /></button><br/><div class="tip "id="tip7" >Contrat de ruralité</div>
 					</div>
-					
+					</br>
 					<div id="retourCategories"><img src='img/fleche.png' style='vertical-align:middle; width:20px;padding:0px 15px;'  />Retour</div>
 				</div>
 					
@@ -311,9 +333,9 @@
 						popupDEP(feature.properties);
 						territoireCible(e.target._latlngs);	
 						map.fitBounds(e.target._latlngs, { paddingTopLeft: [300, 0] , maxZoom :10});
-						creationProjets('tout');
+						
 						departement.setStyle(style2);
-						e.preventDefault();
+						e.preventDefault();creationProjets('tout');
 						});		
 					}
 		});
@@ -488,13 +510,18 @@
 		function popupDEP(e) {
 			if (document.getElementById('sidebar').classList.contains('collapsed')){sidebar.open('home');}
 			document.getElementById('popupDEP').style.display = "block";
+			document.getElementById('tableDEP').style.display = "block";
 			document.getElementById('popup').style.display = "none";
 			document.getElementById('defaut').style.display = "none";
 			document.getElementById('filtres').style.display = "none";
 			//Remplissage de la popup
-			document.getElementById('NOMDEP').innerHTML = "<h1 style='color:#00414d'>"+e.libgeo+"</h1>";
-			document.getElementById('POPDEP').innerHTML = "<span>Population : "+format2(e.pop)+" habitants</span>";
-			document.getElementById('LIEN').innerHTML = "<span><a href='maps/Dotations_investissement_departement_"+e.codgeo+".png' target=_blank >Télécharger la carte pour le département</br>"+e.libgeo+" ("+e.codgeo+")</a></span>";
+			document.getElementById('NOMDEP').innerHTML = "<h1 style='color:#00414d'>"+e.libgeo+" ("+e.codgeo+")</h1>";
+			document.getElementById('LIEN').innerHTML = "<a href='maps/Dotations_investissement_departement_"+e.codgeo+".png' target=_blank >&rarr; Télécharger la carte pour le département</a>";
+			document.getElementById('POPDEP').innerHTML = "<span>"+format2(e.pop)+" habitants</span>";
+			document.getElementById('DIDEP').innerHTML = "<span>"+format2(e.DI18)+"&nbsp;€</span>";
+			document.getElementById('DIHA').innerHTML = "<span>"+format2(e.DIHA18)+"&nbsp;€</span>";
+			document.getElementById('NB_PROJETS').innerHTML = "<span>"+e.NB_PROJETS+"</span>";
+			
 		}
 		
 		
@@ -533,9 +560,7 @@
 			document.getElementById('filtres').style.display = "none";
 			document.getElementById('popupDEP').style.display = "block";
 			map.removeLayer(myRenderer);
-			document.getElementById('NOMDEP').innerHTML = "";
-			document.getElementById('POPDEP').innerHTML = "";
-			document.getElementById('LIEN').innerHTML = "";
+			document.getElementById('tableDEP').style.display = "none";
 			resetView();
 		}
 		
