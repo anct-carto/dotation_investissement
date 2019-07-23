@@ -151,7 +151,7 @@
 								<div class="divTableRow chiffre" id="SUBVENTION"></div>
 						</div>
 						<div class="divTableCell">
-								<h3 class="divTableRow">Effet de levier (en %)&nbsp;:</h3>
+								<h3 class="divTableRow">Part de la subvention dans le coût total (en %)&nbsp;:</h3>
 								<div class="divTableRow chiffre" id="LEVIER"></div>
 						</div>
 					</div>
@@ -189,6 +189,7 @@
 	<script type="text/javascript" src="data/dep.js"></script>
 	<script type="text/javascript" src="data/Projets.js"></script>
 	<script type="text/javascript" src="data/cercles_drom.js"></script>
+	<script type="text/javascript" src="data/chef_lieu.js"></script>
 	
 	<script src="https://leaflet.github.io/Leaflet.markercluster/dist/leaflet.markercluster-src.js"></script>
 
@@ -297,6 +298,8 @@
 		map.getPane('markers').style.zIndex = 550;
 		map.createPane('bigMarker');
 		map.getPane('bigMarker').style.zIndex = 580;
+		map.createPane('labels');
+		map.getPane('labels').style.zIndex = 610;
 		
 		//Couches du fond de carte
 		Cache = L.geoJSON(JS_masque, {color: "#9de0d4", weight: 0, opacity: 1, fillOpacity: 1}).addTo(map);
@@ -311,12 +314,50 @@
 			style: {opacity: 0}
 		})
 		
+		//Création des labels
+		var createLabelIcon = function(labelClass,labelText){
+		return L.divIcon({ 
+		className: labelClass,
+		html: labelText
+		})
+		}
+		
+		//Label Regions
+		labelsReg = L.geoJSON(JS_chef_lieu, {
+				pointToLayer: function(feature, latlng) {
+					return L.marker(latlng,{icon:createLabelIcon("labelClassReg", feature.properties.libgeom),pane:'labels', interactive: false})
+				},
+				filter : function(feature, layer) {
+                return feature.properties.STATUT == "région";
+				}		
+		}).addTo(map)
+		
+		//Label Departements
+		labelsDep = L.geoJSON(JS_chef_lieu, {
+				pointToLayer: function(feature, latlng) {
+					return L.marker(latlng,{icon:createLabelIcon("labelClassDep", feature.properties.libgeom),pane:'labels', interactive: false})
+				},
+				filter : function(feature, layer) {
+                return feature.properties.STATUT == "département";
+				}		
+		})
+		
+		//Label Canton
+		labelsCan = L.geoJSON(JS_chef_lieu, {
+				pointToLayer: function(feature, latlng) {
+					return L.marker(latlng,{icon:createLabelIcon("labelClassCan", feature.properties.libgeom),pane:'labels', interactive: false})
+				},
+				filter : function(feature, layer) {
+                return feature.properties.STATUT == "sous-prefecture";
+				}		
+		})
+		
 		//Départements
 		departement = L.geoJSON(JS_dep, {
 			//filter: function(feature, layer) {return feature.properties.TYPE == "Départemen";},
 			style: style1,
 			onEachFeature: function(feature, layer) {
-					layer.bindTooltip(feature.properties.libgeo + ' (' + feature.properties.codgeo + ')', {className: 'Tooltips'});
+					layer.bindTooltip(feature.properties.libgeo + ' (' + feature.properties.codgeo + ')', {className: 'Tooltips', direction: "center", sticky:true});
 					layer.on('click', function(e) {
 						timer = setTimeout(function() {
 							if (!prevent) {
@@ -393,7 +434,7 @@
 			pointToLayer: function(feature, latlng) {
 				var marker = L.circleMarker(latlng,{renderer: myRenderer, radius : 3, color: 'white', fillColor: getCircleColor(feature.properties.NUMCATEGORIE), weight: 0.2, fillOpacity: 1, opacity: 1});
 				marker.on('mouseover', function(e) {createBigMarker(e.target);});
-				marker.bindTooltip(feature.properties.libgeo, {className: 'Tooltips'});
+				marker.bindTooltip(feature.properties.libgeo, {className: 'Tooltips', direction: "center"});
 				marker.on('click', function(e) {selectMarker(e.target);popup(e.target.properties); });
 				marker.properties = {};
 				marker.properties.NOM = feature.properties.libgeo;
@@ -672,9 +713,9 @@
 		
 		map.on('zoomend', function() {
 			var zoom = map.getZoom();
-			if (zoom < 8) {map.removeLayer(vectorGridCom); map.removeLayer(vectorGridEpci)}
-			else if (zoom >= 8 && zoom < 9) { map.addLayer(vectorGridEpci);map.removeLayer(vectorGridCom)}
-			else if (zoom >= 9) {map.addLayer(vectorGridEpci); map.addLayer(vectorGridCom)}
+			if (zoom < 8) {map.removeLayer(vectorGridCom); map.removeLayer(vectorGridEpci); map.removeLayer(labelsDep); map.removeLayer(labelsCan);}
+			else if (zoom >= 8 && zoom < 9) { map.addLayer(vectorGridEpci);map.removeLayer(vectorGridCom);map.addLayer(labelsDep); map.removeLayer(labelsCan);}
+			else if (zoom >= 9) {map.addLayer(vectorGridEpci); map.addLayer(vectorGridCom);map.addLayer(labelsDep);map.addLayer(labelsCan);}
 		});
 		
 		

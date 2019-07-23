@@ -66,10 +66,12 @@ h3{
 
 .Tooltips {
 	font-size:1.1em;
-	padding:5px;
+	font-weight:bold;
+	padding:0 5px;
 	border:none;
 	color: #00414d;
-	background-color: white;
+	background-color: white;	
+	margin: -20px 0px;
 	}
 	
 .epci_Tooltips {
@@ -321,7 +323,7 @@ button {
 }
 
 .divTableCell, .divTableHead {
-	border: 0.1px solid #88a0b7;
+	border: 1px solid rgba(255,255,255,0.4);
 	vertical-align:middle;
 	padding: 7px 8px;
 }
@@ -361,6 +363,28 @@ button {
     margin-left: -20px;
 }
 
+.labelClassReg {
+	line-height:9px;	
+	font-size:0.9em;
+	font-weight: bold;
+	color:rgba(0,65,77,1);
+	text-align:center;
+}
 
+.labelClassDep {
+	line-height:9px;	
+	font-size:0.85em;
+	font-weight: bold;
+	color:rgba(0,65,77,0.9);
+	text-align:center;
+}
+
+.labelClassCan {
+	line-height:8px;	
+	font-size:0.8em;
+	font-weight: bold;
+	color:rgba(0,65,77,0.8);
+	text-align:center;
+}
 
 
